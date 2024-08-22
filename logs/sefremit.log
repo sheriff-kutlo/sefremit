@@ -1,0 +1,4 @@
+2024-08-22 15:36:40 INFO send_interactive_sefremit_menu_message successfully sent. phone_number: 26774342078
+2024-08-22 15:36:40 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBIzMzdDMTg4MEIwQkE2QjhBMkYA'}]}
+2024-08-22 15:39:09 INFO send_interactive_sefremit_menu_message successfully sent. phone_number: 26774342078
+2024-08-22 15:39:09 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBJGNjI2QUU2N0I3RjE2RkQ3RkEA'}]}

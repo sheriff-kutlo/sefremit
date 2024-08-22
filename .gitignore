@@ -1,0 +1,5 @@
+# Ignore the sefalana_env file in the root directory
+/sefremit_env
+
+# Ignore all __pycache__ directories in the repository
+**/__pycache__/
