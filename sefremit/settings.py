@@ -27,13 +27,20 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = os.environ.get("SECRET_KEY")
+APP_SECRET = os.environ.get("APP_SECRET")
 # SECRET_KEY = 'django-insecure-cj7xv7la-t56&m!3=r9b+w-xj9jsun3oh0q@k!(o+#lb!nv1=@'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+TOKEN = os.environ.get("TOKEN")
 
-ALLOWED_HOSTS = []
-ALLOWED_HOSTS = ['41.216.208.252', 'whatsapp.service.sefalana.co.bw']
+# SECURITY WARNING: don't run with debug turned on in production!
+# DEBUG = False
+DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
+
+
+# ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = ['41.216.208.252', 'whatsapp.service.sefalana.co.bw']
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
 
 
 
@@ -180,8 +187,8 @@ LOGGING = {
         'file': {
             'level': 'DEBUG',  # Set the desired logging level
             'class': 'logging.FileHandler',
-            # 'filename': os.path.join(BASE_DIR, 'logs', 'sefremit.log'),
-            'filename': '/var/log/gunicorn/sefremit.log',
+            'filename': os.path.join(BASE_DIR, 'logs', 'sefremit.log'),
+            # 'filename': '/var/log/gunicorn/sefremit.log',
             'formatter': 'simple',
         },
         'console': {
