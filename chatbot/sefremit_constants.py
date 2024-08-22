@@ -27,6 +27,7 @@ SEFREMIT_OPERATING_HOURS_URL = "https://i.imgur.com/jsq7cYk.jpeg"
 SEFREMIT_PARTNERS_URL = "https://i.imgur.com/41JDuIw.jpeg"
 SEFREMIT_TODAYS_RATES_URL = "https://i.imgur.com/GPfVI8s.jpeg"
 SEFREMIT_TRANSFER_FEES = "https://i.imgur.com/4WsiyyD.jpeg"
+SEFREMIT_UPCOMING_EVENT = "https://s3.us-east-2.amazonaws.com/bdih.test.bucket/event_img.jpg"
 
 
 # Message

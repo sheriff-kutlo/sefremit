@@ -668,7 +668,7 @@ def handle_reply(reply, message_id, phone_number, username, display_phone_number
         send_sefremit_message(KYC_REQUIREMENTS_MESSAGE, phone_number)
 
     elif reply == EVENTS:
-        send_sefremit_message("No Upcoming Events", phone_number)
+        send_sefremit_image(SEFREMIT_UPCOMING_EVENT, phone_number)
 
     elif reply == PARTNERS:
         send_sefremit_image(SEFREMIT_PARTNERS_URL, phone_number)
