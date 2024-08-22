@@ -676,11 +676,11 @@ def handle_reply(reply, message_id, phone_number, username, display_phone_number
     elif reply == CASH_PICKUP:
         send_image_with_description(SEFREMIT_PARTNERS_URL, phone_number, CASH_PICKUP_CAPTION)
 
-    elif reply == STANDARD_CHARTERED:
-        send_sefremit_message(STANDARD_CHARTERED_REQUIREMENTS_MESSAGE, phone_number)
+    # elif reply == STANDARD_CHARTERED:
+    #     send_sefremit_message(STANDARD_CHARTERED_REQUIREMENTS_MESSAGE, phone_number)
 
-    elif reply == AGENCY_BANKING:
-        send_interactive_sefremit_agency_banking_menu_message(phone_number)
+    # elif reply == AGENCY_BANKING:
+    #     send_interactive_sefremit_agency_banking_menu_message(phone_number)
 
     elif reply == "sefremit":
         send_interactive_sefremit_menu_message(phone_number)
@@ -689,7 +689,8 @@ def handle_reply(reply, message_id, phone_number, username, display_phone_number
         send_sefremit_message(FOREIGN_CURRECY_EXCHANGE_MESSAGE, phone_number)
 
     elif reply == GLOBAL_MONEY_TRANSER:
-        send_image_with_description(SEFREMIT_TRANSFER_FEES, phone_number, GLOBAL_MONEY_TRANSER_MESSAGE)
+        send_sefremit_message(GLOBAL_MONEY_TRANSER_MESSAGE, phone_number)
+        # send_image_with_description(SEFREMIT_TRANSFER_FEES, phone_number, GLOBAL_MONEY_TRANSER_MESSAGE)
 
     else:
         send_interactive_sefremit_menu_message(phone_number)
