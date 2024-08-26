@@ -9,7 +9,7 @@ SEFREMIT_MESSAGES_ENDPOINT = "https://graph.facebook.com/v20.0/422196440971638/m
 
 SERVICES = "services"
 TODAYS_RATES = "todays rates"
-EVENTS = "events"
+UPCOMING_EVENTS = "upcoming events"
 BRANCH_HOURS = "branch hours"
 AGENCY_BANKING = "agency banking"
 TRANSACTION_LIMITS = "transaction limits"
@@ -36,7 +36,7 @@ KYC_REQUIREMENTS_MESSAGE = "*KYC Requirements*\n\nMotswana - Valid Omang\n\nFore
 STANDARD_CHARTERED = "standard chartered"
 STANDARD_CHARTERED_REQUIREMENTS_MESSAGE = "*Standard Chartered Requirements*\n\nTo make deposits or withdrawals, please bring:\n\n  • Your Valid Omang\n\n  • Standard Chartered Bank Card"
 FOREIGN_CURRECY_EXCHANGE_MESSAGE = "*Foreign Currency Exchange*\n\nWe offer the best exchange rates for the following currencies:\n\n  • USD (United States Dollar)\n\n  • ZAR (South African Rand)\n\n  • EUR (Euro)\n\n  • GBP (British Pound)"
-GLOBAL_MONEY_TRANSER_MESSAGE = "Global money transfer is a service that enables you to send money to any bank account anywhere in the world at *affordable rates*. It is fast and secure ensuring that the money reaches your beneficiaries in minutes. SefRemit global transfer service is both convenient and reliable."
+GLOBAL_MONEY_TRANSER_MESSAGE = "Global money transfer is a service that enables you to send money to any bank account anywhere in the world at *affordable rates*. It is fast and secure ensuring that the money reaches your beneficiaries in minutes. SefRemit global money transfer service is both convenient and reliable."
 CASH_PICKUP_CAPTION = "Collect your transfer in Cash from any of our branches located in select Sefalana Stores. You will need the cash transfer number, sent to you by the person sending you the money, and to present your valid ID (Omang for Batswana, and Passport for Foreign Nationals)."
 SEFREMIT_BRANCHES_CAPTION = "SefRemit is available at select Sefalana Hyper and Shopper"
 

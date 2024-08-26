@@ -110,7 +110,7 @@ def send_interactive_sefremit_menu_message(phone_number):
                             {"id": "4", "title": "Operating Hours"},
                             {"id": "5", "title": "Transaction Limits"},
                             {"id": "6", "title": "KYC Requirements"},
-                            {"id": "7", "title": "Events"}
+                            {"id": "7", "title": "Upcoming Events"}
                         ]
                     }
                 ]
