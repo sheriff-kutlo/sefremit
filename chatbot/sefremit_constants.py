@@ -23,7 +23,7 @@ OPERATING_HOURS = "operating hours"
 
 
 SEFREMIT_BRANCHES_URL = "https://i.imgur.com/n2vt2Hp.jpeg"
-SEFREMIT_OPERATING_HOURS_URL = "https://i.imgur.com/jsq7cYk.jpeg"
+SEFREMIT_OPERATING_HOURS_URL = "https://i.imgur.com/NsNzd31.jpeg"
 SEFREMIT_PARTNERS_URL = "https://i.imgur.com/41JDuIw.jpeg"
 SEFREMIT_TODAYS_RATES_URL = "https://i.imgur.com/GPfVI8s.jpeg"
 SEFREMIT_TRANSFER_FEES = "https://i.imgur.com/4WsiyyD.jpeg"
