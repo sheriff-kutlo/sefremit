@@ -154,7 +154,7 @@ def sefremit_verification(request):
 
                         handle_reply(title, message_id, message_from, name, display_phone_number)
 
-                elif 'request_welcome' in json_data['entry'][0]['changes'][0]['value']['messages'][0].get('type', ''):
+                elif 'request_welcome' in json_data['entry'][0]['changes'][0]['value']['messages'][0]:
                     name = json_data['entry'][0]['changes'][0]['value']['contacts'][0]['profile']['name']
                     logger.info(f"Request Type: request_welcome")
                     logger.info(f"Name: {name}")
