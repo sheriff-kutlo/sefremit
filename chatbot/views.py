@@ -154,7 +154,7 @@ def sefremit_verification(request):
 
                         handle_reply(title, message_id, message_from, name, display_phone_number)
 
-                elif 'request_welcome' in json_data['entry'][0]['changes'][0]['value']['messages'][0]['interactive']['list_reply']:                    
+                elif 'request_welcome' in json_data['entry'][0]['changes'][0]['value']['messages'][0]:                
                     name = json_data['entry'][0]['changes'][0]['value']['contacts'][0]['profile']['name']
                     
                     message_id = json_data['entry'][0]['changes'][0]['value']['messages'][0]['id']
@@ -163,7 +163,7 @@ def sefremit_verification(request):
                     logger.info(f"Message ID: {message_id}")
 
                     display_phone_number = json_data['entry'][0]['changes'][0]['value']['metadata'].get('display_phone_number', None)
-                    logger.info(f"Display Phone Number from description: {display_phone_number}")
+                    logger.info(f"Display Phone Number from request_welcome: {display_phone_number}")
 
                     handle_reply("options", message_id, message_from, name, display_phone_number)
 
