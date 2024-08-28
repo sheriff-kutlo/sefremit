@@ -154,18 +154,20 @@ def sefremit_verification(request):
 
                         handle_reply(title, message_id, message_from, name, display_phone_number)
 
-                elif 'request_welcome' in json_data['entry'][0]['changes'][0]['value']['messages'][0]:                
+                elif 'request_welcome' in json_data['entry'][0]['changes'][0]['value']['messages'][0].get('type', ''):
                     name = json_data['entry'][0]['changes'][0]['value']['contacts'][0]['profile']['name']
-                    
+                    logger.info(f"Request Type: request_welcome")
+                    logger.info(f"Name: {name}")
+
                     message_id = json_data['entry'][0]['changes'][0]['value']['messages'][0]['id']
                     message_from = json_data['entry'][0]['changes'][0]['value']['messages'][0]['from']
-                    
                     logger.info(f"Message ID: {message_id}")
+                    logger.info(f"Message From: {message_from}")
 
                     display_phone_number = json_data['entry'][0]['changes'][0]['value']['metadata'].get('display_phone_number', None)
-                    logger.info(f"Display Phone Number from request_welcome: {display_phone_number}")
+                    logger.info(f"Display Phone Number: {display_phone_number}")
 
-                    handle_reply("options", message_id, message_from, name, display_phone_number)
+                    handle_reply('request_welcome', message_id, message_from, name, display_phone_number)
 
                 else:
                     logger.info("Invalid JSON structure")
