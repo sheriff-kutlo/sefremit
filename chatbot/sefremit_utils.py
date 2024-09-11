@@ -271,5 +271,55 @@ def send_sefremit_image(url, phone_number):
         logger.error(f"Error sending Image: {e}", exc_info=True)
         return None
 
+def send_survey_flow(phone_number):
+    headers = {
+        "Content-Type": APPLICATION_JSON,
+        "Authorization": "Bearer EAAGEVZB3PErsBO0su0lexA8f56akL6C9rXC5Ba4suLXQnwYkoFutROdO7mXEfKfRQN8C0kZCziHusufSe1MmDj3vKxaIL6yUfkBofb26Pg2kE9O6eMz0sjhf4jnm3hiWpgpURhORNk27hQZBjAT1PaZAPpljezHZBQQIfE0a8I5hPfRX2ZA0ezEG2HtOb6IwUU"
+    }
+
+    json_data = {
+        "messaging_product": "whatsapp",
+        "recipient_type": "individual",
+        "to": phone_number,
+        "type": "template",
+        "template": {
+            "name": "poll_template_test_2",
+            "language": {
+                "code": "en_US"
+            },
+            "components": [
+                {
+                    "type": "button",
+                    "sub_type": "flow",
+                    "index": "0",
+                    "parameters": [
+                        {
+                            "type": "action",
+                            "action": {
+                                "flow_token": "1067499460905066"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+        
+    try:
+        response = requests.post("https://graph.facebook.com/v20.0/286939801179582/messages", json=json_data, headers=headers)
+        
+        if response.status_code == 200:
+            logger.info(f"Flow template sent successfully. flow: survey flow, phone_number: {phone_number}")
+            response_data = response.json()
+            logger.debug(f"Response JSON: {response_data}")
+            return response_data.get("messages", [{}])[0].get("id")
+        else:
+            logger.error(f"Failed to send message. Status Code: {response.status_code}. Response Content: {response.content}")
+            return None
+            
+    except requests.exceptions.RequestException as e:
+        logger.error(f"Error sending message: {e}", exc_info=True)
+        return None
+
 
 

@@ -186,6 +186,8 @@ def sefremit_verification(request):
 
 def hello(request):
 
+    send_survey_flow("26774342078")
+
     # handle_reply("sefremit", "wamid: 842892", KUTLO_PHONE_NUMBER, "Joe", SEFREMIT_PHONE_NUMBER)
 
     # new_broadcast()
