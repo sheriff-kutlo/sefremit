@@ -2,3 +2,1065 @@
 2024-08-22 15:36:40 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBIzMzdDMTg4MEIwQkE2QjhBMkYA'}]}
 2024-08-22 15:39:09 INFO send_interactive_sefremit_menu_message successfully sent. phone_number: 26774342078
 2024-08-22 15:39:09 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBJGNjI2QUU2N0I3RjE2RkQ3RkEA'}]}
+2024-10-11 11:52:49 ERROR An error occurred saving media content: 'daily rates'
+Traceback (most recent call last):
+  File "/Users/kutlomangwa/Documents/sefremit/chatbot/utils.py", line 1282, in save_media_content
+    save_media_content_dict[DAILY_RATES],
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+KeyError: 'daily rates'
+2024-10-11 11:52:49 INFO Daily Rates Image updated successfully. media_id: 554963000223249
+2024-10-11 12:04:34 ERROR An error occurred saving media content: 'daily_rates'
+Traceback (most recent call last):
+  File "/Users/kutlomangwa/Documents/sefremit/chatbot/utils.py", line 1282, in save_media_content
+    save_media_content_dict[DAILY_RATES],
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+KeyError: 'daily_rates'
+2024-10-11 12:04:34 INFO Daily Rates Image updated successfully. media_id: 1075413314254668
+2024-10-11 12:08:47 ERROR An error occurred saving media content: 'daily_rates'
+Traceback (most recent call last):
+  File "/Users/kutlomangwa/Documents/sefremit/chatbot/utils.py", line 1281, in save_media_content
+    save_media_content_dict[DAILY_RATES],
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+KeyError: 'daily_rates'
+2024-10-11 12:08:47 INFO Daily Rates Image updated successfully. media_id: 1788501121956839
+2024-10-11 12:16:04 ERROR An error occurred saving media content: 'daily_rates'
+Traceback (most recent call last):
+  File "/Users/kutlomangwa/Documents/sefremit/chatbot/utils.py", line 1282, in save_media_content
+    save_media_content_dict[DAILY_RATES],
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+KeyError: 'daily_rates'
+2024-10-11 12:16:04 INFO Daily Rates Image updated successfully. media_id: 2022332884878499
+2024-10-11 12:27:03 ERROR An error occurred saving media content: 'daily_rates'
+Traceback (most recent call last):
+  File "/Users/kutlomangwa/Documents/sefremit/chatbot/utils.py", line 1282, in save_media_content
+    save_media_content_dict[DAILY_RATES],
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+KeyError: 'daily_rates'
+2024-10-11 12:27:03 INFO Daily Rates Image updated successfully. media_id: 1052165976197426
+2024-10-11 12:34:30 ERROR An error occurred saving media content: 'daily_rates'
+Traceback (most recent call last):
+  File "/Users/kutlomangwa/Documents/sefremit/chatbot/utils.py", line 1282, in save_media_content
+    save_media_content_dict[DAILY_RATES],
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+KeyError: 'daily_rates'
+2024-10-11 12:34:30 INFO Daily Rates Image updated successfully. media_id: 564832579218923
+2024-10-11 14:14:19 ERROR An error occurred saving media content: (2003, "Can't connect to MySQL server on '41.216.208.252:3306' (65)")
+Traceback (most recent call last):
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 275, in ensure_connection
+    self.connect()
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/mysql/base.py", line 256, in get_new_connection
+    connection = Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/MySQLdb/__init__.py", line 121, in Connect
+    return Connection(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/MySQLdb/connections.py", line 195, in __init__
+    super().__init__(*args, **kwargs2)
+MySQLdb.OperationalError: (2003, "Can't connect to MySQL server on '41.216.208.252:3306' (65)")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/kutlomangwa/Documents/sefremit/chatbot/utils.py", line 1277, in save_media_content
+    with connection.cursor() as cursor:
+         ^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 316, in cursor
+    return self._cursor()
+           ^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 292, in _cursor
+    self.ensure_connection()
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 274, in ensure_connection
+    with self.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 275, in ensure_connection
+    self.connect()
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/mysql/base.py", line 256, in get_new_connection
+    connection = Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/MySQLdb/__init__.py", line 121, in Connect
+    return Connection(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/MySQLdb/connections.py", line 195, in __init__
+    super().__init__(*args, **kwargs2)
+django.db.utils.OperationalError: (2003, "Can't connect to MySQL server on '41.216.208.252:3306' (65)")
+2024-10-11 14:14:19 INFO Daily Rates Image updated successfully. media_id: 2650977838416929
+2024-10-11 14:15:00 ERROR An error occurred saving media content: 'username'
+Traceback (most recent call last):
+  File "/Users/kutlomangwa/Documents/sefremit/chatbot/utils.py", line 1286, in save_media_content
+    logger.info(f"Media Content saved successfully. type: {save_media_content_dict[USERNAME]}, image: {save_media_content_dict[PHONE_NUMBER]}, text: {save_media_content_dict[PHONE_NUMBER]}")
+                                                           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+KeyError: 'username'
+2024-10-11 14:15:00 INFO Daily Rates Image updated successfully. media_id: 466928173040825
+2024-10-11 14:17:38 ERROR An error occurred saving media content: (2003, "Can't connect to MySQL server on '41.216.208.252:3306' (65)")
+Traceback (most recent call last):
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 275, in ensure_connection
+    self.connect()
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/mysql/base.py", line 256, in get_new_connection
+    connection = Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/MySQLdb/__init__.py", line 121, in Connect
+    return Connection(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/MySQLdb/connections.py", line 195, in __init__
+    super().__init__(*args, **kwargs2)
+MySQLdb.OperationalError: (2003, "Can't connect to MySQL server on '41.216.208.252:3306' (65)")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/kutlomangwa/Documents/sefremit/chatbot/utils.py", line 1277, in save_media_content
+    with connection.cursor() as cursor:
+         ^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 316, in cursor
+    return self._cursor()
+           ^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 292, in _cursor
+    self.ensure_connection()
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 274, in ensure_connection
+    with self.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 275, in ensure_connection
+    self.connect()
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/mysql/base.py", line 256, in get_new_connection
+    connection = Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/MySQLdb/__init__.py", line 121, in Connect
+    return Connection(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/MySQLdb/connections.py", line 195, in __init__
+    super().__init__(*args, **kwargs2)
+django.db.utils.OperationalError: (2003, "Can't connect to MySQL server on '41.216.208.252:3306' (65)")
+2024-10-11 14:17:38 INFO Daily Rates Image updated successfully. media_id: 1050009033259865
+2024-10-11 14:18:24 ERROR An error occurred saving media content: (2003, "Can't connect to MySQL server on '41.216.208.252:3306' (65)")
+Traceback (most recent call last):
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 275, in ensure_connection
+    self.connect()
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/mysql/base.py", line 256, in get_new_connection
+    connection = Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/MySQLdb/__init__.py", line 121, in Connect
+    return Connection(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/MySQLdb/connections.py", line 195, in __init__
+    super().__init__(*args, **kwargs2)
+MySQLdb.OperationalError: (2003, "Can't connect to MySQL server on '41.216.208.252:3306' (65)")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/kutlomangwa/Documents/sefremit/chatbot/utils.py", line 1277, in save_media_content
+    with connection.cursor() as cursor:
+         ^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 316, in cursor
+    return self._cursor()
+           ^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 292, in _cursor
+    self.ensure_connection()
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 274, in ensure_connection
+    with self.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 275, in ensure_connection
+    self.connect()
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/mysql/base.py", line 256, in get_new_connection
+    connection = Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/MySQLdb/__init__.py", line 121, in Connect
+    return Connection(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/MySQLdb/connections.py", line 195, in __init__
+    super().__init__(*args, **kwargs2)
+django.db.utils.OperationalError: (2003, "Can't connect to MySQL server on '41.216.208.252:3306' (65)")
+2024-10-11 14:18:24 INFO Daily Rates Image updated successfully. media_id: 346554581813081
+2024-10-11 14:20:18 INFO Media Content saved successfully. type: daily_rates, image: 1564552780983245, text: null
+2024-10-11 14:20:18 INFO Daily Rates Image updated successfully. media_id: 1564552780983245
+2024-10-14 08:56:27 INFO Media Content saved successfully. type: daily_rates, image: 559503243418809, text: null
+2024-10-14 08:56:27 INFO Daily Rates Image updated successfully. media_id: 559503243418809
+2024-10-14 09:13:08 INFO Media Content saved successfully. type: events, image: 1479427639428773, text: null
+2024-10-14 09:13:08 INFO Events Image updated successfully. media_id: 1479427639428773
+2024-10-14 09:25:25 INFO Media Content saved successfully. type: daily_rates, image: 1031862635089762, text: null
+2024-10-14 09:25:25 INFO Daily Rates Image updated successfully. media_id: 1031862635089762
+2024-10-14 09:29:03 INFO Media Content saved successfully. type: daily_rates, image: 1199388227957860, text: null, status: active
+2024-10-14 09:29:03 INFO Daily Rates Image updated successfully. media_id: 1199388227957860
+2024-10-14 10:36:32 ERROR An error occurred saving media content: 'status'
+Traceback (most recent call last):
+  File "/Users/kutlomangwa/Documents/sefremit/chatbot/utils.py", line 1285, in save_media_content
+    save_media_content_dict[STATUS]))
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+KeyError: 'status'
+2024-10-14 10:36:32 INFO Events Image updated successfully. media_id: 388154387703224
+2024-10-14 10:39:15 INFO Media Content saved successfully. type: daily_rates, image: 1074057230982011, text: null, status: active
+2024-10-14 10:39:15 INFO Events Image updated successfully. media_id: 1074057230982011
+2024-10-14 14:29:50 INFO Successfully removed events. inactive, image: active, text: events
+2024-10-14 14:38:00 INFO Successfully removed events. inactive, image: active, text: events
+2024-10-14 14:38:00 INFO Media content removed successfully. Type: inactive, Status updated from active to events
+2024-10-14 14:38:08 INFO Successfully removed events. inactive, image: active, text: events
+2024-10-14 14:38:08 INFO Media content removed successfully. Type: inactive, Status updated from active to events
+2024-10-14 14:38:18 INFO Successfully removed events. inactive, image: active, text: events
+2024-10-14 14:38:18 INFO Media content removed successfully. Type: inactive, Status updated from active to events
+2024-10-14 14:47:06 INFO Successfully removed events. inactive, image: active, text: events
+2024-10-14 14:47:06 INFO Media content removed successfully. Type: inactive, Status updated from active to events
+2024-10-14 14:47:09 INFO Successfully removed events. inactive, image: active, text: events
+2024-10-14 14:47:09 INFO Media content removed successfully. Type: inactive, Status updated from active to events
+2024-10-14 14:47:29 INFO Media Content saved successfully. type: daily_rates, image: 861242529105600, text: null, status: active
+2024-10-14 14:47:29 INFO Events Image updated successfully. media_id: 861242529105600
+2024-10-14 14:47:50 INFO Successfully removed events. inactive, image: active, text: events
+2024-10-14 14:47:50 INFO Media content removed successfully. Type: inactive, Status updated from active to events
+2024-10-14 14:49:44 INFO Media Content saved successfully. type: events, image: 1238041947232799, text: null, status: active
+2024-10-14 14:49:44 INFO Events Image updated successfully. media_id: 1238041947232799
+2024-10-14 14:50:00 INFO Successfully removed events. inactive, image: active, text: events
+2024-10-14 14:50:00 INFO Media content removed successfully. Type: inactive, Status updated from active to events
+2024-10-14 15:10:29 ERROR An error occurred while removing events: (2003, "Can't connect to MySQL server on '41.216.208.252:3306' (65)")
+Traceback (most recent call last):
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 275, in ensure_connection
+    self.connect()
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/mysql/base.py", line 256, in get_new_connection
+    connection = Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/MySQLdb/__init__.py", line 121, in Connect
+    return Connection(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/MySQLdb/connections.py", line 195, in __init__
+    super().__init__(*args, **kwargs2)
+MySQLdb.OperationalError: (2003, "Can't connect to MySQL server on '41.216.208.252:3306' (65)")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/kutlomangwa/Documents/sefremit/chatbot/utils.py", line 1299, in remove_media_content
+    with connection.cursor() as cursor:
+         ^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 316, in cursor
+    return self._cursor()
+           ^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 292, in _cursor
+    self.ensure_connection()
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 274, in ensure_connection
+    with self.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 275, in ensure_connection
+    self.connect()
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/mysql/base.py", line 256, in get_new_connection
+    connection = Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/MySQLdb/__init__.py", line 121, in Connect
+    return Connection(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/MySQLdb/connections.py", line 195, in __init__
+    super().__init__(*args, **kwargs2)
+django.db.utils.OperationalError: (2003, "Can't connect to MySQL server on '41.216.208.252:3306' (65)")
+2024-10-14 15:10:29 INFO Media content removed successfully. Type: inactive, Status updated from active to events
+2024-10-14 15:10:34 ERROR An error occurred while removing events: (2003, "Can't connect to MySQL server on '41.216.208.252:3306' (65)")
+Traceback (most recent call last):
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 275, in ensure_connection
+    self.connect()
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/mysql/base.py", line 256, in get_new_connection
+    connection = Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/MySQLdb/__init__.py", line 121, in Connect
+    return Connection(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/MySQLdb/connections.py", line 195, in __init__
+    super().__init__(*args, **kwargs2)
+MySQLdb.OperationalError: (2003, "Can't connect to MySQL server on '41.216.208.252:3306' (65)")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/kutlomangwa/Documents/sefremit/chatbot/utils.py", line 1299, in remove_media_content
+    with connection.cursor() as cursor:
+         ^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 316, in cursor
+    return self._cursor()
+           ^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 292, in _cursor
+    self.ensure_connection()
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 274, in ensure_connection
+    with self.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 275, in ensure_connection
+    self.connect()
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/mysql/base.py", line 256, in get_new_connection
+    connection = Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/MySQLdb/__init__.py", line 121, in Connect
+    return Connection(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/MySQLdb/connections.py", line 195, in __init__
+    super().__init__(*args, **kwargs2)
+django.db.utils.OperationalError: (2003, "Can't connect to MySQL server on '41.216.208.252:3306' (65)")
+2024-10-14 15:10:34 INFO Media content removed successfully. Type: inactive, Status updated from active to events
+2024-10-14 15:10:41 INFO Successfully removed events. inactive, image: active, text: events
+2024-10-14 15:10:41 INFO Media content removed successfully. Type: inactive, Status updated from active to events
+2024-10-14 15:26:28 INFO Message received: This is a caption.
+2024-10-14 15:26:28 ERROR An error occurred saving media content: (2003, "Can't connect to MySQL server on '41.216.208.252:3306' (65)")
+Traceback (most recent call last):
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 275, in ensure_connection
+    self.connect()
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/mysql/base.py", line 256, in get_new_connection
+    connection = Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/MySQLdb/__init__.py", line 121, in Connect
+    return Connection(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/MySQLdb/connections.py", line 195, in __init__
+    super().__init__(*args, **kwargs2)
+MySQLdb.OperationalError: (2003, "Can't connect to MySQL server on '41.216.208.252:3306' (65)")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/kutlomangwa/Documents/sefremit/chatbot/utils.py", line 1277, in save_media_content
+    with connection.cursor() as cursor:
+         ^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 316, in cursor
+    return self._cursor()
+           ^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 292, in _cursor
+    self.ensure_connection()
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 274, in ensure_connection
+    with self.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 275, in ensure_connection
+    self.connect()
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/mysql/base.py", line 256, in get_new_connection
+    connection = Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/MySQLdb/__init__.py", line 121, in Connect
+    return Connection(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/MySQLdb/connections.py", line 195, in __init__
+    super().__init__(*args, **kwargs2)
+django.db.utils.OperationalError: (2003, "Can't connect to MySQL server on '41.216.208.252:3306' (65)")
+2024-10-14 15:26:28 INFO Events Image updated successfully. media_id: 999834725248715
+2024-10-14 15:27:30 INFO Message received: This is a caption.
+2024-10-14 15:27:30 INFO Media Content saved successfully. type: events, image: 489830000720478, text: This is a caption., status: active
+2024-10-14 15:27:30 INFO Events Image updated successfully. media_id: 489830000720478
+2024-10-14 16:17:34 INFO Media Content saved successfully. type: daily_rates, image: 552434577468632, text: null, status: active
+2024-10-14 16:17:34 INFO Daily Rates Image updated successfully. media_id: 552434577468632
+2024-10-14 16:17:59 INFO Media Content saved successfully. type: daily_rates, image: 1346519756321791, text: null, status: active
+2024-10-14 16:17:59 INFO Daily Rates Image updated successfully. media_id: 1346519756321791
+2024-10-14 16:19:01 INFO Message received: A caption for event's.
+2024-10-14 16:19:02 INFO Media Content saved successfully. type: events, image: 572566875126203, text: A caption for event's., status: active
+2024-10-14 16:19:02 INFO Events Image updated successfully. media_id: 572566875126203
+2024-10-14 16:19:32 INFO Message received: A caption for event's. again
+2024-10-14 16:19:33 INFO Media Content saved successfully. type: events, image: 1017544916792252, text: A caption for event's. again, status: active
+2024-10-14 16:19:33 INFO Events Image updated successfully. media_id: 1017544916792252
+2024-10-14 16:22:27 INFO Media Content saved successfully. type: daily_rates, image: 551167010626293, text: null, status: active
+2024-10-14 16:22:27 INFO Daily Rates Image updated successfully. media_id: 551167010626293
+2024-10-14 16:22:47 INFO Media Content saved successfully. type: daily_rates, image: 2101832803548101, text: null, status: active
+2024-10-14 16:22:47 INFO Daily Rates Image updated successfully. media_id: 2101832803548101
+2024-10-14 16:23:19 INFO Successfully removed events. inactive, image: active, text: events
+2024-10-14 16:23:19 INFO Events content removed successfully. Type: inactive, Status updated from active to events
+2024-10-14 16:23:34 INFO Message received: Hello, this is the event caption.
+2024-10-14 16:23:34 INFO Media Content saved successfully. type: events, image: 1626770774574566, text: Hello, this is the event caption., status: active
+2024-10-14 16:23:34 INFO Events Image updated successfully. media_id: 1626770774574566
+2024-10-14 16:23:49 INFO Successfully removed events. inactive, image: active, text: events
+2024-10-14 16:23:49 INFO Events content removed successfully. Type: inactive, Status updated from active to events
+2024-10-14 16:24:19 INFO Message received: Hello, this is the event caption.
+2024-10-14 16:24:19 INFO Media Content saved successfully. type: events, image: 893525009371221, text: Hello, this is the event caption., status: active
+2024-10-14 16:24:19 INFO Events Image updated successfully. media_id: 893525009371221
+2024-10-14 16:24:54 INFO Message received: this is a new captions!!!
+2024-10-14 16:24:54 ERROR An error occurred saving media content: (2003, "Can't connect to MySQL server on '41.216.208.252:3306' (65)")
+Traceback (most recent call last):
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 275, in ensure_connection
+    self.connect()
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/mysql/base.py", line 256, in get_new_connection
+    connection = Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/MySQLdb/__init__.py", line 121, in Connect
+    return Connection(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/MySQLdb/connections.py", line 195, in __init__
+    super().__init__(*args, **kwargs2)
+MySQLdb.OperationalError: (2003, "Can't connect to MySQL server on '41.216.208.252:3306' (65)")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/kutlomangwa/Documents/sefremit/chatbot/utils.py", line 1277, in save_media_content
+    with connection.cursor() as cursor:
+         ^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 316, in cursor
+    return self._cursor()
+           ^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 292, in _cursor
+    self.ensure_connection()
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 274, in ensure_connection
+    with self.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 275, in ensure_connection
+    self.connect()
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/mysql/base.py", line 256, in get_new_connection
+    connection = Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/MySQLdb/__init__.py", line 121, in Connect
+    return Connection(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/MySQLdb/connections.py", line 195, in __init__
+    super().__init__(*args, **kwargs2)
+django.db.utils.OperationalError: (2003, "Can't connect to MySQL server on '41.216.208.252:3306' (65)")
+2024-10-14 16:24:54 INFO Events Image updated successfully. media_id: 1471043536936987
+2024-10-14 16:25:12 INFO Message received: this is a new captions!!!
+2024-10-14 16:25:12 ERROR An error occurred saving media content: (2003, "Can't connect to MySQL server on '41.216.208.252:3306' (65)")
+Traceback (most recent call last):
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 275, in ensure_connection
+    self.connect()
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/mysql/base.py", line 256, in get_new_connection
+    connection = Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/MySQLdb/__init__.py", line 121, in Connect
+    return Connection(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/MySQLdb/connections.py", line 195, in __init__
+    super().__init__(*args, **kwargs2)
+MySQLdb.OperationalError: (2003, "Can't connect to MySQL server on '41.216.208.252:3306' (65)")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/kutlomangwa/Documents/sefremit/chatbot/utils.py", line 1277, in save_media_content
+    with connection.cursor() as cursor:
+         ^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 316, in cursor
+    return self._cursor()
+           ^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 292, in _cursor
+    self.ensure_connection()
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 274, in ensure_connection
+    with self.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 275, in ensure_connection
+    self.connect()
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/mysql/base.py", line 256, in get_new_connection
+    connection = Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/MySQLdb/__init__.py", line 121, in Connect
+    return Connection(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/MySQLdb/connections.py", line 195, in __init__
+    super().__init__(*args, **kwargs2)
+django.db.utils.OperationalError: (2003, "Can't connect to MySQL server on '41.216.208.252:3306' (65)")
+2024-10-14 16:25:12 INFO Events Image updated successfully. media_id: 1716322375853941
+2024-10-14 16:25:22 INFO Message received: this is a new captions!!!
+2024-10-14 16:25:22 ERROR An error occurred saving media content: (2003, "Can't connect to MySQL server on '41.216.208.252:3306' (65)")
+Traceback (most recent call last):
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 275, in ensure_connection
+    self.connect()
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/mysql/base.py", line 256, in get_new_connection
+    connection = Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/MySQLdb/__init__.py", line 121, in Connect
+    return Connection(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/MySQLdb/connections.py", line 195, in __init__
+    super().__init__(*args, **kwargs2)
+MySQLdb.OperationalError: (2003, "Can't connect to MySQL server on '41.216.208.252:3306' (65)")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/kutlomangwa/Documents/sefremit/chatbot/utils.py", line 1277, in save_media_content
+    with connection.cursor() as cursor:
+         ^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 316, in cursor
+    return self._cursor()
+           ^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 292, in _cursor
+    self.ensure_connection()
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 274, in ensure_connection
+    with self.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 275, in ensure_connection
+    self.connect()
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/mysql/base.py", line 256, in get_new_connection
+    connection = Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/MySQLdb/__init__.py", line 121, in Connect
+    return Connection(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/MySQLdb/connections.py", line 195, in __init__
+    super().__init__(*args, **kwargs2)
+django.db.utils.OperationalError: (2003, "Can't connect to MySQL server on '41.216.208.252:3306' (65)")
+2024-10-14 16:25:22 INFO Events Image updated successfully. media_id: 1938175410035661
+2024-10-14 16:25:38 INFO Message received: this is a new captions!!!
+2024-10-14 16:25:39 INFO Media Content saved successfully. type: events, image: 1775728649629859, text: this is a new captions!!!, status: active
+2024-10-14 16:25:39 INFO Events Image updated successfully. media_id: 1775728649629859
+2024-10-14 16:26:42 INFO Message received: this is a new captions!!!
+2024-10-14 16:26:42 ERROR An error occurred saving media content: (2003, "Can't connect to MySQL server on '41.216.208.252:3306' (65)")
+Traceback (most recent call last):
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 275, in ensure_connection
+    self.connect()
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/mysql/base.py", line 256, in get_new_connection
+    connection = Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/MySQLdb/__init__.py", line 121, in Connect
+    return Connection(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/MySQLdb/connections.py", line 195, in __init__
+    super().__init__(*args, **kwargs2)
+MySQLdb.OperationalError: (2003, "Can't connect to MySQL server on '41.216.208.252:3306' (65)")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/kutlomangwa/Documents/sefremit/chatbot/utils.py", line 1277, in save_media_content
+    with connection.cursor() as cursor:
+         ^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 316, in cursor
+    return self._cursor()
+           ^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 292, in _cursor
+    self.ensure_connection()
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 274, in ensure_connection
+    with self.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 275, in ensure_connection
+    self.connect()
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/mysql/base.py", line 256, in get_new_connection
+    connection = Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/MySQLdb/__init__.py", line 121, in Connect
+    return Connection(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/MySQLdb/connections.py", line 195, in __init__
+    super().__init__(*args, **kwargs2)
+django.db.utils.OperationalError: (2003, "Can't connect to MySQL server on '41.216.208.252:3306' (65)")
+2024-10-14 16:26:42 INFO Events Image updated successfully. media_id: 882198623586462
+2024-10-14 16:26:57 INFO Message received: this is a new captions!!!
+2024-10-14 16:26:58 INFO Media Content saved successfully. type: events, image: 1166991301060854, text: this is a new captions!!!, status: active
+2024-10-14 16:26:58 INFO Events Image updated successfully. media_id: 1166991301060854
+2024-10-14 16:28:56 INFO Successfully removed events. inactive, image: active, text: events
+2024-10-14 16:28:56 INFO Events content removed successfully. Type: inactive, Status updated from active to events
+2024-10-14 16:29:16 ERROR An error occurred saving media content: (2003, "Can't connect to MySQL server on '41.216.208.252:3306' (65)")
+Traceback (most recent call last):
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 275, in ensure_connection
+    self.connect()
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/mysql/base.py", line 256, in get_new_connection
+    connection = Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/MySQLdb/__init__.py", line 121, in Connect
+    return Connection(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/MySQLdb/connections.py", line 195, in __init__
+    super().__init__(*args, **kwargs2)
+MySQLdb.OperationalError: (2003, "Can't connect to MySQL server on '41.216.208.252:3306' (65)")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/kutlomangwa/Documents/sefremit/chatbot/utils.py", line 1277, in save_media_content
+    with connection.cursor() as cursor:
+         ^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 316, in cursor
+    return self._cursor()
+           ^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 292, in _cursor
+    self.ensure_connection()
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 274, in ensure_connection
+    with self.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 275, in ensure_connection
+    self.connect()
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/mysql/base.py", line 256, in get_new_connection
+    connection = Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/MySQLdb/__init__.py", line 121, in Connect
+    return Connection(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/MySQLdb/connections.py", line 195, in __init__
+    super().__init__(*args, **kwargs2)
+django.db.utils.OperationalError: (2003, "Can't connect to MySQL server on '41.216.208.252:3306' (65)")
+2024-10-14 16:29:16 INFO Promotions Image updated successfully. media_id: 1080614830341663
+2024-10-14 16:29:51 INFO Media Content saved successfully. type: promotions, image: 915174947127260, text: null, status: active
+2024-10-14 16:29:51 INFO Promotions Image updated successfully. media_id: 915174947127260
+2024-10-14 16:30:07 INFO Media Content saved successfully. type: promotions, image: 848011800841495, text: null, status: active
+2024-10-14 16:30:07 INFO Promotions Image updated successfully. media_id: 848011800841495
+2024-10-14 16:30:14 ERROR An error occurred while removing events: (2003, "Can't connect to MySQL server on '41.216.208.252:3306' (65)")
+Traceback (most recent call last):
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 275, in ensure_connection
+    self.connect()
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/mysql/base.py", line 256, in get_new_connection
+    connection = Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/MySQLdb/__init__.py", line 121, in Connect
+    return Connection(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/MySQLdb/connections.py", line 195, in __init__
+    super().__init__(*args, **kwargs2)
+MySQLdb.OperationalError: (2003, "Can't connect to MySQL server on '41.216.208.252:3306' (65)")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/kutlomangwa/Documents/sefremit/chatbot/utils.py", line 1299, in remove_media_content
+    with connection.cursor() as cursor:
+         ^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 316, in cursor
+    return self._cursor()
+           ^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 292, in _cursor
+    self.ensure_connection()
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 274, in ensure_connection
+    with self.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 275, in ensure_connection
+    self.connect()
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/mysql/base.py", line 256, in get_new_connection
+    connection = Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/MySQLdb/__init__.py", line 121, in Connect
+    return Connection(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/MySQLdb/connections.py", line 195, in __init__
+    super().__init__(*args, **kwargs2)
+django.db.utils.OperationalError: (2003, "Can't connect to MySQL server on '41.216.208.252:3306' (65)")
+2024-10-14 16:30:14 INFO Promotions content removed successfully. Type: inactive, Status updated from active to events
+2024-10-14 16:30:17 INFO Successfully removed events. inactive, image: active, text: promotions
+2024-10-14 16:30:17 INFO Promotions content removed successfully. Type: inactive, Status updated from active to events
+2024-10-14 16:45:20 ERROR An error occurred saving media content: (2003, "Can't connect to MySQL server on '41.216.208.252:3306' (65)")
+Traceback (most recent call last):
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 275, in ensure_connection
+    self.connect()
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/mysql/base.py", line 256, in get_new_connection
+    connection = Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/MySQLdb/__init__.py", line 121, in Connect
+    return Connection(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/MySQLdb/connections.py", line 195, in __init__
+    super().__init__(*args, **kwargs2)
+MySQLdb.OperationalError: (2003, "Can't connect to MySQL server on '41.216.208.252:3306' (65)")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/kutlomangwa/Documents/sefremit/chatbot/utils.py", line 1277, in save_media_content
+    with connection.cursor() as cursor:
+         ^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 316, in cursor
+    return self._cursor()
+           ^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 292, in _cursor
+    self.ensure_connection()
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 274, in ensure_connection
+    with self.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 275, in ensure_connection
+    self.connect()
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/base/base.py", line 256, in connect
+    self.connection = self.get_new_connection(conn_params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/utils/asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/django/db/backends/mysql/base.py", line 256, in get_new_connection
+    connection = Database.connect(**conn_params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/MySQLdb/__init__.py", line 121, in Connect
+    return Connection(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/sefremit_env/lib/python3.12/site-packages/MySQLdb/connections.py", line 195, in __init__
+    super().__init__(*args, **kwargs2)
+django.db.utils.OperationalError: (2003, "Can't connect to MySQL server on '41.216.208.252:3306' (65)")
+2024-10-14 16:45:20 INFO Promotions Image updated successfully. media_id: 1012800270533215
+2024-10-14 16:45:50 INFO Media Content saved successfully. type: promotions, image: 557155800030244, text: null, status: active
+2024-10-14 16:45:50 INFO Promotions Image updated successfully. media_id: 557155800030244
+2024-10-14 16:46:00 INFO Media Content saved successfully. type: promotions, image: 548222657745553, text: null, status: active
+2024-10-14 16:46:00 INFO Promotions Image updated successfully. media_id: 548222657745553
+2024-10-14 16:46:24 INFO Successfully removed events. inactive, image: active, text: promotions
+2024-10-14 16:46:24 INFO Promotions content removed successfully. Type: inactive, Status updated from active to events
+2024-10-15 08:43:21 INFO Message sent successfully. message: No Daily Rates at the moment, phone_number: 26774342078
+2024-10-15 08:43:21 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBI4NzlBNkE5MEM5RjNBMUU4MzYA'}]}
+2024-10-15 08:44:54 INFO Message sent successfully. message: No Daily Rates at the moment, phone_number: 26774342078
+2024-10-15 08:44:54 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBJCQTkxNkQ4RjJGRjg1NkFEMUEA'}]}
+2024-10-15 08:48:15 INFO Message sent successfully. message: No Daily Rates at the moment, phone_number: 26774342078
+2024-10-15 08:48:15 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBI3REQ1RERDMjc1NUI3OUJDNDQA'}]}
+2024-10-15 09:06:16 INFO Media Content saved successfully. type: daily_rates, image: 855832590011142, text: null, status: active
+2024-10-15 09:06:16 INFO Daily Rates Image updated successfully. media_id: 855832590011142
+2024-10-15 09:07:35 ERROR Failed to send image. Status Code: 400. Response Content: b'{"error":{"message":"Unsupported post request. Object with ID \'286939801179582\' does not exist, cannot be loaded due to missing permissions, or does not support this operation. Please read the Graph API documentation at https:\\/\\/developers.facebook.com\\/docs\\/graph-api","type":"GraphMethodException","code":100,"error_subcode":33,"fbtrace_id":"A8XmNpNIdYbmcewEpuwEgNm"}}'
+2024-10-15 09:10:03 INFO Image sent successfully. id: 855832590011142, phone: 26774342078
+2024-10-15 09:10:03 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBIyMDA5ODVCRUFFRjBBNDkzMzUA'}]}
+2024-10-15 09:10:48 INFO Image sent successfully. id: 855832590011142, phone: 26774342078
+2024-10-15 09:10:48 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBI0RjgyMjdBMEZBNTk2ODFBN0EA'}]}
+2024-10-15 09:38:38 ERROR Failed to upload Daily Rates. Status Code: 400
+Details: {"error":{"message":"Unsupported post request. Object with ID '286939801179582' does not exist, cannot be loaded due to missing permissions, or does not support this operation. Please read the Graph API documentation at https:\/\/developers.facebook.com\/docs\/graph-api","type":"GraphMethodException","code":100,"error_subcode":33,"fbtrace_id":"AqFlshKlJenXAwDrFZvcSXQ"}}
+2024-10-15 09:44:20 ERROR Failed to upload Daily Rates. Status Code: 400
+Details: {"error":{"message":"Unsupported post request. Object with ID '286939801179582' does not exist, cannot be loaded due to missing permissions, or does not support this operation. Please read the Graph API documentation at https:\/\/developers.facebook.com\/docs\/graph-api","type":"GraphMethodException","code":100,"error_subcode":33,"fbtrace_id":"AlpBtsdGnBCGa9BcgR7x3vw"}}
+2024-10-15 09:45:26 INFO Media Content saved successfully. type: daily_rates, image: 1266672801343706, text: null, status: active
+2024-10-15 09:45:26 INFO Daily Rates Image updated successfully. media_id: 1266672801343706
+2024-10-15 09:45:38 ERROR Failed to send image. Status Code: 403. Response Content: b'{"error":{"message":"(#200) Permissions error","type":"OAuthException","code":200,"fbtrace_id":"A2ptqoR4uBoNQaBiNsGPGAK"}}'
+2024-10-15 09:46:44 ERROR Failed to send image. Status Code: 400. Response Content: b'{"error":{"message":"Unsupported post request. Object with ID \'286939801179582\' does not exist, cannot be loaded due to missing permissions, or does not support this operation. Please read the Graph API documentation at https:\\/\\/developers.facebook.com\\/docs\\/graph-api","type":"GraphMethodException","code":100,"error_subcode":33,"fbtrace_id":"AUebT-1W8ulS3ZUZVcAiu8_"}}'
+2024-10-15 09:47:19 INFO Image sent successfully. id: 1266672801343706, phone: 26774342078
+2024-10-15 09:47:19 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBJCNEIwREQxRjRGMTZCODJBMDIA'}]}
+2024-10-15 10:45:24 INFO Image sent successfully. id: 1266672801343706, phone: 26774342078
+2024-10-15 10:45:24 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBJGN0Y3NDg3Qjg3MzM2QzA4MjkA'}]}
+2024-10-15 10:51:33 INFO Media Content saved successfully. type: daily_rates, image: 2533211956872956, text: null, status: active
+2024-10-15 10:51:33 INFO Daily Rates Image updated successfully. media_id: 2533211956872956
+2024-10-15 10:52:14 INFO Image sent successfully. id: 2533211956872956, phone: 26774342078
+2024-10-15 10:52:14 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBI1NkNCOERGRjQ3NkNBRUIxREUA'}]}
+2024-10-15 10:53:37 INFO Message sent successfully. message: No Promotions at the moment, phone_number: 26774342078
+2024-10-15 10:53:37 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBJBNTE5RTI0ODU3ODkxMEJFM0UA'}]}
+2024-10-15 10:55:40 INFO Media Content saved successfully. type: promotions, image: 7787827121320852, text: null, status: active
+2024-10-15 10:55:40 INFO Promotions Image updated successfully. media_id: 7787827121320852
+2024-10-15 10:55:48 INFO Image sent successfully. id: 7787827121320852, phone: 26774342078
+2024-10-15 10:55:48 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBI4MTRGRTlCOEVCNEFDNjc0OTcA'}]}
+2024-10-15 10:56:22 INFO Media Content saved successfully. type: promotions, image: 612447961105266, text: null, status: active
+2024-10-15 10:56:22 INFO Promotions Image updated successfully. media_id: 612447961105266
+2024-10-15 10:56:28 INFO Image sent successfully. id: 612447961105266, phone: 26774342078
+2024-10-15 10:56:29 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBJEQjc3N0RERERGOTRFRTc1REMA'}]}
+2024-10-15 10:56:48 INFO Successfully removed events. inactive, image: active, text: promotions
+2024-10-15 10:56:48 INFO Promotions content removed successfully. Type: inactive, Status updated from active to events
+2024-10-15 10:57:08 INFO Message sent successfully. message: No Promotions at the moment, phone_number: 26774342078
+2024-10-15 10:57:08 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBIwNkJEQkY3QkVGRThGMzNEMkYA'}]}
+2024-10-15 10:59:08 INFO Message sent successfully. message: No Upcoming Events, phone_number: 26774342078
+2024-10-15 10:59:08 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBI1QTMxQzk0Mzc5NkVEOEY4QTcA'}]}
+2024-10-15 10:59:52 ERROR Failed to upload Events Image. Status Code: 400
+Details: {"error":{"message":"Unsupported post request. Object with ID '422196440971638' does not exist, cannot be loaded due to missing permissions, or does not support this operation. Please read the Graph API documentation at https:\/\/developers.facebook.com\/docs\/graph-api","type":"GraphMethodException","code":100,"error_subcode":33,"fbtrace_id":"Aniy9cyj3KKi05MOXpbxEJR"}}
+2024-10-15 11:01:18 INFO Message received: JOIN our event
+2024-10-15 11:01:19 INFO Media Content saved successfully. type: events, image: 2201128133592387, text: JOIN our event, status: active
+2024-10-15 11:01:19 INFO Events Image updated successfully. media_id: 2201128133592387
+2024-10-15 11:04:26 INFO Message sent successfully. message: No Upcoming Events, phone_number: 26774342078
+2024-10-15 11:04:26 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBJCNTVGMjQxMkYwNjZCQjBFOTEA'}]}
+2024-10-15 11:05:12 INFO Image sent successfully. id: 2201128133592387, phone: 26774342078
+2024-10-15 11:05:12 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBIyNEZDMkIxNkFGMTQxRkQ2MjQA'}]}
+2024-10-15 11:05:52 INFO Message received: this is new events
+2024-10-15 11:05:53 INFO Media Content saved successfully. type: events, image: 1632120984000670, text: this is new events, status: active
+2024-10-15 11:05:53 INFO Events Image updated successfully. media_id: 1632120984000670
+2024-10-15 11:06:35 INFO Image sent successfully. id: 1632120984000670, phone: 26774342078
+2024-10-15 11:06:35 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBIzREJBNkM0MjRBMTA0M0JDNTEA'}]}
+2024-10-15 11:06:54 INFO Successfully removed events. inactive, image: active, text: events
+2024-10-15 11:06:54 INFO Events content removed successfully. Type: inactive, Status updated from active to events
+2024-10-15 11:07:12 INFO Message sent successfully. message: No Upcoming Events, phone_number: 26774342078
+2024-10-15 11:07:12 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBIyMEUyMUJGQ0NENDVGRDMwQUUA'}]}

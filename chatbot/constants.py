@@ -62,10 +62,23 @@ JULY_8_AUGUST_4_2024_BIRTHDAY_PROMOTION_SEFALANA_LIQUOR = "8_july_4_august_2024_
 JULY_8_AUGUST_4_2024_BIRTHDAY_PROMOTION_ALL_HYPER_CASH_CARRY = "8_july_4_august_2024_birthday_promo_all_hyper_cash_and_carry_liquor"
 FOLLOW_UP_TO_SEND_PARTICIPATING_STORES_IMAGE = "follow_up_to_send_participating_stores_image"
 FOLLOW_UP_TO_SEND_PRIZES_IMAGE = "follow_up_to_send_prizes_image"
+FOLLOW_UP_TO_SEND_EVENTS_IMAGE = "follow_up_to_send_events_image"
 SEFALANA_WHOLESALE = "Sefalana Wholesale"
 SEFALANA_HYPER = "Sefalana Hyper"
 SEFALANA_SHOPPER = "Sefalana Shopper"
 LIQUOR_WEEKEND_SPECIAL = "Liquor Weekend Special"
+TYPE = "type"
+IMAGE = "image"
+TEXT = "text"
+NULL = "null"
+DAILY_RATES = "daily_rates"
+EVENTS = "events"
+PROMOTIONS = "promotions"
+STATUS = "status"
+ACTIVE = "active"
+INACTIVE = "inactive"
+OLD_STATUS = "old_status"
+NEW_STATUS = "new_status"
 
 
 # Template Names

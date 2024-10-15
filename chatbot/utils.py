@@ -653,7 +653,12 @@ def handle_reply(reply, message_id, phone_number, username, display_phone_number
         send_interactive_sefremit_services_menu_message(phone_number)
 
     elif reply == TODAYS_RATES:
-        send_sefremit_image(SEFREMIT_TODAYS_RATES_URL, phone_number)
+        daily_rates_image = get_daily_rates_image()
+
+        if daily_rates_image is None:
+            send_sefremit_message("No Daily Rates at the moment", phone_number)
+        else:
+            send_sefremit_image_by_id(daily_rates_image, phone_number)
 
     elif reply == OPERATING_HOURS:
         send_sefremit_image(SEFREMIT_OPERATING_HOURS_URL, phone_number)
@@ -668,19 +673,27 @@ def handle_reply(reply, message_id, phone_number, username, display_phone_number
         send_sefremit_message(KYC_REQUIREMENTS_MESSAGE, phone_number)
 
     elif reply == UPCOMING_EVENTS:
-        send_sefremit_image(SEFREMIT_UPCOMING_EVENT, phone_number)
+        events_image = get_events_image()
 
+        if events_image is None:
+            send_sefremit_message("No Upcoming Events", phone_number)
+        else:
+            wamid = send_sefremit_image_by_id(events_image, phone_number)
+            cache.set(wamid, FOLLOW_UP_TO_SEND_EVENTS_IMAGE, timeout=300)
+        
     elif reply == PARTNERS:
         send_sefremit_image(SEFREMIT_PARTNERS_URL, phone_number)
 
+    elif reply == PROMOTIONS:
+        promotions_image = get_promotions_image()
+
+        if promotions_image is None:
+            send_sefremit_message("No Promotions at the moment", phone_number)
+        else:
+            send_sefremit_image_by_id(promotions_image, phone_number)
+
     elif reply == CASH_PICKUP:
         send_image_with_description(SEFREMIT_PARTNERS_URL, phone_number, CASH_PICKUP_CAPTION)
-
-    # elif reply == STANDARD_CHARTERED:
-    #     send_sefremit_message(STANDARD_CHARTERED_REQUIREMENTS_MESSAGE, phone_number)
-
-    # elif reply == AGENCY_BANKING:
-    #     send_interactive_sefremit_agency_banking_menu_message(phone_number)
 
     elif reply == "sefremit":
         send_interactive_sefremit_menu_message(phone_number)
@@ -1266,4 +1279,222 @@ def send_document_template_by_id_with_parameter(phone_number, template_name, doc
     except requests.exceptions.RequestException as e:
         logger.error(f"Error sending document template message: {e}", exc_info=True)
         return None
+
+def save_media_content(save_media_content_dict):
+    try:
+        query = """
+            INSERT INTO media_content (type, image, text, created_at, status) 
+            VALUES (%s, %s, %s, NOW(), %s);
+        """
+        
+        with connection.cursor() as cursor:
+            
+            cursor.execute(
+                query, 
+                (
+                    save_media_content_dict[TYPE], 
+                    save_media_content_dict[IMAGE], 
+                    save_media_content_dict[TEXT],
+                    save_media_content_dict[STATUS]))
+            
+            connection.commit()
+            logger.info(f"Media Content saved successfully. type: {save_media_content_dict[TYPE]}, image: {save_media_content_dict[IMAGE]}, text: {save_media_content_dict[TEXT]}, status: {save_media_content_dict[STATUS]}")
+
+    except Exception as e:
+        connection.rollback()
+        logger.error(f'An error occurred saving media content: {e}', exc_info=True)
+
+def remove_media_content(remove_media_content_dict):
+    query = "UPDATE media_content SET status = %s WHERE status = %s and type = %s;"
+
+    try:
+        # Use context manager to get cursor from connection
+        with connection.cursor() as cursor:
+
+            cursor.execute(
+                query, 
+                (
+                    remove_media_content_dict[NEW_STATUS], 
+                    remove_media_content_dict[OLD_STATUS], 
+                    remove_media_content_dict[TYPE]))
+            
+            
+            # Commit the transaction
+            connection.commit()
+
+            logger.info(f"Successfully removed events. {remove_media_content_dict[NEW_STATUS]}, image: {remove_media_content_dict[OLD_STATUS]}, text: {remove_media_content_dict[TYPE]}")
+
+    except Exception as e:
+        # Rollback any changes if an error occurs
+        connection.rollback()
+        logger.error(f"An error occurred while removing events: {e}", exc_info=True)
+
+def get_daily_rates_image():
+    query = "SELECT image FROM media_content WHERE status = 'active' AND type = 'daily_rates' ORDER BY created_at DESC LIMIT 1;"
+
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute(query)
+            result = cursor.fetchone()
+
+            if result:
+                return result[0]
+            else:
+                # Handle case where no customer is found
+                # Example: You might want to register the user here
+                # register_user(phone_number)
+                return None
+
+    except OperationalError as e:
+        logger.error(f'Error occurred in get_daily_rates_image: {e}', exc_info=True)
+        # Handle or raise the exception as needed
+        return None
+    except Exception as e:
+        logger.error(f'An error occurred in get_daily_rates_image: {e}', exc_info=True)
+        # Handle or raise the exception as needed
+        return None
+
+def get_events_image(customer_id):
+    query = "SELECT image FROM media_content WHERE status = 'active' AND type = 'events' ORDER BY created_at DESC LIMIT 1;"
+    
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute(query, (customer_id,))
+            results = cursor.fetchall()
+
+            events_dict_lst = [
+                {
+                    IMAGE: image,
+                    TEXT: text
+                }
+
+                for image, text in results
+            ]
+            
+            return events_dict_lst
+
+    except Exception as e:
+        logger.error(f'An error occurred in get_events_image: {e}', exc_info=True)
+        return []
+
+def get_events_image():
+    query = "SELECT image FROM media_content WHERE status = 'active' AND type = 'events' ORDER BY created_at DESC LIMIT 1;"
+
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute(query)
+            result = cursor.fetchone()
+
+            if result:
+                return result[0]
+            else:
+                # Handle case where no customer is found
+                # Example: You might want to register the user here
+                # register_user(phone_number)
+                return None
+
+    except OperationalError as e:
+        logger.error(f'Error occurred in get_events_image: {e}', exc_info=True)
+        # Handle or raise the exception as needed
+        return None
+    except Exception as e:
+        logger.error(f'An error occurred in get_events_image: {e}', exc_info=True)
+        # Handle or raise the exception as needed
+        return None
+
+def get_events_text():
+    query = "SELECT text FROM media_content WHERE status = 'active' AND type = 'events' ORDER BY created_at DESC LIMIT 1;"
+
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute(query)
+            result = cursor.fetchone()
+
+            if result:
+                return result[0]
+            else:
+                # Handle case where no customer is found
+                # Example: You might want to register the user here
+                # register_user(phone_number)
+                return None
+
+    except OperationalError as e:
+        logger.error(f'Error occurred in get_events_image: {e}', exc_info=True)
+        # Handle or raise the exception as needed
+        return None
+    except Exception as e:
+        logger.error(f'An error occurred in get_events_image: {e}', exc_info=True)
+        # Handle or raise the exception as needed
+        return None
+
+def get_promotions_image():
+    query = "SELECT image, text FROM media_content WHERE status = 'active' AND type = 'promotions' ORDER BY created_at DESC LIMIT 1;"
+
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute(query)
+            result = cursor.fetchone()
+
+            if result:
+                return result[0]
+            else:
+                # Handle case where no customer is found
+                # Example: You might want to register the user here
+                # register_user(phone_number)
+                return None
+
+    except OperationalError as e:
+        logger.error(f'Error occurred in get_promotions_image: {e}', exc_info=True)
+        # Handle or raise the exception as needed
+        return None
+    except Exception as e:
+        logger.error(f'An error occurred in get_promotions_image: {e}', exc_info=True)
+        # Handle or raise the exception as needed
+        return None
+
+def send_sefremit_image_by_id(id, phone_number):
+    headers = {
+        "Content-Type": APPLICATION_JSON,
+        "Authorization": SEFREMIT_AUTHORIZATION
+    }
+    
+    json_data = {
+        "messaging_product": "whatsapp",
+        "recipient_type": "individual",
+        "to": phone_number,
+        "type": "image",
+        "image": {
+            "id": id
+        }
+    }
+    
+    try:
+        response = requests.post(SEFREMIT_MESSAGES_ENDPOINT, json=json_data, headers=headers)
+        
+        if response.status_code == 200:
+            logger.info(f"Image sent successfully. id: {id}, phone: {phone_number}")
+
+            response_data = response.json()
+
+            logger.debug(f"Response JSON: {response_data}")
+
+            return response_data.get("messages", [{}])[0].get("id")
+        else:
+            logger.error(f"Failed to send image. Status Code: {response.status_code}. Response Content: {response.content}")
+            return None
+            
+    except requests.exceptions.RequestException as e:
+        logger.error(f"Error sending Image: {e}", exc_info=True)
+        return None
+
+def handle_upcoming_events(phone_number):
+    events_text = get_events_text()
+
+    if events_text is None:
+        pass
+    else:
+        send_sefremit_message(events_text, phone_number)
+
+
+
 

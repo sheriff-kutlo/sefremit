@@ -14,6 +14,9 @@ from django.http import FileResponse, Http404
 import pandas as pd
 import re
 from datetime import datetime
+from django.core.files.storage import default_storage
+from django.core.files.base import ContentFile
+import requests
 
 # Get an instance of a logger
 logger = logging.getLogger(CHATBOT_CATALOG)
@@ -76,6 +79,8 @@ def sefremit_verification(request):
                                 send_template_without_header(recipient_id, PROMOTIONAL_PRODUCTS_OPTIONS_TEMP)
                             elif value == FOLLOW_UP_TO_SEND_PRIZES_IMAGE:
                                 handle_prizes(recipient_id)
+                            elif value == FOLLOW_UP_TO_SEND_EVENTS_IMAGE:
+                                handle_upcoming_events(recipient_id)
 
                     else:
                         logger.info(f"Status is not 'delivered' or 'read': {status['status']}")
@@ -186,7 +191,9 @@ def sefremit_verification(request):
 
 def hello(request):
 
-    send_survey_flow("26774342078")
+    handle_reply(UPCOMING_EVENTS, "id", KUTLO_PHONE_NUMBER, "Joe", KUTLO_PHONE_NUMBER)
+
+    # send_survey_flow("26774342078")
 
     # handle_reply("sefremit", "wamid: 842892", KUTLO_PHONE_NUMBER, "Joe", SEFREMIT_PHONE_NUMBER)
 
@@ -629,4 +636,188 @@ def extract_phone_numbers(target_date):
                     phone_numbers.append(phone_number)
 
     return phone_numbers
+
+@csrf_exempt
+def upload_daily_rates_image(request):
+    if request.method == 'POST' and request.FILES.get('file'):
+        uploaded_file = request.FILES['file']
+
+        # Save the uploaded image temporarily
+        file_path = default_storage.save(os.path.join('uploads', uploaded_file.name), ContentFile(uploaded_file.read()))
+        full_file_path = os.path.join(default_storage.location, file_path)
+
+        # Now make the API call to Facebook (or another server) to upload the image
+        url = "https://graph.facebook.com/v20.0/422196440971638/media"
+        headers = {
+            'Authorization': SEFREMIT_AUTHORIZATION,  # Replace with your actual token
+        }
+
+        # Prepare the file and data for the POST request
+        data = {
+            'type': 'image/jpeg',
+            'messaging_product': 'whatsapp'
+        }
+        files = {
+            'file': (uploaded_file.name, open(full_file_path, 'rb'), 'image/jpeg')
+        }
+
+        response = requests.post(url, headers=headers, files=files, data=data)
+
+        # Remove the temporarily saved file
+        os.remove(full_file_path)
+
+        if response.status_code == 200:
+            response_data = response.json()
+            media_id = response_data.get("id")
+            print(f"Media ID: {media_id}")
+            
+            save_media_content({TYPE: DAILY_RATES, IMAGE: media_id, TEXT: NULL, STATUS: ACTIVE})
+
+            logger.info(f"Daily Rates Image updated successfully. media_id: {media_id}")
+
+            return JsonResponse({"message": "Daily Rates uploaded successfully", "media_id": media_id})
+        else:
+            logger.error(f"Failed to upload Daily Rates. Status Code: {response.status_code}\nDetails: {response.text}")
+            return JsonResponse({"error": f"Failed to upload Daily Rates. Status Code: {response.status_code}", "details": response.text}, status=500)
+
+    return JsonResponse({"error": "No file uploaded"}, status=400)
+
+@csrf_exempt
+def upload_events_image(request):
+    if request.method == 'POST' and request.FILES.get('file'):
+        uploaded_file = request.FILES['file']
+
+        # Get the message from the request
+        message = request.POST.get('message', None)
+
+        # Save the uploaded image temporarily
+        file_path = default_storage.save(os.path.join('uploads', uploaded_file.name), ContentFile(uploaded_file.read()))
+        full_file_path = os.path.join(default_storage.location, file_path)
+
+        # Now make the API call to Facebook (or another server) to upload the image
+        url = "https://graph.facebook.com/v20.0/422196440971638/media"
+        headers = {
+            'Authorization': SEFREMIT_AUTHORIZATION,  # Replace with your actual token
+        }
+
+        # Prepare the file and data for the POST request
+        data = {
+            'type': 'image/jpeg',
+            'messaging_product': 'whatsapp'
+        }
+        files = {
+            'file': (uploaded_file.name, open(full_file_path, 'rb'), 'image/jpeg')
+        }
+
+        response = requests.post(url, headers=headers, files=files, data=data)
+
+        # Remove the temporarily saved file
+        os.remove(full_file_path)
+
+        if response.status_code == 200:
+            response_data = response.json()
+            media_id = response_data.get("id")
+            print(f"Media ID: {media_id}")
+
+            # Log the message if it was sent
+            if message:
+                logger.info(f"Message received: {message}")
+
+            save_media_content({TYPE: EVENTS, IMAGE: media_id, TEXT: message or NULL, STATUS: ACTIVE})
+
+            logger.info(f"Events Image updated successfully. media_id: {media_id}")
+
+            return JsonResponse({"message": "Events Image uploaded successfully", "media_id": media_id})
+        else:
+            logger.error(f"Failed to upload Events Image. Status Code: {response.status_code}\nDetails: {response.text}")
+            return JsonResponse({"error": f"Failed to upload Events Image. Status Code: {response.status_code}", "details": response.text}, status=500)
+
+    return JsonResponse({"error": "No file uploaded"}, status=400)
+
+@csrf_exempt
+def upload_promotions_image(request):
+    if request.method == 'POST' and request.FILES.get('file'):
+        uploaded_file = request.FILES['file']
+
+        # Save the uploaded image temporarily
+        file_path = default_storage.save(os.path.join('uploads', uploaded_file.name), ContentFile(uploaded_file.read()))
+        full_file_path = os.path.join(default_storage.location, file_path)
+
+        # Now make the API call to Facebook (or another server) to upload the image
+        url = "https://graph.facebook.com/v20.0/422196440971638/media"
+        headers = {
+            'Authorization': SEFREMIT_AUTHORIZATION,  # Replace with your actual token
+        }
+
+        # Prepare the file and data for the POST request
+        data = {
+            'type': 'image/jpeg',
+            'messaging_product': 'whatsapp'
+        }
+        files = {
+            'file': (uploaded_file.name, open(full_file_path, 'rb'), 'image/jpeg')
+        }
+
+        response = requests.post(url, headers=headers, files=files, data=data)
+
+        # Remove the temporarily saved file
+        os.remove(full_file_path)
+
+        if response.status_code == 200:
+            response_data = response.json()
+            media_id = response_data.get("id")
+            print(f"Media ID: {media_id}")
+            
+            save_media_content({TYPE: PROMOTIONS, IMAGE: media_id, TEXT: NULL, STATUS: ACTIVE})
+
+            logger.info(f"Promotions Image updated successfully. media_id: {media_id}")
+
+            return JsonResponse({"message": "Promotions uploaded successfully", "media_id": media_id})
+        else:
+            logger.error(f"Failed to upload Promotions. Status Code: {response.status_code}\nDetails: {response.text}")
+            return JsonResponse({"error": f"Failed to upload Promotions. Status Code: {response.status_code}", "details": response.text}, status=500)
+
+    return JsonResponse({"error": "No file uploaded"}, status=400)
+
+def remove_events_image(request):
+    if request.method == 'GET':    
+        # Perform the remove operation
+        try:
+            # Replace remove_media_content with the actual logic if needed
+            remove_media_content({NEW_STATUS: INACTIVE, OLD_STATUS: ACTIVE, TYPE: EVENTS})
+
+            # Log success
+            logger.info(f"Events content removed successfully. Type: {INACTIVE}, Status updated from {ACTIVE} to {EVENTS}")
+
+            return JsonResponse({"message": "Events content removed successfully"}, status=200)
+
+        except Exception as e:
+            # Log error and return failure response
+            logger.error(f"Failed to remove Events content: {str(e)}")
+            return JsonResponse({"error": f"Failed to remove Events content: {str(e)}"}, status=500)
+
+    return JsonResponse({"error": "Invalid request method. Use GET."}, status=405)
+
+def remove_promotions_image(request):
+    if request.method == 'GET':    
+        # Perform the remove operation
+        try:
+            # Replace remove_media_content with the actual logic if needed
+            remove_media_content({NEW_STATUS: INACTIVE, OLD_STATUS: ACTIVE, TYPE: PROMOTIONS})
+
+            # Log success
+            logger.info(f"Promotions content removed successfully. Type: {INACTIVE}, Status updated from {ACTIVE} to {EVENTS}")
+
+            return JsonResponse({"message": "Promotions content removed successfully"}, status=200)
+
+        except Exception as e:
+            # Log error and return failure response
+            logger.error(f"Failed to remove Promotions content: {str(e)}")
+            return JsonResponse({"error": f"Failed to remove Promotions content: {str(e)}"}, status=500)
+
+    return JsonResponse({"error": "Invalid request method. Use GET."}, status=405)
+
+
+
+
 

@@ -27,20 +27,20 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY")
-APP_SECRET = os.environ.get("APP_SECRET")
-# SECRET_KEY = 'django-insecure-cj7xv7la-t56&m!3=r9b+w-xj9jsun3oh0q@k!(o+#lb!nv1=@'
+# SECRET_KEY = os.environ.get("SECRET_KEY")
+# APP_SECRET = os.environ.get("APP_SECRET")
+SECRET_KEY = 'django-insecure-cj7xv7la-t56&m!3=r9b+w-xj9jsun3oh0q@k!(o+#lb!nv1=@'
 
-TOKEN = os.environ.get("TOKEN")
+# TOKEN = os.environ.get("TOKEN")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = False
-DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
+DEBUG = False
+# DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
 
 
 # ALLOWED_HOSTS = []
-# ALLOWED_HOSTS = ['41.216.208.252', 'whatsapp.service.sefalana.co.bw']
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
+ALLOWED_HOSTS = ['41.216.208.252', 'whatsapp.sefremit.sefalana.co.bw']
+# ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
 
 
 
@@ -112,11 +112,11 @@ WSGI_APPLICATION = 'sefremit.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'sefalana_dm_refactored',
-        'USER': 'avnadmin',
-        'PASSWORD': 'AVNS_QqYij4m7KXDyjgPKkr1',
-        'HOST': 'mysql-985f53f-willmangwafx-250f.aivencloud.com',
-        'PORT': '11989'
+        'NAME': 'sefremit',
+        'USER': 'kutlo',
+        'PASSWORD': 'FavShow#1K',
+        'HOST': '127.0.0.1',
+        'PORT': '3306'
     }
 }
 
@@ -187,8 +187,8 @@ LOGGING = {
         'file': {
             'level': 'DEBUG',  # Set the desired logging level
             'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, 'logs', 'sefremit.log'),
-            # 'filename': '/var/log/gunicorn/sefremit.log',
+            # 'filename': os.path.join(BASE_DIR, 'logs', 'sefremit.log'),
+            'filename': '/var/log/gunicorn/sefremit.log',
             'formatter': 'simple',
         },
         'console': {
