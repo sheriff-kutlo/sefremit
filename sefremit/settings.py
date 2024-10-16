@@ -39,7 +39,7 @@ DEBUG = False
 
 
 # ALLOWED_HOSTS = []
-ALLOWED_HOSTS = ['41.216.208.252', 'whatsapp.sefremit.sefalana.co.bw']
+ALLOWED_HOSTS = ['41.216.208.252', 'whatsapp.sefremit.sefalana.co.bw', 'localhost', '127.0.0.1']
 # ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
 
 
