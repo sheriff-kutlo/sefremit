@@ -351,7 +351,7 @@ def other_images(request, category, filename):
     file_path = os.path.join(settings.MEDIA_ROOT, category, filename)
     if os.path.exists(file_path):
         with open(file_path, 'rb') as f:
-            return HttpResponse(f.read(), content_type="image/jpeg")
+            return HttpResponse(f.read(), content_type="image/jpg")
     else:
         raise Http404("Image not found")
 
@@ -359,7 +359,7 @@ def catalog_images(request, category, promotion, filename):
     file_path = os.path.join(settings.MEDIA_ROOT, category, promotion, filename)
     if os.path.exists(file_path):
         with open(file_path, 'rb') as f:
-            return HttpResponse(f.read(), content_type="image/jpeg")
+            return HttpResponse(f.read(), content_type="image/jpg")
     else:
         raise Http404("Image not found")
 
@@ -654,11 +654,11 @@ def upload_daily_rates_image(request):
 
         # Prepare the file and data for the POST request
         data = {
-            'type': 'image/jpeg',
+            'type': 'image/jpg',
             'messaging_product': 'whatsapp'
         }
         files = {
-            'file': (uploaded_file.name, open(full_file_path, 'rb'), 'image/jpeg')
+            'file': (uploaded_file.name, open(full_file_path, 'rb'), 'image/jpg')
         }
 
         response = requests.post(url, headers=headers, files=files, data=data)
@@ -702,11 +702,11 @@ def upload_events_image(request):
 
         # Prepare the file and data for the POST request
         data = {
-            'type': 'image/jpeg',
+            'type': 'image/jpg',
             'messaging_product': 'whatsapp'
         }
         files = {
-            'file': (uploaded_file.name, open(full_file_path, 'rb'), 'image/jpeg')
+            'file': (uploaded_file.name, open(full_file_path, 'rb'), 'image/jpg')
         }
 
         response = requests.post(url, headers=headers, files=files, data=data)
@@ -751,11 +751,11 @@ def upload_promotions_image(request):
 
         # Prepare the file and data for the POST request
         data = {
-            'type': 'image/jpeg',
+            'type': 'image/jpg',
             'messaging_product': 'whatsapp'
         }
         files = {
-            'file': (uploaded_file.name, open(full_file_path, 'rb'), 'image/jpeg')
+            'file': (uploaded_file.name, open(full_file_path, 'rb'), 'image/jpg')
         }
 
         response = requests.post(url, headers=headers, files=files, data=data)
