@@ -660,11 +660,11 @@ def handle_reply(reply, message_id, phone_number, username, display_phone_number
         else:
             send_sefremit_image_by_id(daily_rates_image, phone_number)
 
-    elif reply == OPERATING_HOURS:
+    elif reply == BRANCH_HOURS:
         send_sefremit_image(SEFREMIT_OPERATING_HOURS_URL, phone_number)
 
-    elif reply == OUR_BRANCHES:
-        send_sefremit_image(SEFREMIT_BRANCHES_URL, phone_number)
+    # elif reply == OUR_BRANCHES:
+    #     send_sefremit_image(SEFREMIT_BRANCHES_URL, phone_number)
 
     elif reply == TRANSACTION_LIMITS:
         send_sefremit_message("The maximum transaction limit is BWP 10,000.00", phone_number)

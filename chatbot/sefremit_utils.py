@@ -106,8 +106,7 @@ def send_interactive_sefremit_menu_message(phone_number):
                         "rows": [
                             {"id": "1", "title": "Services"},
                             {"id": "2", "title": "Todays Rates"},
-                            {"id": "3", "title": "Our Branches"},
-                            {"id": "4", "title": "Operating Hours"},
+                            {"id": "3", "title": "Branch Hours"},
                             {"id": "5", "title": "Transaction Limits"},
                             {"id": "6", "title": "KYC Requirements"},
                             {"id": "7", "title": "Upcoming Events"},
