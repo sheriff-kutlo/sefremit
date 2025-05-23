@@ -14,7 +14,7 @@ MESSAGES_ENDPOINT = "https://graph.facebook.com/v20.0/617912614744988/messages"
 RADIO_DRAMA_PODCASTS = "radio drama/ podcasts"
 JOBS = "jobs [mohiri]"
 JA_METER = "ja meter"
-OSVP = "OSVP"
+OSVP = "osvp"
 PROMOTIONS = "promotions"
 ORANGE_SOCIAL_VENTURE_PRICE = "Orange Social Venture Prize"
 
