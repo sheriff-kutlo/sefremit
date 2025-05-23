@@ -113,7 +113,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'sefremit',
-        'USER': 'kutlo',
+        'USER': 'sheriff_kutlo',
         'PASSWORD': 'FavShow#1K',
         'HOST': '127.0.0.1',
         'PORT': '3306'
