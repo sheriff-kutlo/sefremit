@@ -12,7 +12,7 @@ import logging
 logger = logging.getLogger(CHATBOT_CATALOG)
 
 @csrf_exempt
-def sefremit_verification(request):
+def verification(request):
     if request.method == 'GET':
         hub_mode = request.GET.get('hub.mode')
         hub_verify_token = request.GET.get('hub.verify_token')
@@ -59,42 +59,147 @@ def sefremit_verification(request):
                         logger.info(f"Conversation ID: {conversation_id}")
                         logger.info(f"Display Phone Number from status: {display_phone_number}")
 
-                        # value = cache.get(message_id)
-
-                        # delete_cache_customer_id(message_id)
-
-                        # Check if the value exists
-                        # if value is not None:
-                        #     if value == FOLLOW_UP_TO_SEND_PARTICIPATING_STORES_IMAGE:
-                        #         send_template_without_header(recipient_id, PROMOTIONAL_PRODUCTS_OPTIONS_TEMP)
-                        #     elif value == FOLLOW_UP_TO_SEND_PRIZES_IMAGE:
-                        #         handle_prizes(recipient_id)
-                        #     elif value == FOLLOW_UP_TO_SEND_EVENTS_IMAGE:
-                        #         handle_upcoming_events(recipient_id)
 
                     else:
                         logger.info(f"Status is not 'delivered' or 'read': {status['status']}")
 
-                if 'request_welcome' in json_data['entry'][0]['changes'][0]['value']['messages'][0].get('type', ''):
-                    name = json_data['entry'][0]['changes'][0]['value']['contacts'][0]['profile']['name']
-                    logger.info(f"Request Type: request_welcome")
-                    logger.info(f"Name: {name}")
+                if 'interactive' in json_data['entry'][0]['changes'][0]['value']['messages'][0]:
+                    interactive_data = json_data['entry'][0]['changes'][0]['value']['messages'][0]['interactive']
 
-                    message_id = json_data['entry'][0]['changes'][0]['value']['messages'][0]['id']
-                    message_from = json_data['entry'][0]['changes'][0]['value']['messages'][0]['from']
-                    logger.info(f"Message ID: {message_id}")
-                    logger.info(f"Message From: {message_from}")
+                    if interactive_data['type'] == 'list_reply':
 
-                    display_phone_number = json_data['entry'][0]['changes'][0]['value']['metadata'].get('display_phone_number', None)
-                    logger.info(f"Display Phone Number: {display_phone_number}")
+                        title = interactive_data['list_reply']['title']
 
-                    handle_reply('options', message_id, message_from, name, display_phone_number)
+                        logger.info(f"Title: {title}")
 
+                        message_id = json_data['entry'][0]['changes'][0]['value']['messages'][0]['id']
+                        message_from = json_data['entry'][0]['changes'][0]['value']['messages'][0]['from']
+
+                        name = json_data['entry'][0]['changes'][0]['value']['contacts'][0]['profile']['name']
+
+                        logger.info(f"Message ID: {message_id}")
+
+                        display_phone_number = json_data['entry'][0]['changes'][0]['value']['metadata'].get('display_phone_number', None)
+                        logger.info(f"Display Phone Number from interactive: {display_phone_number}")
+
+                        handle_reply(title, message_id, message_from, name, display_phone_number)
+
+                    elif interactive_data['type'] == 'nfm_reply':
+
+                        message = json_data['entry'][0]['changes'][0]['value']['messages'][0]
+
+                        response_str = message['interactive']['nfm_reply']['response_json']
+                        message_from = json_data['entry'][0]['changes'][0]['value']['messages'][0]['from']
+                        
+                        # Convert to dictionary
+                        response_data = json.loads(response_str)
+
+                        # Extract values
+                        firstname = response_data.get('screen_0_Firstname_0', '')
+                        lastname = response_data.get('screen_0_Lastname_1', '')
+                        contact = response_data.get('screen_0_Contact_2', '')
+                        town = response_data.get('screen_0_Town_3', '').replace("0_", "")
+                        instructions = response_data.get('screen_0_Instructions_4', '')
+
+                
+                        # Create a dictionary for delivery details
+                        delivery_details = {
+                            "firstname": firstname,
+                            "lastname": lastname,
+                            "contact": contact,
+                            "town": town,
+                            "instructions": instructions
+                        }
+
+                        # Save to cache
+                        # cache.set(f"{message_from}_delivery_details", delivery_details, timeout=26 * 3600)  # 26 hours
+
+                        # Optional: Log for debugging
+                        logger.info("Saved delivery details:", delivery_details)
+
+                        # delivery_status = cache.get(f"{message_from}_delivery_status")
+
+                        # data = get_customer_order_cache_data(message_from)
+
+                        # if delivery_status == "deliver":
+                        #     request_location(message_from)
+                        # else:
+                        #     save_order_data(data, message_from, None, None)
+
+                        #     order_data = data["order_data"]
+                        #     order_number = order_data["order_number"]
+                        #     store_name = data["store_name"]
+
+                        #     store_contact = get_store_contact(store_name)
+
+                        #     send_message(f"✅ *Order Placed*\n\nYour order has been successfully placed and will be ready for pick-up at the store you selected.\n\nWe’ll let you know once it has been picked and is ready for collection.\n\nIf you have any questions or need assistance, you can contact the store at: *{store_contact}*.\n\nThank you for shopping with us! 🛍️", message_from)
+                           
+                        #     send_message(f"📢 *Order Alert*\n\nOrder *{order_number}* has been sent to the Order Management System.\n\nPlease prepare the order", message_from)
+
+                        #     cache.delete_pattern(f"{message_from}_*")
+
+                if 'location' in json_data['entry'][0]['changes'][0]['value']['messages'][0]:
+                    message = json_data['entry'][0]['changes'][0]['value']['messages'][0]
+                    latitude = message['location']['latitude']
+                    longitude = message['location']['longitude']
+                    message_from = message['from']
+
+                    # data = get_customer_order_cache_data(message_from)
+
+                    # save_order_data(data, message_from, latitude, longitude)
+
+                    # order_data = data["order_data"]
+                    # order_number = order_data["order_number"]
+                    # store_name = data["store_name"]
+
+                    # store_contact = get_store_contact(store_name)
+
+                    # send_message(f"✅ *Order Placed*\n\nYour order has been successfully placed and will be delivered to the address you provided.\n\nIf you have any questions or need assistance, you can contact the store at: *{store_contact}*.\n\nThank you for shopping with us! 🛍️", message_from)
+
+                    # send_message(f"📢 *Order Alert*\n\nOrder *{order_number}* has been sent to the Order Management System.\n\nPlease prepare the order", message_from)
+
+                    # cache.delete_pattern(f"{message_from}_*")
+
+                if 'audio' in json_data['entry'][0]['changes'][0]['value']['messages'][0]:
+                    audio_id = json_data['entry'][0]['changes'][0]['value']['messages'][0]['audio']['id']
+
+                    logger.info(f"audio id: {audio_id}")
+
+                    # audio_url = get_audio_url(audio_id)
+
+                    # logger.info(f"logger url: {audio_url}")
+
+                    # name = json_data['entry'][0]['changes'][0]['value']['contacts'][0]['profile']['name']
+                                        
+                    # message_id = json_data['entry'][0]['changes'][0]['value']['messages'][0]['id']
+                    # message_from = json_data['entry'][0]['changes'][0]['value']['messages'][0]['from']
+
+                    # display_phone_number = json_data['entry'][0]['changes'][0]['value']['metadata'].get('display_phone_number', None)
+
+                    # logger.info(f"audio_url: {audio_url}")
+                    # logger.info(f"message_id: {message_id}")
+                    # logger.info(f"message_from: {message_from}")
+                    # logger.info(f"name: {name}")
+                    # logger.info(f"display_phone_number: {display_phone_number}")
+
+                    # rank_activity = get_rank_activity(message_from)
+
+                    # if rank_activity == CHECK_IN:
+                    #     if audio_url:                        
+                    #         file_path = download_audio(audio_url)
+                    #         if file_path:
+                    #             transcription_text = transcribe_audio(file_path)
+                    #             logger.info(f"Transcribed Text: {transcription_text}")
+                    #             send_sefremit_message(send_chat_msg(message_from, transcription_text)["content"], message_from)
+                    
+                    # else:
+                    #     send_sefremit_message("Head over to *Check In* to use voice")
+                                     
                 # Check if the JSON data follows structure 1
                 if 'text' in json_data['entry'][0]['changes'][0]['value']['messages'][0]:
                     # Extract the name and wa_id
                     name = json_data['entry'][0]['changes'][0]['value']['contacts'][0]['profile']['name']
-
+                    
                     body = json_data['entry'][0]['changes'][0]['value']['messages'][0]['text']['body']
 
                     logger.info(f"Message Body: {body}")
@@ -110,6 +215,88 @@ def sefremit_verification(request):
 
                     handle_reply(body, message_id, message_from, name, display_phone_number)
                 
+                elif 'order' in json_data['entry'][0]['changes'][0]['value']['messages'][0]:
+                    # Extract the name and wa_id
+                    name = json_data['entry'][0]['changes'][0]['value']['contacts'][0]['profile']['name']
+
+                    message_id = json_data['entry'][0]['changes'][0]['value']['messages'][0]['id']
+                    wa_id = json_data['entry'][0]['changes'][0]['value']['contacts'][0]['wa_id']
+                    logger.info(f"Name: {name}, WhatsApp ID: {wa_id}")
+    
+                    logger.info(f"Message ID: {message_id}")
+
+                    # Extract display phone number
+                    display_phone_number = json_data['entry'][0]['changes'][0]['value']['metadata'].get('display_phone_number', None)
+                    logger.info(f"Display Phone Number from text: {display_phone_number}")
+
+                    # Extract product items
+                    product_items = json_data['entry'][0]['changes'][0]['value']['messages'][0]['order']['product_items']
+
+
+                    # # Product ID to Name Mapping
+                    # display_products = get_product_title_and_content_id()
+
+                    # order_number = generate_unique_order_number()
+
+                    # # Prepare output
+                    # output_lines = []
+                    # output_lines.append(f"*Order ID: {order_number}*\n")  # Add Order ID at the top
+                    # output_lines.append("\n*Ordered Products:*\n" + "-" * 50)
+
+                    # total_price = 0  # Initialize total price
+
+                    # order_data = []
+
+                    # for item in product_items:
+                    #     product_id = item['product_retailer_id']
+                    #     quantity = item['quantity']
+                    #     item_price = item['item_price']
+                    #     currency = "P"  # Botswana Pula (BWP)
+                        
+                    #     # Get product name from dictionary
+                    #     product_name = display_products.get(product_id, "Unknown Product")
+                        
+                    #     # Calculate total price
+                    #     total_price += item_price * quantity
+                        
+                    #     # Format output
+                    #     output_lines.append(f"{product_name}\nQuantity: {quantity}\nPrice: {currency}{item_price}\n")
+
+                    #     # Append total price to output
+                    #     output_lines.append("-" * 50)
+                    #     # output_lines.append(f"Total Price: {currency}{total_price}")
+
+                    #     formatted_output = "\n".join(output_lines)
+
+                    #     store_name = cache.get(f"{wa_id}_store_name")
+
+                    #     if store_name is None:
+                    #         send_stores(wa_id)
+                    #     else:
+                    #         # Append item to order_data
+                    #         order_data.append({
+                    #             "content_id": product_id,
+                    #             "quantity": quantity,
+                    #             "item_price": item_price
+                    #         })
+
+                    # # send_message(f"{formatted_output} \n\n*Total: {currency}{round(total_price, 2)}*\n\n", wa_id)
+                    # # After calculating total_price and before send_message
+
+                    # if total_price >= 200:
+                    #     cache.set(f"{wa_id}_delivery_status", "deliver", timeout=24 * 3600)
+                    # else:
+                    #     cache.set(f"{wa_id}_delivery_status", "non_deliver", timeout=24 * 3600)
+
+                    # wamid = send_message(f"{formatted_output} \n\n*Total: {currency}{round(total_price, 2)}*\n\n", wa_id)
+                    # cache.set(f"{wa_id}_order_data", {
+                    #     "products": order_data,
+                    #     "order_wamid": wamid,
+                    #     "order_number": order_number
+                    # }, timeout=24 * 3600)
+
+                    # cache.set(wamid, "follow_up_invoice_btns", timeout=24 * 3600)
+                        
                 # Check if the JSON data follows structure 2
                 elif 'button' in json_data['entry'][0]['changes'][0]['value']['messages'][0]:
                     text = json_data['entry'][0]['changes'][0]['value']['messages'][0]['button']['text']
@@ -144,26 +331,7 @@ def sefremit_verification(request):
                     logger.info(f"Display Phone Number from description: {display_phone_number}")
 
                     handle_reply(description, message_id, message_from, name, display_phone_number)
-
-                elif 'interactive' in json_data['entry'][0]['changes'][0]['value']['messages'][0]:
-                    interactive_data = json_data['entry'][0]['changes'][0]['value']['messages'][0]['interactive']
-                    if interactive_data['type'] == 'list_reply':
-                        title = interactive_data['list_reply']['title']
-
-                        logger.info(f"Title: {title}")
-
-                        message_id = json_data['entry'][0]['changes'][0]['value']['messages'][0]['id']
-                        message_from = json_data['entry'][0]['changes'][0]['value']['messages'][0]['from']
-
-                        name = json_data['entry'][0]['changes'][0]['value']['contacts'][0]['profile']['name']
-
-                        logger.info(f"Message ID: {message_id}")
-
-                        display_phone_number = json_data['entry'][0]['changes'][0]['value']['metadata'].get('display_phone_number', None)
-                        logger.info(f"Display Phone Number from interactive: {display_phone_number}")
-
-                        handle_reply(title, message_id, message_from, name, display_phone_number)
-
+              
                 else:
                     logger.info("Invalid JSON structure")
 
@@ -178,6 +346,8 @@ def sefremit_verification(request):
         
         except json.JSONDecodeError as e:
             return JsonResponse({'error': 'Invalid JSON format'}, status=400)
+
+
 
 def hello(request):
 
