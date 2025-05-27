@@ -347,11 +347,13 @@ def verification(request):
         except json.JSONDecodeError as e:
             return JsonResponse({'error': 'Invalid JSON format'}, status=400)
 
-
-
 def hello(request):
 
-    send_message("some message", KUTLO_PHONE_NUMBER)
+    # send_message("some message", KUTLO_PHONE_NUMBER)
+
+    # handle_reply(JOBS, "wamid", KUTLO_PHONE_NUMBER, "JOE", TEST_PHONE_NUMBER)
+
+    handle_reply(EPISODE_1, "wamid", KUTLO_PHONE_NUMBER, "Joe", TEST_PHONE_NUMBER)
 
     return HttpResponse(f"Server working as expected!")
 
