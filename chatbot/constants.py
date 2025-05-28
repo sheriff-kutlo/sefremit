@@ -26,5 +26,16 @@ SEASON_2 = "season 2"
 SEASON_3 = "season 3"
 EPISODE_1 = "episode 1"
 EPISODE_2 = "episode 2"
-EPISODE_3 = "rpisode 3"
+EPISODE_3 = "episode 3"
 EPISODE_4 = "episode 4"
+JOBS_SIMPLE = "jobs"
+IT = "it"
+FINANCE_ACCOUNTING = "finance & accounting"
+COMPLIANCE = "compliance"
+NORTHERN_TRADE_FAIR_2025 = "northern trade fair 2025"
+BOTSWANA_NURSES_DAY = "botswana nurses day"
+TERMS_CONDITIONS = "terms & conditions"
+JOIN_COMPETITION = "join the competition for just p2.50!"
+
+
+

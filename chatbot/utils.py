@@ -56,13 +56,13 @@ def handle_reply(reply, message_id, phone_number, username, display_phone_number
             send_interactive_radio_drama_message(phone_number)
 
         elif reply == JOBS:
-            send_message(JOBS, phone_number)
+            send_interactive_jobs_message(phone_number)
 
         elif reply == JA_METER:
-            send_message(JA_METER, phone_number)
+            send_interactive_ja_meter_message(phone_number)
 
-        elif reply == OSVP:
-            send_message(OSVP, phone_number)
+        elif reply == ORANGE_SOCIAL_VENTURE_PRICE:
+            send_pdf_by_id("1431280267895547", phone_number, "Rules for the 2025 Orange Social Venture Prize (OSVP), detailing eligibility, competition structure, and application process for entrepreneurs in Africa and the Middle East.", "Rules of the OSVP Prize-2025")
 
         elif reply == DRAMA:
             send_interactive_radio_drama_message(phone_number)
@@ -94,8 +94,35 @@ def handle_reply(reply, message_id, phone_number, username, display_phone_number
         elif reply == EPISODE_4:
             send_audio_by_id(625557423882962, phone_number)
 
-        elif reply == JOBS:
-            send_message(JOBS, phone_number)
+        elif reply == JOBS_SIMPLE:
+            send_interactive_jobs_message(phone_number)
+
+        elif reply == IT:
+            send_image_by_id('1865771617324259', phone_number)
+
+        elif reply == FINANCE_ACCOUNTING:
+            img_ids = ['1108933161267627', '689359607159211']
+            
+            for img in img_ids:
+                send_image_by_id(img, phone_number)
+
+        elif reply == COMPLIANCE:
+            send_image_by_id('1041626037488666', phone_number)
+
+        elif reply == EVENTS:
+            send_interactive_events_message(phone_number)
+
+        elif reply == NORTHERN_TRADE_FAIR_2025:
+            send_image_by_id("613557838403443", phone_number)
+
+        elif reply == BOTSWANA_NURSES_DAY:
+            send_image_by_id("1764990677735677", phone_number)
+
+        elif reply == JOIN_COMPETITION:
+            send_message("✅ You’re in! \n\nYour entry to the Ja Meter SMS Competition is successful. 🎉\n\nEnter again to increase your odds!", phone_number)
+
+        elif reply == TERMS_CONDITIONS:
+            send_message("*Your Terms & Conditions Here*\n\nLorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum.", phone_number)
         
         else:
             send_interactive_menu_message(phone_number)
@@ -147,12 +174,12 @@ def send_interactive_menu_message(phone_number):
         response = requests.post(MESSAGES_ENDPOINT, json=json_data, headers=headers)
         
         if response.status_code == 200:
-            logger.info(f"category interactive message successfully sent. phone_number: {phone_number}")
+            logger.info(f"welcome message interactive message successfully sent. phone_number: {phone_number}")
             response_data = response.json()
             logger.debug(f"Response JSON: {response_data}")
             return response_data.get("messages", [{}])[0].get("id")
         else:
-            logger.error(f"Failed to send category message. Status Code: {response.status_code}. Response Content: {response.content}")
+            logger.error(f"Failed to send welcome message message. Status Code: {response.status_code}. Response Content: {response.content}")
             return None
             
     except requests.exceptions.RequestException as e:
@@ -207,7 +234,7 @@ def send_interactive_radio_drama_message(phone_number):
             logger.debug(f"Response JSON: {response_data}")
             return response_data.get("messages", [{}])[0].get("id")
         else:
-            logger.error(f"Failed to send category message. Status Code: {response.status_code}. Response Content: {response.content}")
+            logger.error(f"Failed to send radio drama/podcasts message. Status Code: {response.status_code}. Response Content: {response.content}")
             return None
             
     except requests.exceptions.RequestException as e:
@@ -260,7 +287,7 @@ def send_interactive_seasons_message(phone_number):
             logger.debug(f"Response JSON: {response_data}")
             return response_data.get("messages", [{}])[0].get("id")
         else:
-            logger.error(f"Failed to send category message. Status Code: {response.status_code}. Response Content: {response.content}")
+            logger.error(f"Failed to send Seasons message. Status Code: {response.status_code}. Response Content: {response.content}")
             return None
             
     except requests.exceptions.RequestException as e:
@@ -347,6 +374,253 @@ def send_audio_by_id(id, phone_number):
             return response_data.get("messages", [{}])[0].get("id")
         else:
             logger.error(f"Failed to send message. Status Code: {response.status_code}. Response Content: {response.content}")
+            return None
+            
+    except requests.exceptions.RequestException as e:
+        logger.error(f"Error sending message: {e}", exc_info=True)
+        return None
+
+def send_interactive_jobs_message(phone_number):
+    headers = {
+        "Content-Type": APPLICATION_JSON,
+        "Authorization": AUTHORIZATION
+    }
+
+    json_data = {
+        "messaging_product": "whatsapp",
+        "recipient_type": "individual",
+        "to": phone_number,
+        "type": "interactive",
+        "interactive": {
+            "type": "list",
+            "header": {
+                "type": "text",
+                "text": "Jobs [Mohiri]"
+            },
+            "body": {
+                "text": "Select a profession area, so we can tailor the experience for you."
+            },
+            "footer": {
+                "text": "You can type *jobs* at any time to return to this screen."
+            },
+            "action": {
+                "button": "Profession Area",
+                "sections": [
+                    {
+                        "title": "Please choose an option",
+                        "rows": [
+                            {"id": "1", "title": "IT"},
+                            {"id": "2", "title": "Compliance"},
+                            {"id": "3", "title": "Finance & Accounting"},
+
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+
+    try:
+        response = requests.post(MESSAGES_ENDPOINT, json=json_data, headers=headers)
+        
+        if response.status_code == 200:
+            logger.info(f"Jobs interactive message successfully sent. phone_number: {phone_number}")
+            response_data = response.json()
+            logger.debug(f"Response JSON: {response_data}")
+            return response_data.get("messages", [{}])[0].get("id")
+        else:
+            logger.error(f"Failed to send Jobs message. Status Code: {response.status_code}. Response Content: {response.content}")
+            return None
+            
+    except requests.exceptions.RequestException as e:
+        logger.error(f"Error sending message: {e}", exc_info=True)
+        return None
+
+def send_pdf_by_id(id, phone_number, caption, filename):
+    headers = {
+        "Content-Type": APPLICATION_JSON,
+        "Authorization": AUTHORIZATION
+    }
+    
+
+    json_data = {
+        "messaging_product": "whatsapp",
+        "recipient_type": "individual",
+        "to": phone_number,
+        "type": "document",
+        "document": {
+            "id": id,
+            "caption": caption,
+            "filename": filename
+        }
+    }
+    
+    try:
+        response = requests.post(MESSAGES_ENDPOINT, json=json_data, headers=headers)
+        
+        if response.status_code == 200:
+            logger.info(f"Document sent successfully. phone_number: {phone_number}")
+            response_data = response.json()
+            logger.debug(f"Response JSON: {response_data}")
+            return response_data.get("messages", [{}])[0].get("id")
+        else:
+            logger.error(f"Failed to send message. Status Code: {response.status_code}. Response Content: {response.content}")
+            return None
+            
+    except requests.exceptions.RequestException as e:
+        logger.error(f"Error sending message: {e}", exc_info=True)
+        return None
+
+def send_interactive_events_message(phone_number):
+    headers = {
+        "Content-Type": APPLICATION_JSON,
+        "Authorization": AUTHORIZATION
+    }
+
+    json_data = {
+        "messaging_product": "whatsapp",
+        "recipient_type": "individual",
+        "to": phone_number,
+        "type": "interactive",
+        "interactive": {
+            "type": "list",
+            "header": {
+                "type": "text",
+                "text": "Events"
+            },
+            "body": {
+                "text": "Check out our upcoming events and be part of something special."
+            },
+            "footer": {
+                "text": "You can type *events* at any time to return to this screen."
+            },
+            "action": {
+                "button": "Profession Area",
+                "sections": [
+                    {
+                        "title": "Please choose an option",
+                        "rows": [
+                            {"id": "1", "title": "Northern Trade Fair 2025"},
+                            {"id": "2", "title": "Botswana Nurses Day"}
+
+
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+
+    try:
+        response = requests.post(MESSAGES_ENDPOINT, json=json_data, headers=headers)
+        
+        if response.status_code == 200:
+            logger.info(f"Jobs interactive message successfully sent. phone_number: {phone_number}")
+            response_data = response.json()
+            logger.debug(f"Response JSON: {response_data}")
+            return response_data.get("messages", [{}])[0].get("id")
+        else:
+            logger.error(f"Failed to send Jobs message. Status Code: {response.status_code}. Response Content: {response.content}")
+            return None
+            
+    except requests.exceptions.RequestException as e:
+        logger.error(f"Error sending message: {e}", exc_info=True)
+        return None
+
+def send_image_by_id(id, phone_number):
+    headers = {
+        "Content-Type": APPLICATION_JSON,
+        "Authorization": AUTHORIZATION
+    }
+    
+
+    # json_data1 = {
+    #     "messaging_product": "whatsapp",
+    #     "recipient_type": "individual",
+    #     "to": phone_number,
+    #     "type": "document",
+    #     "document": {
+    #         "id": id,
+    #         "caption": caption,
+    #         "filename": filename
+    #     }
+    # }
+
+    json_data = {
+        "messaging_product": "whatsapp",
+        "recipient_type": "individual",
+        "to": phone_number,
+        "type": "image",
+        "image": {
+            "id": id
+        }
+    }
+    
+    try:
+        response = requests.post(MESSAGES_ENDPOINT, json=json_data, headers=headers)
+        
+        if response.status_code == 200:
+            logger.info(f"Document sent successfully. phone_number: {phone_number}")
+            response_data = response.json()
+            logger.debug(f"Response JSON: {response_data}")
+            return response_data.get("messages", [{}])[0].get("id")
+        else:
+            logger.error(f"Failed to send message. Status Code: {response.status_code}. Response Content: {response.content}")
+            return None
+            
+    except requests.exceptions.RequestException as e:
+        logger.error(f"Error sending message: {e}", exc_info=True)
+        return None
+
+def send_interactive_ja_meter_message(phone_number):
+    headers = {
+        "Content-Type": APPLICATION_JSON,
+        "Authorization": AUTHORIZATION
+    }
+
+    json_data = {
+        "messaging_product": "whatsapp",
+        "recipient_type": "individual",
+        "to": phone_number,
+        "type": "interactive",
+        "interactive": {
+            "type": "list",
+            "header": {
+                "type": "text",
+                "text": "🏆 Ja Meter 🎁💶"
+            },
+            "body": {
+                "text": "Making 1 lucky person a *Millionaire*"
+            },
+            "footer": {
+                "text": "You can type *ja meter* at any time to return to this screen."
+            },
+            "action": {
+                "button": "View",
+                "sections": [
+                    {
+                        "title": "Please choose an option",
+                        "rows": [
+                            {"id": "1", "title": "Enter Competition", "description": "Join the competition for just P2.50!"},
+                            {"id": "2", "title": "Terms & Conditions"},
+
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+
+    try:
+        response = requests.post(MESSAGES_ENDPOINT, json=json_data, headers=headers)
+        
+        if response.status_code == 200:
+            logger.info(f"Jobs interactive message successfully sent. phone_number: {phone_number}")
+            response_data = response.json()
+            logger.debug(f"Response JSON: {response_data}")
+            return response_data.get("messages", [{}])[0].get("id")
+        else:
+            logger.error(f"Failed to send Jobs message. Status Code: {response.status_code}. Response Content: {response.content}")
             return None
             
     except requests.exceptions.RequestException as e:

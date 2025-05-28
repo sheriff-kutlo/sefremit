@@ -1105,3 +1105,46 @@ Details: {"error":{"message":"Unsupported post request. Object with ID '42219644
 2025-05-27 12:14:30 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBIzNDkyOEY0M0IwOTNGODRCQkYA'}]}
 2025-05-27 12:33:27 INFO Audio sent successfully. phone_number: 26774342078
 2025-05-27 12:33:27 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBJDMkVGQjdCQUIwRkU5OTMyODMA'}]}
+2025-05-27 16:18:33 INFO Document sent successfully. phone_number: 26774342078
+2025-05-27 16:18:33 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBJCOEFGMzA2QTA5NkM2RENEMEIA'}]}
+2025-05-27 16:28:33 INFO Document sent successfully. phone_number: 26774342078
+2025-05-27 16:28:33 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBJEOTVFNzEzOTM2MDJCQjM2RTYA'}]}
+2025-05-27 16:29:21 INFO Document sent successfully. phone_number: 26774342078
+2025-05-27 16:29:21 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBI1ODNFRjAyMkY0QzRCNzdGRkYA'}]}
+2025-05-28 11:18:00 INFO Document sent successfully. phone_number: 26774342078
+2025-05-28 11:18:00 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBJENjFCRDUzNTE5NEE5MUI3RDQA'}]}
+2025-05-28 11:18:49 INFO Document sent successfully. phone_number: 26774342078
+2025-05-28 11:18:49 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBIzRDlDRTQxMUUwNUJENkJDMUQA'}]}
+2025-05-28 14:36:09 ERROR Failed to send Jobs message. Status Code: 400. Response Content: b'{"error":{"message":"(#131009) Parameter value is not valid","type":"OAuthException","code":131009,"error_data":{"messaging_product":"whatsapp","details":"Row title is too long. Max length is 24"},"fbtrace_id":"Adjqc07iQSZka_JtOlMFzYI"}}'
+2025-05-28 14:37:24 INFO Jobs interactive message successfully sent. phone_number: 26774342078
+2025-05-28 14:37:24 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBIxNUQwRkFDNTA2RDMxOTc0RDkA'}]}
+2025-05-28 14:38:06 INFO Jobs interactive message successfully sent. phone_number: 26774342078
+2025-05-28 14:38:06 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBI1OTlFQkRFNUU3ODJGOUUwM0QA'}]}
+2025-05-28 14:38:23 INFO Document sent successfully. phone_number: 26774342078
+2025-05-28 14:38:23 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBIwNTEyQ0I1MjYwMDAxRUVCMDAA'}]}
+2025-05-28 14:38:41 INFO Document sent successfully. phone_number: 26774342078
+2025-05-28 14:38:41 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBI0NjNEMUUxNkE4NUZEQzYyRUMA'}]}
+2025-05-28 14:38:51 INFO Document sent successfully. phone_number: 26774342078
+2025-05-28 14:38:51 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBJFOTc1MEExMjlCRTVCQUY2RjcA'}]}
+2025-05-28 14:38:52 INFO Document sent successfully. phone_number: 26774342078
+2025-05-28 14:38:52 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBIzRjA4NjJEQjZBNjEwRjM2NzYA'}]}
+2025-05-28 15:01:03 INFO Document sent successfully. phone_number: 26774342078
+2025-05-28 15:01:03 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBJDQTJBQkJDOURCREVEOUQ1OUUA'}]}
+2025-05-28 15:01:04 INFO Document sent successfully. phone_number: 26774342078
+2025-05-28 15:01:04 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBI3N0E2MDdENDI4RUVBRkNEMDgA'}]}
+2025-05-28 15:01:30 INFO Jobs interactive message successfully sent. phone_number: 26774342078
+2025-05-28 15:01:30 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBI5REZDOTJBQUJFMkUwNjlBQTEA'}]}
+2025-05-28 15:10:44 INFO Jobs interactive message successfully sent. phone_number: 26774342078
+2025-05-28 15:10:44 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBI2REQ2NTNBNEFDMjREN0Q3MTEA'}]}
+2025-05-28 15:11:24 INFO Message sent successfully. message: ✅ You’re in! 
+
+Your entry to the Ja Meter SMS Competition is successful. 🎉
+
+Enter again to increase your odds!, phone_number: 26774342078
+2025-05-28 15:11:24 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBJDMjk2MDk3QTBGMUM3RjAwMjMA'}]}
+2025-05-28 15:11:53 INFO Message sent successfully. message: *Your Terms & Conditions Here*, phone_number: 26774342078
+2025-05-28 15:11:53 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBI1QzBDRUQ0QjhBQUI3MUZCMzcA'}]}
+2025-05-28 15:13:11 INFO Message sent successfully. message: *Your Terms & Conditions Here*
+
+Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum., phone_number: 26774342078
+2025-05-28 15:13:11 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBIyNEFGQzIxQjY0MkU3RjlENTAA'}]}
