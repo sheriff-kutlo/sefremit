@@ -68,21 +68,40 @@ def verification(request):
 
                     if interactive_data['type'] == 'list_reply':
 
-                        title = interactive_data['list_reply']['title']
+                        if 'description' in json_data['entry'][0]['changes'][0]['value']['messages'][0]['interactive']['list_reply']:
+                            description = json_data['entry'][0]['changes'][0]['value']['messages'][0]['interactive']['list_reply']['description']
+                            
+                            name = json_data['entry'][0]['changes'][0]['value']['contacts'][0]['profile']['name']
 
-                        logger.info(f"Title: {title}")
+                            logger.info(f"Description: {description}")
+                            
+                            message_id = json_data['entry'][0]['changes'][0]['value']['messages'][0]['id']
+                            message_from = json_data['entry'][0]['changes'][0]['value']['messages'][0]['from']
+                            
+                            logger.info(f"Message ID: {message_id}")
 
-                        message_id = json_data['entry'][0]['changes'][0]['value']['messages'][0]['id']
-                        message_from = json_data['entry'][0]['changes'][0]['value']['messages'][0]['from']
+                            display_phone_number = json_data['entry'][0]['changes'][0]['value']['metadata'].get('display_phone_number', None)
+                            logger.info(f"Display Phone Number from description: {display_phone_number}")
 
-                        name = json_data['entry'][0]['changes'][0]['value']['contacts'][0]['profile']['name']
+                            handle_reply(description, message_id, message_from, name, display_phone_number)
+                    
+                        else:
 
-                        logger.info(f"Message ID: {message_id}")
+                            title = interactive_data['list_reply']['title']
 
-                        display_phone_number = json_data['entry'][0]['changes'][0]['value']['metadata'].get('display_phone_number', None)
-                        logger.info(f"Display Phone Number from interactive: {display_phone_number}")
+                            logger.info(f"Title: {title}")
 
-                        handle_reply(title, message_id, message_from, name, display_phone_number)
+                            message_id = json_data['entry'][0]['changes'][0]['value']['messages'][0]['id']
+                            message_from = json_data['entry'][0]['changes'][0]['value']['messages'][0]['from']
+
+                            name = json_data['entry'][0]['changes'][0]['value']['contacts'][0]['profile']['name']
+
+                            logger.info(f"Message ID: {message_id}")
+
+                            display_phone_number = json_data['entry'][0]['changes'][0]['value']['metadata'].get('display_phone_number', None)
+                            logger.info(f"Display Phone Number from interactive: {display_phone_number}")
+
+                            handle_reply(title, message_id, message_from, name, display_phone_number)
 
                     elif interactive_data['type'] == 'nfm_reply':
 
@@ -194,27 +213,9 @@ def verification(request):
                     
                     # else:
                     #     send_sefremit_message("Head over to *Check In* to use voice")
-
-                if 'description' in json_data['entry'][0]['changes'][0]['value']['messages'][0]['interactive']['list_reply']:
-                    description = json_data['entry'][0]['changes'][0]['value']['messages'][0]['interactive']['list_reply']['description']
-                    
-                    name = json_data['entry'][0]['changes'][0]['value']['contacts'][0]['profile']['name']
-
-                    logger.info(f"Description: {description}")
-                    
-                    message_id = json_data['entry'][0]['changes'][0]['value']['messages'][0]['id']
-                    message_from = json_data['entry'][0]['changes'][0]['value']['messages'][0]['from']
-                    
-                    logger.info(f"Message ID: {message_id}")
-
-                    display_phone_number = json_data['entry'][0]['changes'][0]['value']['metadata'].get('display_phone_number', None)
-                    logger.info(f"Display Phone Number from description: {display_phone_number}")
-
-                    handle_reply(description, message_id, message_from, name, display_phone_number)
-            
-                    
+                                     
                 # Check if the JSON data follows structure 1
-                elif 'text' in json_data['entry'][0]['changes'][0]['value']['messages'][0]:
+                if 'text' in json_data['entry'][0]['changes'][0]['value']['messages'][0]:
                     # Extract the name and wa_id
                     name = json_data['entry'][0]['changes'][0]['value']['contacts'][0]['profile']['name']
                     
@@ -333,25 +334,25 @@ def verification(request):
                     
                     handle_reply(text, message_id, message_from, name, display_phone_number)
 
-                elif 'description' in json_data['entry'][0]['changes'][0]['value']['messages'][0]['interactive']['list_reply']:
-                    description = json_data['entry'][0]['changes'][0]['value']['messages'][0]['interactive']['list_reply']['description']
+                # elif 'description' in json_data['entry'][0]['changes'][0]['value']['messages'][0]['interactive']['list_reply']:
+                #     description = json_data['entry'][0]['changes'][0]['value']['messages'][0]['interactive']['list_reply']['description']
                     
-                    name = json_data['entry'][0]['changes'][0]['value']['contacts'][0]['profile']['name']
+                #     name = json_data['entry'][0]['changes'][0]['value']['contacts'][0]['profile']['name']
 
-                    logger.info(f"Description: {description}")
+                #     logger.info(f"Description: {description}")
                     
-                    message_id = json_data['entry'][0]['changes'][0]['value']['messages'][0]['id']
-                    message_from = json_data['entry'][0]['changes'][0]['value']['messages'][0]['from']
+                #     message_id = json_data['entry'][0]['changes'][0]['value']['messages'][0]['id']
+                #     message_from = json_data['entry'][0]['changes'][0]['value']['messages'][0]['from']
                     
-                    logger.info(f"Message ID: {message_id}")
+                #     logger.info(f"Message ID: {message_id}")
 
-                    display_phone_number = json_data['entry'][0]['changes'][0]['value']['metadata'].get('display_phone_number', None)
-                    logger.info(f"Display Phone Number from description: {display_phone_number}")
+                #     display_phone_number = json_data['entry'][0]['changes'][0]['value']['metadata'].get('display_phone_number', None)
+                #     logger.info(f"Display Phone Number from description: {display_phone_number}")
 
-                    handle_reply(description, message_id, message_from, name, display_phone_number)
+                #     handle_reply(description, message_id, message_from, name, display_phone_number)
               
-                else:
-                    logger.info("Invalid JSON structure")
+                # else:
+                #     logger.info("Invalid JSON structure")
 
             except KeyError as e:
                 logger.info(f"Error: Key not found -: {e}")
