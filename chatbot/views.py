@@ -194,9 +194,27 @@ def verification(request):
                     
                     # else:
                     #     send_sefremit_message("Head over to *Check In* to use voice")
-                                     
+
+                if 'description' in json_data['entry'][0]['changes'][0]['value']['messages'][0]['interactive']['list_reply']:
+                    description = json_data['entry'][0]['changes'][0]['value']['messages'][0]['interactive']['list_reply']['description']
+                    
+                    name = json_data['entry'][0]['changes'][0]['value']['contacts'][0]['profile']['name']
+
+                    logger.info(f"Description: {description}")
+                    
+                    message_id = json_data['entry'][0]['changes'][0]['value']['messages'][0]['id']
+                    message_from = json_data['entry'][0]['changes'][0]['value']['messages'][0]['from']
+                    
+                    logger.info(f"Message ID: {message_id}")
+
+                    display_phone_number = json_data['entry'][0]['changes'][0]['value']['metadata'].get('display_phone_number', None)
+                    logger.info(f"Display Phone Number from description: {display_phone_number}")
+
+                    handle_reply(description, message_id, message_from, name, display_phone_number)
+            
+                    
                 # Check if the JSON data follows structure 1
-                if 'text' in json_data['entry'][0]['changes'][0]['value']['messages'][0]:
+                elif 'text' in json_data['entry'][0]['changes'][0]['value']['messages'][0]:
                     # Extract the name and wa_id
                     name = json_data['entry'][0]['changes'][0]['value']['contacts'][0]['profile']['name']
                     
