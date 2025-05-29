@@ -3,6 +3,8 @@ from .constants import *
 import requests
 from django.db import connection, OperationalError
 import logging
+import re
+
 
 # Get an instance of a logger
 logger = logging.getLogger(CHATBOT_CATALOG)
@@ -45,60 +47,76 @@ def handle_reply(reply, message_id, phone_number, username, display_phone_number
     if display_phone_number == TEST_PHONE_NUMBER:
         reply = reply.lower()
 
-        # customer_id = get_customer_id(phone_number)
+        user_id = get_user_id(phone_number)
 
-        # if not customer_id:
-        #     save_customer({USERNAME: remove_emojis(username), PHONE_NUMBER: phone_number})
-        #     customer_id = get_customer_id(phone_number)
+        if not user_id:
+            save_user({USERNAME: remove_emojis(username), PHONE_NUMBER: phone_number})
+            user_id = get_user_id(phone_number)
 
 
         if reply == RADIO_DRAMA_PODCASTS:
             send_interactive_radio_drama_message(phone_number)
+            update_interactions({INTERACTION_TYPE: RADIO_DRAMA_PODCASTS, USER_ID: user_id})
 
         elif reply == JOBS:
             send_interactive_jobs_message(phone_number)
+            update_interactions({INTERACTION_TYPE: JOBS, USER_ID: user_id})
 
         elif reply == JA_METER:
             send_interactive_ja_meter_message(phone_number)
+            update_interactions({INTERACTION_TYPE: JA_METER, USER_ID: user_id})
 
         elif reply == ORANGE_SOCIAL_VENTURE_PRICE:
             send_pdf_by_id("1431280267895547", phone_number, "Rules for the 2025 Orange Social Venture Prize (OSVP), detailing eligibility, competition structure, and application process for entrepreneurs in Africa and the Middle East.", "Rules of the OSVP Prize-2025")
+            update_interactions({INTERACTION_TYPE: ORANGE_SOCIAL_VENTURE_PRICE, USER_ID: user_id})
 
         elif reply == DRAMA:
             send_interactive_radio_drama_message(phone_number)
+            update_interactions({INTERACTION_TYPE: DRAMA, USER_ID: user_id})
 
         elif reply == MATSWAKA_BAE:
             send_interactive_seasons_message(phone_number)
+            update_interactions({INTERACTION_TYPE: MATSWAKA_BAE, USER_ID: user_id})
 
         elif reply == SUGAR:
             send_interactive_seasons_message(phone_number)
+            update_interactions({INTERACTION_TYPE: SUGAR, USER_ID: user_id})
 
         elif reply == SEASON_1:
             send_interactive_episodes_message(phone_number)
+            update_interactions({INTERACTION_TYPE: SEASON_1, USER_ID: user_id})
 
         elif reply == SEASON_2:
             send_interactive_episodes_message(phone_number)
+            update_interactions({INTERACTION_TYPE: SEASON_2, USER_ID: user_id})
 
         elif reply == SEASON_3:
             send_interactive_episodes_message(phone_number)
+            update_interactions({INTERACTION_TYPE: SEASON_3, USER_ID: user_id})
 
         elif reply == EPISODE_1:
             send_audio_by_id(625557423882962, phone_number)
+            update_interactions({INTERACTION_TYPE: EPISODE_1, USER_ID: user_id})
 
         elif reply == EPISODE_2:
             send_audio_by_id(625557423882962, phone_number)
+            update_interactions({INTERACTION_TYPE: EPISODE_2, USER_ID: user_id})
 
         elif reply == EPISODE_3:
             send_audio_by_id(625557423882962, phone_number)
+            update_interactions({INTERACTION_TYPE: EPISODE_3, USER_ID: user_id})
 
         elif reply == EPISODE_4:
             send_audio_by_id(625557423882962, phone_number)
+            update_interactions({INTERACTION_TYPE: EPISODE_4, USER_ID: user_id})
 
         elif reply == JOBS_SIMPLE:
             send_interactive_jobs_message(phone_number)
+            update_interactions({INTERACTION_TYPE: JOBS_SIMPLE, USER_ID: user_id})
 
         elif reply == IT:
             send_image_by_id('1865771617324259', phone_number)
+            update_interactions({INTERACTION_TYPE: IT, USER_ID: user_id})
 
         elif reply == FINANCE_ACCOUNTING:
             img_ids = ['1108933161267627', '689359607159211']
@@ -106,32 +124,43 @@ def handle_reply(reply, message_id, phone_number, username, display_phone_number
             for img in img_ids:
                 send_image_by_id(img, phone_number)
 
+            update_interactions({INTERACTION_TYPE: FINANCE_ACCOUNTING, USER_ID: user_id})
+
         elif reply == COMPLIANCE:
             send_image_by_id('1041626037488666', phone_number)
+            update_interactions({INTERACTION_TYPE: COMPLIANCE, USER_ID: user_id})
 
         elif reply == EVENTS:
             send_interactive_events_message(phone_number)
+            update_interactions({INTERACTION_TYPE: EVENTS, USER_ID: user_id})
 
         elif reply == NORTHERN_TRADE_FAIR_2025:
             send_image_by_id("613557838403443", phone_number)
+            update_interactions({INTERACTION_TYPE: NORTHERN_TRADE_FAIR_2025, USER_ID: user_id})
 
         elif reply == BOTSWANA_NURSES_DAY:
             send_image_by_id("1764990677735677", phone_number)
+            update_interactions({INTERACTION_TYPE: BOTSWANA_NURSES_DAY, USER_ID: user_id})
 
         elif reply == JOIN_COMPETITION:
             send_message("✅ You’re in! \n\nYour entry to the Ja Meter SMS Competition is successful. 🎉\n\nEnter again to increase your odds!", phone_number)
+            update_interactions({INTERACTION_TYPE: JOIN_COMPETITION, USER_ID: user_id})
 
         elif reply == TERMS_CONDITIONS:
             send_message("*Your Terms & Conditions Here*\n\nLorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum.", phone_number)
+            update_interactions({INTERACTION_TYPE: TERMS_CONDITIONS, USER_ID: user_id})
         
         elif reply == APPLY_FOR_PROGRAM:
             send_interactive_orange_digital_center_program_form_message(phone_number)
+            update_interactions({INTERACTION_TYPE: APPLY_FOR_PROGRAM, USER_ID: user_id})
 
         elif reply == LOCATION:
             send_orange_digital_center_location(phone_number)
+            update_interactions({INTERACTION_TYPE: LOCATION, USER_ID: user_id})
         
         elif reply == ORANGE_DIGITAL_CENTER:
             send_interactive_orange_digital_center_message(phone_number)
+            update_interactions({INTERACTION_TYPE: ORANGE_DIGITAL_CENTER, USER_ID: user_id})
 
         else:
             send_interactive_menu_message(phone_number)
@@ -779,6 +808,86 @@ def send_interactive_orange_digital_center_program_form_message(phone_number):
     except requests.exceptions.RequestException as e:
         logger.error(f"Error sending message: {e}", exc_info=True)
         return None
+
+def get_user_id(phone_number):
+    query = "SELECT user_id FROM users WHERE phone_number = %s;"
+
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute(query, (phone_number,))
+            result = cursor.fetchone()
+
+            if result:
+                return result[0]
+            else:
+                # Handle case where no customer is found
+                # Example: You might want to register the user here
+                # register_user(phone_number)
+                return None
+
+    except OperationalError as e:
+        logger.error(f'Operational error occurred in get_user_id: {e}', exc_info=True)
+        # Handle or raise the exception as needed
+        return None
+    except Exception as e:
+        logger.error(f'An error occurred in get_user_id: {e}', exc_info=True)
+        # Handle or raise the exception as needed
+        return None
+
+def save_user(save_user_dict):
+    try:
+        query = """
+            INSERT INTO users (username, phone_number, created_at) 
+            VALUES (%s, %s, CURRENT_TIMESTAMP());
+        """
+        
+        with connection.cursor() as cursor:
+            cursor.execute(query, (save_user_dict[USERNAME], save_user_dict[PHONE_NUMBER]))
+            connection.commit()
+            logger.info(f"Customer saved successfully. username: {save_user_dict[USERNAME]}, phone: {save_user_dict[PHONE_NUMBER]}")
+
+    except Exception as e:
+        connection.rollback()
+        logger.error(f'An error occurred saving user: {e}', exc_info=True)
+
+def remove_emojis(text):
+    """
+    Function to remove emojis from a string.
+
+    :param text: The input string potentially containing emojis.
+    :return: The string with emojis removed.
+    """
+    # Define a regex pattern to match emojis
+    emoji_pattern = re.compile(
+        "[\U0001F600-\U0001F64F"  # Emoticons
+        "\U0001F300-\U0001F5FF"  # Misc Symbols and Pictographs
+        "\U0001F680-\U0001F6FF"  # Transport and Map Symbols
+        "\U0001F700-\U0001F77F"  # Alchemical Symbols
+        "\U0001F780-\U0001F7FF"  # Geometric Shapes Extended
+        "\U0001F800-\U0001F8FF"  # Supplemental Arrows-C
+        "\U0001F900-\U0001F9FF"  # Supplemental Symbols and Pictographs
+        "\U0001FA00-\U0001FA6F"  # Chess Symbols
+        "\U0001FA70-\U0001FAFF"  # Symbols and Pictographs Extended-A
+        "\U00002702-\U000027B0"  # Dingbats
+        "\U000024C2-\U0001F251"  # Enclosed Characters
+        "]+", flags=re.UNICODE
+    )
+    return emoji_pattern.sub(r'', text)
+
+def update_interactions(interaction_dict):
+    try:
+        # Use context manager to get cursor from connection
+        with connection.cursor() as cursor:
+            query = "INSERT INTO interactions(interaction_type, timestamp, user_id) VALUES(%s, current_timestamp(), %s);"
+            cursor.execute(query, (interaction_dict[INTERACTION_TYPE], interaction_dict[USER_ID]))
+            
+            # Commit the transaction
+            connection.commit()
+
+            logger.info(f"Successfully updated customer interaction: interaction_type: {interaction_dict[INTERACTION_TYPE]}, customer_id: {interaction_dict[USER_ID]}")
+        
+    except Exception as e:
+        logger.error(f"An unexpected error occurred in update_interactions: {e}", exc_info=True)
 
 
 

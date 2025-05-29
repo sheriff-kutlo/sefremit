@@ -38,6 +38,10 @@ TERMS_CONDITIONS = "terms & conditions"
 JOIN_COMPETITION = "join the competition for just p2.50!"
 APPLY_FOR_PROGRAM = "apply for program"
 LOCATION = "location"
+USERNAME = "username"
+PHONE_NUMBER = "phone_number"
+INTERACTION_TYPE = "interaction_type"
+USER_ID = "user_id"
 
 
 
