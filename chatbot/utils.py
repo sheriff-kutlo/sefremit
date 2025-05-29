@@ -504,7 +504,7 @@ def send_interactive_events_message(phone_number):
                 "text": "You can type *events* at any time to return to this screen."
             },
             "action": {
-                "button": "Profession Area",
+                "button": "Events",
                 "sections": [
                     {
                         "title": "Please choose an option",
