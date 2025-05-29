@@ -109,54 +109,11 @@ def verification(request):
 
                         response_str = message['interactive']['nfm_reply']['response_json']
                         message_from = json_data['entry'][0]['changes'][0]['value']['messages'][0]['from']
+
+                        send_message("Your application has been successfully submitted", message_from)
                         
-                        # Convert to dictionary
-                        response_data = json.loads(response_str)
 
-                        # Extract values
-                        firstname = response_data.get('screen_0_Firstname_0', '')
-                        lastname = response_data.get('screen_0_Lastname_1', '')
-                        contact = response_data.get('screen_0_Contact_2', '')
-                        town = response_data.get('screen_0_Town_3', '').replace("0_", "")
-                        instructions = response_data.get('screen_0_Instructions_4', '')
-
-                
-                        # Create a dictionary for delivery details
-                        delivery_details = {
-                            "firstname": firstname,
-                            "lastname": lastname,
-                            "contact": contact,
-                            "town": town,
-                            "instructions": instructions
-                        }
-
-                        # Save to cache
-                        # cache.set(f"{message_from}_delivery_details", delivery_details, timeout=26 * 3600)  # 26 hours
-
-                        # Optional: Log for debugging
-                        logger.info("Saved delivery details:", delivery_details)
-
-                        # delivery_status = cache.get(f"{message_from}_delivery_status")
-
-                        # data = get_customer_order_cache_data(message_from)
-
-                        # if delivery_status == "deliver":
-                        #     request_location(message_from)
-                        # else:
-                        #     save_order_data(data, message_from, None, None)
-
-                        #     order_data = data["order_data"]
-                        #     order_number = order_data["order_number"]
-                        #     store_name = data["store_name"]
-
-                        #     store_contact = get_store_contact(store_name)
-
-                        #     send_message(f"✅ *Order Placed*\n\nYour order has been successfully placed and will be ready for pick-up at the store you selected.\n\nWe’ll let you know once it has been picked and is ready for collection.\n\nIf you have any questions or need assistance, you can contact the store at: *{store_contact}*.\n\nThank you for shopping with us! 🛍️", message_from)
-                           
-                        #     send_message(f"📢 *Order Alert*\n\nOrder *{order_number}* has been sent to the Order Management System.\n\nPlease prepare the order", message_from)
-
-                        #     cache.delete_pattern(f"{message_from}_*")
-
+            
                 if 'location' in json_data['entry'][0]['changes'][0]['value']['messages'][0]:
                     message = json_data['entry'][0]['changes'][0]['value']['messages'][0]
                     latitude = message['location']['latitude']
@@ -372,7 +329,7 @@ def hello(request):
 
     # handle_reply(FINANCE_ACCOUNTING, "wamid", KUTLO_PHONE_NUMBER, "JOE", TEST_PHONE_NUMBER)
 
-    # handle_reply(TERMS_CONDITIONS, "wamid", KUTLO_PHONE_NUMBER, "Joe", TEST_PHONE_NUMBER)
+    handle_reply(APPLY_FOR_PROGRAM, "wamid", KUTLO_PHONE_NUMBER, "Joe", TEST_PHONE_NUMBER)
 
 
     return HttpResponse(f"Server working as expected!")

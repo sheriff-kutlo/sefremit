@@ -1148,3 +1148,16 @@ Enter again to increase your odds!, phone_number: 26774342078
 
 Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum., phone_number: 26774342078
 2025-05-28 15:13:11 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBIyNEFGQzIxQjY0MkU3RjlENTAA'}]}
+2025-05-29 14:42:21 INFO Jobs interactive message successfully sent. phone_number: 26774342078
+2025-05-29 14:42:21 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBI5RUM0RTIyMzVEQkVFOEFFNEIA'}]}
+2025-05-29 14:42:53 INFO Location sent successfully. phone: 26774342078
+2025-05-29 14:42:53 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBI1RTQ3NUEwOENEOTlEMERGNTIA'}]}
+2025-05-29 14:44:50 INFO Location sent successfully. phone: 26774342078
+2025-05-29 14:44:50 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBIxQzlERTcxMkJENkIwNjdDN0YA'}]}
+2025-05-29 14:46:28 ERROR Failed to send Orange Digital Center message. Status Code: 400. Response Content: b'{"error":{"message":"(#131009) Parameter value is not valid","type":"OAuthException","code":131009,"error_data":{"messaging_product":"whatsapp","details":"Parameter \\"flow_id\\" or parameter \\"flow_name\\" must be specified."},"fbtrace_id":"Aa2FZVa2GOTYc54sJGdAfL0"}}'
+2025-05-29 14:47:38 INFO Orange Digital Center interactive message successfully sent. phone_number: 26774342078
+2025-05-29 14:47:38 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBJEQTFEN0Q2QjJFMzhBMDg4MkIA'}]}
+2025-05-29 14:48:24 INFO Orange Digital Center interactive message successfully sent. phone_number: 26774342078
+2025-05-29 14:48:24 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBJDRjM1NkFEOUFDRjNCM0Q3ODcA'}]}
+2025-05-29 14:48:46 INFO Orange Digital Center interactive message successfully sent. phone_number: 26774342078
+2025-05-29 14:48:46 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBIyNTlBMjVBQTNFMEM0REFCRjEA'}]}

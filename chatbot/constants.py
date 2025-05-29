@@ -36,6 +36,8 @@ NORTHERN_TRADE_FAIR_2025 = "northern trade fair 2025"
 BOTSWANA_NURSES_DAY = "botswana nurses day"
 TERMS_CONDITIONS = "terms & conditions"
 JOIN_COMPETITION = "join the competition for just p2.50!"
+APPLY_FOR_PROGRAM = "apply for program"
+LOCATION = "location"
 
 
 

@@ -124,6 +124,15 @@ def handle_reply(reply, message_id, phone_number, username, display_phone_number
         elif reply == TERMS_CONDITIONS:
             send_message("*Your Terms & Conditions Here*\n\nLorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum.", phone_number)
         
+        elif reply == APPLY_FOR_PROGRAM:
+            send_interactive_orange_digital_center_program_form_message(phone_number)
+
+        elif reply == LOCATION:
+            send_orange_digital_center_location(phone_number)
+        
+        elif reply == ORANGE_DIGITAL_CENTER:
+            send_interactive_orange_digital_center_message(phone_number)
+
         else:
             send_interactive_menu_message(phone_number)
 
@@ -621,6 +630,150 @@ def send_interactive_ja_meter_message(phone_number):
             return response_data.get("messages", [{}])[0].get("id")
         else:
             logger.error(f"Failed to send Jobs message. Status Code: {response.status_code}. Response Content: {response.content}")
+            return None
+            
+    except requests.exceptions.RequestException as e:
+        logger.error(f"Error sending message: {e}", exc_info=True)
+        return None
+
+def send_interactive_orange_digital_center_message(phone_number):
+    headers = {
+        "Content-Type": APPLICATION_JSON,
+        "Authorization": AUTHORIZATION
+    }
+
+    json_data = {
+        "messaging_product": "whatsapp",
+        "recipient_type": "individual",
+        "to": phone_number,
+        "type": "interactive",
+        "interactive": {
+            "type": "list",
+            "header": {
+                "type": "text",
+                "text": "Orange Digital Center"
+            },
+            "body": {
+                "text": "A network of free & inclusive resources to support local start ups & projects with digital technology"
+            },
+            "action": {
+                "button": "Menu",
+                "sections": [
+                    {
+                        "title": "Please choose an option",
+                        "rows": [
+                            {"id": "1", "title": "Apply for Program"},
+                            {"id": "2", "title": "Location"},
+
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+
+    try:
+        response = requests.post(MESSAGES_ENDPOINT, json=json_data, headers=headers)
+        
+        if response.status_code == 200:
+            logger.info(f"Jobs interactive message successfully sent. phone_number: {phone_number}")
+            response_data = response.json()
+            logger.debug(f"Response JSON: {response_data}")
+            return response_data.get("messages", [{}])[0].get("id")
+        else:
+            logger.error(f"Failed to send Jobs message. Status Code: {response.status_code}. Response Content: {response.content}")
+            return None
+            
+    except requests.exceptions.RequestException as e:
+        logger.error(f"Error sending message: {e}", exc_info=True)
+        return None
+
+def send_orange_digital_center_location(phone_number):
+    headers = {
+        "Content-Type": APPLICATION_JSON,
+        "Authorization": AUTHORIZATION
+    }
+
+    json_data = {
+        "messaging_product": "whatsapp",
+        "recipient_type": "individual",
+        "to": phone_number,
+        "type": "location",
+        "location": {
+            "latitude": -24.690091,
+            "longitude": 25.879837,
+            "name": "Orange Digital Center"
+        }
+    }
+    
+    try:
+        response = requests.post(MESSAGES_ENDPOINT, json=json_data, headers=headers)
+        
+        if response.status_code == 200:
+            logger.info(f"Location sent successfully. phone: {phone_number}")
+
+            response_data = response.json()
+
+            logger.debug(f"Response JSON: {response_data}")
+
+            return response_data.get("messages", [{}])[0].get("id")
+        else:
+            logger.error(f"Failed to send location. Status Code: {response.status_code}. Response Content: {response.content}")
+            return None
+            
+    except requests.exceptions.RequestException as e:
+        logger.error(f"Error sending Location: {e}", exc_info=True)
+        return None
+
+def send_interactive_orange_digital_center_program_form_message(phone_number):
+    headers = {
+        "Content-Type": APPLICATION_JSON,
+        "Authorization": AUTHORIZATION
+    }
+
+    json_data = {
+        "messaging_product": "whatsapp",
+        "to": phone_number,
+        "recipient_type": "individual",
+        "type": "interactive",
+        "interactive": {
+            "type": "flow",
+            "header": {
+                "type": "text",
+                "text": "Our Programs"
+            },
+            "body": {
+                "text": "Fill in the form to apply for one of our programs."
+            },
+            "action": {
+                "name": "flow",
+                "parameters": {
+                    "flow_message_version": "3",
+                    "flow_action": "navigate",
+                    "flow_token": "<FLOW_TOKEN>",
+                    "flow_id": "1679205382734623",
+                    "flow_cta": "Open Form",
+                    "flow_action_payload": {
+                        "screen": "QUESTION_ONE",
+                        "data": {
+                            "<CUSTOM_KEY>": "<CUSTOM_VALUE>"
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    try:
+        response = requests.post(MESSAGES_ENDPOINT, json=json_data, headers=headers)
+        
+        if response.status_code == 200:
+            logger.info(f"Orange Digital Center interactive message successfully sent. phone_number: {phone_number}")
+            response_data = response.json()
+            logger.debug(f"Response JSON: {response_data}")
+            return response_data.get("messages", [{}])[0].get("id")
+        else:
+            logger.error(f"Failed to send Orange Digital Center message. Status Code: {response.status_code}. Response Content: {response.content}")
             return None
             
     except requests.exceptions.RequestException as e:
