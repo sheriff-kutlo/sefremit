@@ -325,11 +325,9 @@ def verification(request):
 
 def hello(request):
 
-    # send_message("some message", KUTLO_PHONE_NUMBER)
+    # send_template_without_header(KUTLO_PHONE_NUMBER, "confirm_send_request")
 
-    # handle_reply(FINANCE_ACCOUNTING, "wamid", KUTLO_PHONE_NUMBER, "JOE", TEST_PHONE_NUMBER)
-
-    # handle_reply(APPLY_FOR_PROGRAM, "wamid", KUTLO_PHONE_NUMBER, "Joe", TEST_PHONE_NUMBER)
+    send_template_with_parameter(KUTLO_PHONE_NUMBER, CONFIRM_SEND_REQUEST, "Yellow House")
 
 
     return HttpResponse(f"Server working as expected!")

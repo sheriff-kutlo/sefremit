@@ -4,6 +4,7 @@ import requests
 from django.db import connection, OperationalError
 import logging
 import re
+from django.core.cache import cache
 
 
 # Get an instance of a logger
@@ -45,125 +46,200 @@ def send_message(message, phone_number):
 def handle_reply(reply, message_id, phone_number, username, display_phone_number):
 
     if display_phone_number == TEST_PHONE_NUMBER:
-        reply = reply.lower()
 
-        user_id = get_user_id(phone_number)
-
-        if not user_id:
-            save_user({USERNAME: remove_emojis(username), PHONE_NUMBER: phone_number})
-            user_id = get_user_id(phone_number)
-
-
-        if reply == RADIO_DRAMA_PODCASTS:
-            send_interactive_radio_drama_message(phone_number)
-            update_interactions({INTERACTION_TYPE: RADIO_DRAMA_PODCASTS, USER_ID: user_id})
-
-        elif reply == JOBS:
-            send_interactive_jobs_message(phone_number)
-            update_interactions({INTERACTION_TYPE: JOBS, USER_ID: user_id})
-
-        elif reply == JA_METER:
-            send_interactive_ja_meter_message(phone_number)
-            update_interactions({INTERACTION_TYPE: JA_METER, USER_ID: user_id})
-
-        elif reply == ORANGE_SOCIAL_VENTURE_PRICE:
-            send_pdf_by_id("1431280267895547", phone_number, "Rules for the 2025 Orange Social Venture Prize (OSVP), detailing eligibility, competition structure, and application process for entrepreneurs in Africa and the Middle East.", "Rules of the OSVP Prize-2025")
-            update_interactions({INTERACTION_TYPE: ORANGE_SOCIAL_VENTURE_PRICE, USER_ID: user_id})
-
-        elif reply == DRAMA:
-            send_interactive_radio_drama_message(phone_number)
-            update_interactions({INTERACTION_TYPE: DRAMA, USER_ID: user_id})
-
-        elif reply == MATSWAKA_BAE:
-            send_interactive_seasons_message(phone_number)
-            update_interactions({INTERACTION_TYPE: MATSWAKA_BAE, USER_ID: user_id})
-
-        elif reply == SUGAR:
-            send_interactive_seasons_message(phone_number)
-            update_interactions({INTERACTION_TYPE: SUGAR, USER_ID: user_id})
-
-        elif reply == SEASON_1:
-            send_interactive_episodes_message(phone_number)
-            update_interactions({INTERACTION_TYPE: SEASON_1, USER_ID: user_id})
-
-        elif reply == SEASON_2:
-            send_interactive_episodes_message(phone_number)
-            update_interactions({INTERACTION_TYPE: SEASON_2, USER_ID: user_id})
-
-        elif reply == SEASON_3:
-            send_interactive_episodes_message(phone_number)
-            update_interactions({INTERACTION_TYPE: SEASON_3, USER_ID: user_id})
-
-        elif reply == EPISODE_1:
-            send_audio_by_id(625557423882962, phone_number)
-            update_interactions({INTERACTION_TYPE: EPISODE_1, USER_ID: user_id})
-
-        elif reply == EPISODE_2:
-            send_audio_by_id(625557423882962, phone_number)
-            update_interactions({INTERACTION_TYPE: EPISODE_2, USER_ID: user_id})
-
-        elif reply == EPISODE_3:
-            send_audio_by_id(625557423882962, phone_number)
-            update_interactions({INTERACTION_TYPE: EPISODE_3, USER_ID: user_id})
-
-        elif reply == EPISODE_4:
-            send_audio_by_id(625557423882962, phone_number)
-            update_interactions({INTERACTION_TYPE: EPISODE_4, USER_ID: user_id})
-
-        elif reply == JOBS_SIMPLE:
-            send_interactive_jobs_message(phone_number)
-            update_interactions({INTERACTION_TYPE: JOBS_SIMPLE, USER_ID: user_id})
-
-        elif reply == IT:
-            send_image_by_id('1865771617324259', phone_number)
-            update_interactions({INTERACTION_TYPE: IT, USER_ID: user_id})
-
-        elif reply == FINANCE_ACCOUNTING:
-            img_ids = ['1108933161267627', '689359607159211']
+        if phone_number == KUTLO_PHONE_NUMBER:
+            reply = reply.lower()
             
-            for img in img_ids:
-                send_image_by_id(img, phone_number)
+            user_id = get_user_id_tx(phone_number)
 
-            update_interactions({INTERACTION_TYPE: FINANCE_ACCOUNTING, USER_ID: user_id})
+            if not user_id:
+                save_user_tx({USERNAME: remove_emojis(username), PHONE_NUMBER: phone_number})
+                user_id = get_user_id_tx(phone_number)
+                cache.set(f"{phone_number}_action", ROUTE, timeout=24 * 3600)
 
-        elif reply == COMPLIANCE:
-            send_image_by_id('1041626037488666', phone_number)
-            update_interactions({INTERACTION_TYPE: COMPLIANCE, USER_ID: user_id})
 
-        elif reply == EVENTS:
-            send_interactive_events_message(phone_number)
-            update_interactions({INTERACTION_TYPE: EVENTS, USER_ID: user_id})
+            action = cache.get(f"{phone_number}_action")
 
-        elif reply == NORTHERN_TRADE_FAIR_2025:
-            send_image_by_id("613557838403443", phone_number)
-            update_interactions({INTERACTION_TYPE: NORTHERN_TRADE_FAIR_2025, USER_ID: user_id})
+            if action is None:
+                send_routes(phone_number)
 
-        elif reply == BOTSWANA_NURSES_DAY:
-            send_image_by_id("1764990677735677", phone_number)
-            update_interactions({INTERACTION_TYPE: BOTSWANA_NURSES_DAY, USER_ID: user_id})
+            else:
+                if action == ROUTE:
+                    if not verify_route(reply):
+                        send_message("Please enter a valid route", phone_number)
 
-        elif reply == JOIN_COMPETITION:
-            send_message("✅ You’re in! \n\nYour entry to the Ja Meter SMS Competition is successful. 🎉\n\nEnter again to increase your odds!", phone_number)
-            update_interactions({INTERACTION_TYPE: JOIN_COMPETITION, USER_ID: user_id})
+                    else:
+                        send_hotspots(reply, phone_number)
+                        cache.set(f"{phone_number}_action", HOTSPOTS, timeout=24 * 3600)
 
-        elif reply == TERMS_CONDITIONS:
-            send_message("*Your Terms & Conditions Here*\n\nLorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum.", phone_number)
-            update_interactions({INTERACTION_TYPE: TERMS_CONDITIONS, USER_ID: user_id})
-        
-        elif reply == APPLY_FOR_PROGRAM:
-            send_interactive_orange_digital_center_program_form_message(phone_number)
-            update_interactions({INTERACTION_TYPE: APPLY_FOR_PROGRAM, USER_ID: user_id})
+                elif action == HOTSPOTS:
+                    if verify_hotspot(reply) == None:
+                        send_message(f"Please enter a valid hotspot", phone_number)
 
-        elif reply == LOCATION:
-            send_orange_digital_center_location(phone_number)
-            update_interactions({INTERACTION_TYPE: LOCATION, USER_ID: user_id})
-        
-        elif reply == ORANGE_DIGITAL_CENTER:
-            send_interactive_orange_digital_center_message(phone_number)
-            update_interactions({INTERACTION_TYPE: ORANGE_DIGITAL_CENTER, USER_ID: user_id})
+                    else:
+                        send_template_with_parameter(phone_number, CONFIRM_SEND_REQUEST, reply)
+                        cache.set(f"{phone_number}_action", CONFIRM_REQUEST, timeout=24 * 3600)
+
+                elif action == CONFIRM_REQUEST:
+                    if reply == YES:
+                        send_message("send request", phone_number)
+                        pass
+
+                    elif reply == CANCEL:
+                        cache.delete_pattern(f"{phone_number}_*")
+                        send_message("Request Canceled", phone_number)
+
+                    else:
+                        send_message("Please enter a valid response", phone_number)
+
+
+
+
+
+            
+            # send_flow_message(KUTLO_PHONE_NUMBER, SIMPE_USER_DATA_HEADER, SIMPE_USER_DATA_BODY, SIMPE_USER_DATA_FLOW_ID, SIMPE_USER_DATA_FLOW_TOKEN, SIMPE_USER_DATA_CTA)
+
+
+            # store_name = cache.get(f"{phone_number}_store_name")
+
+            # if store_name is None:
+            #     send_stores(phone_number)
+            # else:
+            #     products_lst = get_products(store_name, PET_CARE)
+
+            #     if not products_lst:
+            #         send_message(f"We currently don't have any {PET_CARE} products", phone_number)
+            #     else:
+            #         send_catalog_template_message(phone_number, products_lst, PET_CARE_CAMEL_CASE, PET_CARE_CAMEL_CASE)
+
+
+
+            
+
+
+
+
 
         else:
-            send_interactive_menu_message(phone_number)
+            reply = reply.lower()
+
+            user_id = get_user_id(phone_number)
+
+            if not user_id:
+                save_user({USERNAME: remove_emojis(username), PHONE_NUMBER: phone_number})
+                user_id = get_user_id(phone_number)
+
+
+            if reply == RADIO_DRAMA_PODCASTS:
+                send_interactive_radio_drama_message(phone_number)
+                update_interactions({INTERACTION_TYPE: RADIO_DRAMA_PODCASTS, USER_ID: user_id})
+
+            elif reply == JOBS:
+                send_interactive_jobs_message(phone_number)
+                update_interactions({INTERACTION_TYPE: JOBS, USER_ID: user_id})
+
+            elif reply == JA_METER:
+                send_interactive_ja_meter_message(phone_number)
+                update_interactions({INTERACTION_TYPE: JA_METER, USER_ID: user_id})
+
+            elif reply == ORANGE_SOCIAL_VENTURE_PRICE:
+                send_pdf_by_id("1431280267895547", phone_number, "Rules for the 2025 Orange Social Venture Prize (OSVP), detailing eligibility, competition structure, and application process for entrepreneurs in Africa and the Middle East.", "Rules of the OSVP Prize-2025")
+                update_interactions({INTERACTION_TYPE: ORANGE_SOCIAL_VENTURE_PRICE, USER_ID: user_id})
+
+            elif reply == DRAMA:
+                send_interactive_radio_drama_message(phone_number)
+                update_interactions({INTERACTION_TYPE: DRAMA, USER_ID: user_id})
+
+            elif reply == MATSWAKA_BAE:
+                send_interactive_seasons_message(phone_number)
+                update_interactions({INTERACTION_TYPE: MATSWAKA_BAE, USER_ID: user_id})
+
+            elif reply == SUGAR:
+                send_interactive_seasons_message(phone_number)
+                update_interactions({INTERACTION_TYPE: SUGAR, USER_ID: user_id})
+
+            elif reply == SEASON_1:
+                send_interactive_episodes_message(phone_number)
+                update_interactions({INTERACTION_TYPE: SEASON_1, USER_ID: user_id})
+
+            elif reply == SEASON_2:
+                send_interactive_episodes_message(phone_number)
+                update_interactions({INTERACTION_TYPE: SEASON_2, USER_ID: user_id})
+
+            elif reply == SEASON_3:
+                send_interactive_episodes_message(phone_number)
+                update_interactions({INTERACTION_TYPE: SEASON_3, USER_ID: user_id})
+
+            elif reply == EPISODE_1:
+                send_audio_by_id(625557423882962, phone_number)
+                update_interactions({INTERACTION_TYPE: EPISODE_1, USER_ID: user_id})
+
+            elif reply == EPISODE_2:
+                send_audio_by_id(625557423882962, phone_number)
+                update_interactions({INTERACTION_TYPE: EPISODE_2, USER_ID: user_id})
+
+            elif reply == EPISODE_3:
+                send_audio_by_id(625557423882962, phone_number)
+                update_interactions({INTERACTION_TYPE: EPISODE_3, USER_ID: user_id})
+
+            elif reply == EPISODE_4:
+                send_audio_by_id(625557423882962, phone_number)
+                update_interactions({INTERACTION_TYPE: EPISODE_4, USER_ID: user_id})
+
+            elif reply == JOBS_SIMPLE:
+                send_interactive_jobs_message(phone_number)
+                update_interactions({INTERACTION_TYPE: JOBS_SIMPLE, USER_ID: user_id})
+
+            elif reply == IT:
+                send_image_by_id('1865771617324259', phone_number)
+                update_interactions({INTERACTION_TYPE: IT, USER_ID: user_id})
+
+            elif reply == FINANCE_ACCOUNTING:
+                img_ids = ['1108933161267627', '689359607159211']
+                
+                for img in img_ids:
+                    send_image_by_id(img, phone_number)
+
+                update_interactions({INTERACTION_TYPE: FINANCE_ACCOUNTING, USER_ID: user_id})
+
+            elif reply == COMPLIANCE:
+                send_image_by_id('1041626037488666', phone_number)
+                update_interactions({INTERACTION_TYPE: COMPLIANCE, USER_ID: user_id})
+
+            elif reply == EVENTS:
+                send_interactive_events_message(phone_number)
+                update_interactions({INTERACTION_TYPE: EVENTS, USER_ID: user_id})
+
+            elif reply == NORTHERN_TRADE_FAIR_2025:
+                send_image_by_id("613557838403443", phone_number)
+                update_interactions({INTERACTION_TYPE: NORTHERN_TRADE_FAIR_2025, USER_ID: user_id})
+
+            elif reply == BOTSWANA_NURSES_DAY:
+                send_image_by_id("1764990677735677", phone_number)
+                update_interactions({INTERACTION_TYPE: BOTSWANA_NURSES_DAY, USER_ID: user_id})
+
+            elif reply == JOIN_COMPETITION:
+                send_message("✅ You’re in! \n\nYour entry to the Ja Meter SMS Competition is successful. 🎉\n\nEnter again to increase your odds!", phone_number)
+                update_interactions({INTERACTION_TYPE: JOIN_COMPETITION, USER_ID: user_id})
+
+            elif reply == TERMS_CONDITIONS:
+                send_message("*Your Terms & Conditions Here*\n\nLorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum.", phone_number)
+                update_interactions({INTERACTION_TYPE: TERMS_CONDITIONS, USER_ID: user_id})
+            
+            elif reply == APPLY_FOR_PROGRAM:
+                send_interactive_orange_digital_center_program_form_message(phone_number)
+                update_interactions({INTERACTION_TYPE: APPLY_FOR_PROGRAM, USER_ID: user_id})
+
+            elif reply == LOCATION:
+                send_orange_digital_center_location(phone_number)
+                update_interactions({INTERACTION_TYPE: LOCATION, USER_ID: user_id})
+            
+            elif reply == ORANGE_DIGITAL_CENTER:
+                send_interactive_orange_digital_center_message(phone_number)
+                update_interactions({INTERACTION_TYPE: ORANGE_DIGITAL_CENTER, USER_ID: user_id})
+
+            else:
+                send_interactive_menu_message(phone_number)
 
 def send_interactive_menu_message(phone_number):
     headers = {
@@ -888,6 +964,459 @@ def update_interactions(interaction_dict):
         
     except Exception as e:
         logger.error(f"An unexpected error occurred in update_interactions: {e}", exc_info=True)
+
+def send_welcome_interactive_menu_message(phone_number):
+    headers = {
+        "Content-Type": APPLICATION_JSON,
+        "Authorization": AUTHORIZATION
+    }
+
+    json_data = {
+        "messaging_product": "whatsapp",
+        "recipient_type": "individual",
+        "to": phone_number,
+        "type": "interactive",
+        "interactive": {
+            "type": "list",
+            "header": {
+                "type": "text",
+                "text": "Welcome to Ride Finder 😃"
+            },
+            "body": {
+                "text": "Stay in the loop! Discover current competitions, Orange initiatives, and important updates about our services on WhatsApp."
+            },
+            "footer": {
+                "text": "You can type *menu* at any time to return to this screen."
+            },
+            "action": {
+                "button": "Menu",
+                "sections": [
+                    {
+                        "title": "Please choose an option",
+                        "rows": [
+                            {"id": "1", "title": "Radio Drama/Podcasts"},
+                            {"id": "2", "title": "Jobs [Mohiri]"},
+                            {"id": "3", "title": "Ja Meter"},
+                            {"id": "4", "title": "OSVP", "description": "Orange Social Venture Prize"},
+                            {"id": "5", "title": "Events"},
+                            {"id": "6", "title": "Orange Digital Center"}
+
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+
+    try:
+        response = requests.post(MESSAGES_ENDPOINT, json=json_data, headers=headers)
+        
+        if response.status_code == 200:
+            logger.info(f"welcome message interactive message successfully sent. phone_number: {phone_number}")
+            response_data = response.json()
+            logger.debug(f"Response JSON: {response_data}")
+            return response_data.get("messages", [{}])[0].get("id")
+        else:
+            logger.error(f"Failed to send welcome message message. Status Code: {response.status_code}. Response Content: {response.content}")
+            return None
+            
+    except requests.exceptions.RequestException as e:
+        logger.error(f"Error sending message: {e}", exc_info=True)
+        return None
+
+def send_flow_message(phone_number, header, body, flow_id, flow_token, cta = "Enter Details"):
+
+    json_data = {
+        "messaging_product": "whatsapp",
+        "to": phone_number,
+        "recipient_type": "individual",
+        "type": "interactive",
+        "interactive": {
+            "type": "flow",
+            "header": {
+                "type": "text",
+                "text": header
+            },
+            "body": {
+                "text": body
+            },
+            "action": {
+                "name": "flow",
+                "parameters": {
+                    "flow_message_version": "3",
+                    "flow_action": "navigate",
+                    "flow_token": flow_token,
+                    "flow_id": flow_id,
+                    "flow_cta": cta,
+                    "flow_action_payload": {
+                        "screen": "QUESTION_ONE",
+                        "data": {
+                            "<CUSTOM_KEY>": "<CUSTOM_VALUE>"
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+    headers = {
+        "Authorization": AUTHORIZATION,
+        "Content-Type": APPLICATION_JSON
+    }
+
+    try:
+        response = requests.post(MESSAGES_ENDPOINT, json=json_data, headers=headers)
+        
+        if response.status_code == 200:
+            logger.info(f"flow sent successfully: flow_id: {flow_id}, phone_number: {phone_number}")
+            
+            response_data = response.json()
+            
+            logger.debug(f"Response JSON: {response_data}")
+            return response_data.get("messages", [{}])[0].get("id")
+        else:
+            logger.error(f"Failed to send flow message. Status Code: {response.status_code}. Response Content: {response.content}")
+            return None
+            
+    except requests.exceptions.RequestException as e:
+        logger.error(f"Error sending flow message: {e}", exc_info=True)
+        return None
+ 
+def save_user_tx(save_user_dict):
+    try:
+        query = """
+            INSERT INTO users (username, phone, role, reliability_score, is_banned, created_at) 
+            VALUES (%s, %s, %s, %s, %s, CURRENT_TIMESTAMP());
+        """
+        
+        with connection.cursor() as cursor:
+            cursor.execute(query, (
+                save_user_dict[USERNAME],        
+                save_user_dict[PHONE_NUMBER],    
+                "customer",                        
+                100,                               
+                0                                  
+            ))
+
+            connection.commit()
+            logger.info(f"Customer saved successfully. username: {save_user_dict[USERNAME]}, phone: {save_user_dict[PHONE_NUMBER]}")
+    
+    except Exception as e:
+        connection.rollback()
+        logger.error(f'An error occurred saving user: {e}', exc_info=True)
+
+def get_user_id_tx(phone_number):
+    query = "SELECT user_id FROM users WHERE phone = %s;"
+
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute(query, (phone_number,))
+            result = cursor.fetchone()
+
+            if result:
+                return result[0]
+            else:
+                # Handle case where no customer is found
+                # Example: You might want to register the user here
+                # register_user(phone_number)
+                return None
+
+    except OperationalError as e:
+        logger.error(f'Operational error occurred in get_user_id: {e}', exc_info=True)
+        # Handle or raise the exception as needed
+        return None
+    except Exception as e:
+        logger.error(f'An error occurred in get_user_id: {e}', exc_info=True)
+        # Handle or raise the exception as needed
+        return None
+
+def send_routes(phone_number):
+    headers = {
+        "Content-Type": APPLICATION_JSON,
+        "Authorization": AUTHORIZATION
+    }
+
+    routes = get_routes()
+
+    # Build the "rows" for the WhatsApp list dynamically
+    route_rows = [{"id": str(index + 1), "title": route} for index, route in enumerate(routes)]
+
+    if not route_rows:
+        logger.warning(f"Routes not found")
+        return None
+
+    json_data = {
+        "messaging_product": "whatsapp",
+        "recipient_type": "individual",
+        "to": phone_number,
+        "type": "interactive",
+        "interactive": {
+            "type": "list",
+            "header": {
+                "type": "text",
+                "text": "Share Your Route 🚕"
+            },
+            "body": {
+                "text": "Pick your route to help nearby taxis find you."
+            },
+            "action": {
+                "button": "Choose My Route",
+                "sections": [
+                    {
+                        "title": "Choose your Route",
+                        "rows": route_rows  # Use dynamically generated rows
+                    }
+                ]
+            }
+        }
+    }
+
+    try:
+        response = requests.post(MESSAGES_ENDPOINT, json=json_data, headers=headers)
+        
+        if response.status_code == 200:
+            logger.info(f"Routes message successfully sent. Phone Number: {phone_number}")
+            response_data = response.json()
+            logger.debug(f"Response JSON: {response_data}")
+            return response_data.get("messages", [{}])[0].get("id")
+        else:
+            logger.error(f"Failed to send message. Status Code: {response.status_code}. Response Content: {response.content}")
+            return None
+            
+    except requests.exceptions.RequestException as e:
+        logger.error(f"Error sending message: {e}", exc_info=True)
+        return None
+
+def get_routes():
+    query = """
+        SELECT name 
+        FROM routes;
+    """
+
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute(query)
+            results = [row[0] for row in cursor.fetchall()]
+
+            if results:
+                return results
+            else:
+                # Handle case where no customer is found
+                # Example: You might want to register the user here
+                # register_user(phone_number)
+                return None
+
+    except OperationalError as e:
+        logger.error(f'Operational error occurred in get_routes: {e}', exc_info=True)
+        # Handle or raise the exception as needed
+        return None
+    except Exception as e:
+        logger.error(f'An error occurred in get_routes: {e}', exc_info=True)
+        # Handle or raise the exception as needed
+        return None
+
+def send_hotspots(route, phone_number):
+    headers = {
+        "Content-Type": APPLICATION_JSON,
+        "Authorization": AUTHORIZATION
+    }
+
+    hotspots = get_hotspots(route)
+
+    if hotspots is None:
+        logger.info(f"Hotspots not available for route: {route}")
+
+    else:
+    
+        # Build the "rows" for the WhatsApp list dynamically
+        hotspot_rows = [{"id": str(index + 1), "title": hotspot} for index, hotspot in enumerate(hotspots)]
+
+        if not hotspot_rows:
+            logger.warning(f"Hotspots not found")
+            return None
+
+        json_data = {
+            "messaging_product": "whatsapp",
+            "recipient_type": "individual",
+            "to": phone_number,
+            "type": "interactive",
+            "interactive": {
+                "type": "list",
+                "header": {
+                    "type": "text",
+                    "text": "Choose a Pickup Spot 📍"
+                },
+                "body": {
+                    "text": "Select the nearest hotspot so a taxi can pick you up faster."
+                },
+                "action": {
+                    "button": "Show Hotspot",
+                    "sections": [
+                        {
+                            "title": "Choose your Hotspot",
+                            "rows": hotspot_rows  # Use dynamically generated rows
+                        }
+                    ]
+                }
+            }
+        }
+
+        try:
+            response = requests.post(MESSAGES_ENDPOINT, json=json_data, headers=headers)
+            
+            if response.status_code == 200:
+                logger.info(f"Hotspots message successfully sent. Phone Number: {phone_number}")
+                response_data = response.json()
+                logger.debug(f"Response JSON: {response_data}")
+                return response_data.get("messages", [{}])[0].get("id")
+            else:
+                logger.error(f"Failed to send message. Status Code: {response.status_code}. Response Content: {response.content}")
+                return None
+                
+        except requests.exceptions.RequestException as e:
+            logger.error(f"Error sending message: {e}", exc_info=True)
+            return None
+
+def verify_route(route):
+    query = """
+        SELECT name 
+        FROM routes where name = %s;
+    """
+
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute(query, (route,))
+            result = cursor.fetchone()
+
+            if result:
+                return result[0]
+            else:
+                # Handle case where no customer is found
+                # Example: You might want to register the user here
+                # register_user(phone_number)
+                return None
+
+    except OperationalError as e:
+        logger.error(f'Operational error occurred in verify_route: {e}', exc_info=True)
+        # Handle or raise the exception as needed
+        return None
+    except Exception as e:
+        logger.error(f'An error occurred in verify_route: {e}', exc_info=True)
+        # Handle or raise the exception as needed
+        return None
+
+def get_hotspots(route):
+    query = """
+        SELECT 
+            h.name
+        FROM 
+            hotspots h
+        JOIN 
+            routes r ON h.route_id = r.route_id
+        WHERE 
+            r.name = %s;
+    """
+
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute(query, (route,))
+            results = [row[0] for row in cursor.fetchall()]
+
+            if results:
+                return results
+            else:
+                # Handle case where no customer is found
+                # Example: You might want to register the user here
+                # register_user(phone_number)
+                return None
+
+    except OperationalError as e:
+        logger.error(f'Operational error occurred in get_hotspots: {e}', exc_info=True)
+        # Handle or raise the exception as needed
+        return None
+    except Exception as e:
+        logger.error(f'An error occurred in get_hotspots: {e}', exc_info=True)
+        # Handle or raise the exception as needed
+        return None
+    
+def verify_hotspot(hotspot):
+    query = """
+        SELECT h.name 
+        FROM hotspots h
+        JOIN routes r ON h.route_id = r.route_id
+        WHERE h.name = %s;
+    """
+
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute(query, (hotspot,))
+            result = cursor.fetchone()
+
+            if result:
+                return result[0]  # hotspot name
+            else:
+                return None
+
+    except OperationalError as e:
+        logger.error(f'Operational error in verify_hotspot: {e}', exc_info=True)
+        return None
+    except Exception as e:
+        logger.error(f'Unexpected error in verify_hotspot: {e}', exc_info=True)
+        return None
+
+def send_template_with_parameter(phone_number, template_name, hotspot):
+    json_data = {
+        "messaging_product": "whatsapp",
+        "recipient_type": "individual",
+        "to": phone_number,
+        "type": "template",
+        "template": {
+            "name": template_name,
+            "language": {
+                "code": "en_US"
+            },
+            "components": [
+                {
+                    "type": "body",
+                    "parameters": [
+                        {
+                            "type": "text",
+                            "text": hotspot
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+
+    headers = {
+        "Authorization": AUTHORIZATION,
+        "Content-Type": APPLICATION_JSON
+    }
+
+    try:
+        response = requests.post(MESSAGES_ENDPOINT, json=json_data, headers=headers)
+        
+        if response.status_code == 200:
+            logger.info(f"template sent successfully: template_name: {template_name}, phone_number: {phone_number}")
+            
+            response_data = response.json()
+            
+            logger.debug(f"Response JSON: {response_data}")
+            return response_data.get("messages", [{}])[0].get("id")
+        else:
+            logger.error(f"Failed to send document template message. Status Code: {response.status_code}. Response Content: {response.content}")
+            return None
+            
+    except requests.exceptions.RequestException as e:
+        logger.error(f"Error sending template message: {e}", exc_info=True)
+        return None
+ 
+
+
+
+
 
 
 

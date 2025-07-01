@@ -1279,3 +1279,126 @@ django.db.utils.IntegrityError: (1048, "Column 'user_id' cannot be null")
 2025-05-29 16:34:37 INFO Orange Digital Center interactive message successfully sent. phone_number: 26774342078
 2025-05-29 16:34:37 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBIwNzI2OThFREVENzIwMkJEOEYA'}]}
 2025-05-29 16:34:37 INFO Successfully updated customer interaction: interaction_type: apply for program, customer_id: 1
+2025-06-13 12:05:27 INFO flow sent successfully: flow_id: 738916498483185, phone_number: 26774342078
+2025-06-13 12:05:27 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBIyRjg4OEZCMzAyMTlENDcwNjAA'}]}
+2025-06-13 12:06:32 INFO flow sent successfully: flow_id: 738916498483185, phone_number: 26774342078
+2025-06-13 12:06:32 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBI4OEY0Qzg5ODI0NUVGMEIwNEIA'}]}
+2025-06-13 12:09:45 INFO flow sent successfully: flow_id: 738916498483185, phone_number: 26774342078
+2025-06-13 12:09:45 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBIyRTcxNzlGMTI2QjZEMEE2OTIA'}]}
+2025-06-13 12:10:01 INFO flow sent successfully: flow_id: 738916498483185, phone_number: 26774342078
+2025-06-13 12:10:01 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBJBODY2MEZDNTEyMTEwMkQ5NTQA'}]}
+2025-06-13 14:56:54 INFO flow sent successfully: flow_id: 738916498483185, phone_number: 26774342078
+2025-06-13 14:56:54 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBIzOTY3QzY2RUU1MDBGNzA5NjAA'}]}
+2025-06-13 15:39:41 ERROR An error occurred saving user: (1364, "Field 'first_name' doesn't have a default value")
+Traceback (most recent call last):
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/django/db/backends/mysql/base.py", line 76, in execute
+    return self.cursor.execute(query, args)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/MySQLdb/cursors.py", line 179, in execute
+    res = self._query(mogrified_query)
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/MySQLdb/cursors.py", line 330, in _query
+    db.query(q)
+    ~~~~~~~~^^^
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/MySQLdb/connections.py", line 261, in query
+    _mysql.connection.query(self, query)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+MySQLdb.IntegrityError: (1364, "Field 'first_name' doesn't have a default value")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/kutlomangwa/Documents/sefremit/chatbot/utils.py", line 1051, in save_user_tx
+    cursor.execute(query, (
+    ~~~~~~~~~~~~~~^^^^^^^^^
+        save_user_dict[USERNAME],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+        0
+        ^
+    ))
+    ^^
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sql, params, many=False, executor=self._execute
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/django/db/backends/mysql/base.py", line 76, in execute
+    return self.cursor.execute(query, args)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/MySQLdb/cursors.py", line 179, in execute
+    res = self._query(mogrified_query)
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/MySQLdb/cursors.py", line 330, in _query
+    db.query(q)
+    ~~~~~~~~^^^
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/MySQLdb/connections.py", line 261, in query
+    _mysql.connection.query(self, query)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+django.db.utils.IntegrityError: (1364, "Field 'first_name' doesn't have a default value")
+2025-06-13 15:39:42 INFO flow sent successfully: flow_id: 738916498483185, phone_number: 26774342078
+2025-06-13 15:39:42 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBIxMzcyNzEzOThEQjk1MjE3ODAA'}]}
+2025-06-13 15:43:06 INFO Customer saved successfully. username: Joe, phone: 26774342078
+2025-06-13 15:43:07 INFO flow sent successfully: flow_id: 738916498483185, phone_number: 26774342078
+2025-06-13 15:43:07 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBI2RTMyMzZCNDBBNEY1OUM5RjAA'}]}
+2025-06-13 15:50:34 INFO Customer saved successfully. username: Joe, phone: 26774342078
+2025-06-13 15:50:35 INFO flow sent successfully: flow_id: 738916498483185, phone_number: 26774342078
+2025-06-13 15:50:35 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBJGRjUwOTI1MUUwOUFEM0JCQjgA'}]}
+2025-06-14 16:45:35 INFO flow sent successfully: flow_id: 738916498483185, phone_number: 26774342078
+2025-06-14 16:45:35 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBJGNUM4NjBBREU1Q0NBOTU5NjcA'}]}
+2025-06-14 16:46:14 INFO flow sent successfully: flow_id: 738916498483185, phone_number: 26774342078
+2025-06-14 16:46:14 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBJGN0Q5ODZCQTBDOTYwOTA5OUYA'}]}
+2025-06-14 16:59:06 INFO flow sent successfully: flow_id: 738916498483185, phone_number: 26774342078
+2025-06-14 16:59:06 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBJCMzAwNjdERDY1MkJCOEIwM0MA'}]}
+2025-06-14 17:00:46 INFO flow sent successfully: flow_id: 1237972524778830, phone_number: 26774342078
+2025-06-14 17:00:46 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBJFMkNDNThBRjJCMkI4MzRCNjAA'}]}
+2025-06-14 17:02:10 INFO flow sent successfully: flow_id: 1237972524778830, phone_number: 26774342078
+2025-06-14 17:02:10 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBIyNjAzRURFNEU2QTY2Q0YwMTIA'}]}
+2025-06-16 10:59:55 INFO Routes message successfully sent. Phone Number: 26774342078
+2025-06-16 10:59:55 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBI5NzhBNUU3ODc3Q0M5QTFENDcA'}]}
+2025-06-16 11:00:24 INFO Routes message successfully sent. Phone Number: 26774342078
+2025-06-16 11:00:24 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBI2NEE1MTc3NTA4NjUzQzk5MUYA'}]}
+2025-06-16 11:01:27 INFO Routes message successfully sent. Phone Number: 26774342078
+2025-06-16 11:01:27 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBJFRjJEMkMyQkUwNjFDNTM5MUUA'}]}
+2025-06-16 15:21:29 INFO Hotspots message successfully sent. Phone Number: 26774342078
+2025-06-16 15:21:29 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBI3RTYxMkFFQkYxNzRGQjY2QTAA'}]}
+2025-06-16 15:26:45 WARNING Hotspots not found
+2025-06-30 11:54:41 INFO Hotspots not available for route: hajaf
+2025-06-30 11:58:33 INFO Hotspots not available for route: hajaf
+2025-06-30 12:01:13 INFO Hotspots not available for route: hajaf
+2025-06-30 12:02:10 INFO Hotspots not available for route: hajaf
+2025-06-30 12:03:47 INFO Hotspots not available for route: hajaf
+2025-06-30 12:05:01 INFO Hotspots not available for route: hajaf
+2025-06-30 12:05:35 INFO Hotspots message successfully sent. Phone Number: 26774342078
+2025-06-30 12:05:35 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBJBRDFDMTNCREZERThEOERFOTQA'}]}
+2025-06-30 16:25:41 ERROR Failed to send message to 26774342078. Status Code: 400, Response Content: b'{"error":{"message":"(#132000) Number of parameters does not match the expected number of params","type":"OAuthException","code":132000,"error_data":{"messaging_product":"whatsapp","details":"body: number of localizable_params (0) does not match the expected number of params (1)"},"fbtrace_id":"AnjZ55u9MmEU7ZE70kCnF3E"}}'
+2025-06-30 16:25:41 ERROR Error sending message to 26774342078: 400 Client Error: Bad Request for url: https://graph.facebook.com/v20.0/617912614744988/messages
+Traceback (most recent call last):
+  File "/Users/kutlomangwa/Documents/sefremit/chatbot/utils.py", line 1385, in send_template_without_header
+    response.raise_for_status()  # Raise HTTPError for non-200 status codes
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://graph.facebook.com/v20.0/617912614744988/messages
+2025-06-30 16:37:25 INFO template sent successfully: template_name: confirm_send_request, phone_number: 26774342078
+2025-06-30 16:37:25 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBI5MDNCNjk2RUMyRTM0OEQ0OUEA', 'message_status': 'accepted'}]}
+2025-06-30 16:43:01 INFO template sent successfully: template_name: confirm_send_request, phone_number: 26774342078
+2025-06-30 16:43:01 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBI4MUFGMjcyN0UzQjVGNjE3RDAA', 'message_status': 'accepted'}]}
+2025-06-30 16:46:33 INFO template sent successfully: template_name: confirm_send_request, phone_number: 26774342078
+2025-06-30 16:46:33 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBJDMTY0N0RGMjc5MUIxMkE5NTEA', 'message_status': 'accepted'}]}

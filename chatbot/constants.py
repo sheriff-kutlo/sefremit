@@ -44,4 +44,34 @@ INTERACTION_TYPE = "interaction_type"
 USER_ID = "user_id"
 
 
+SIMPE_USER_DATA_HEADER = "Let's Get to Know You"
+SIMPE_USER_DATA_BODY = "Tell us your name and choose your role to continue."
+SIMPE_USER_DATA_FLOW_ID = "1237972524778830"
+SIMPE_USER_DATA_FLOW_TOKEN = "simple_user_data_flow_token"
+SIMPE_USER_DATA_CTA = "Start"
+
+
+
+
+YES = "yes"
+CANCEL = "cancel"
+
+
+
+
+
+CONFIRM_SEND_REQUEST = "confirm_send_request"
+
+
+
+
+
+
+# Actions
+ROUTE = "route"
+HOTSPOTS = "hotspots"
+CONFIRM_REQUEST = "confirm_request"
+
+
+
 

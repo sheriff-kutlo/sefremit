@@ -34,12 +34,12 @@ SECRET_KEY = 'django-insecure-cj7xv7la-t56&m!3=r9b+w-xj9jsun3oh0q@k!(o+#lb!nv1=@
 # TOKEN = os.environ.get("TOKEN")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 # DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
 
 
-# ALLOWED_HOSTS = []
-ALLOWED_HOSTS = ['41.216.208.252', 'whatsapp.sefremit.sefalana.co.bw', 'localhost', '127.0.0.1', '10.10.220.40']
+ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = ['41.216.208.252', 'whatsapp.sefremit.sefalana.co.bw', 'localhost', '127.0.0.1', '10.10.220.40']
 # ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")whatsapp.sefremit.sefalana.co.bw
 
 
@@ -112,7 +112,8 @@ WSGI_APPLICATION = 'sefremit.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'sefremit',
+        # 'NAME': 'sefremit',
+        'NAME': 'whatsapp_test', 
         'USER': 'sheriff_kutlo',
         'PASSWORD': 'FavShow#1K',
         'HOST': '127.0.0.1',
