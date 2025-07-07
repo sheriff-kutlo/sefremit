@@ -329,6 +329,5 @@ def hello(request):
 
     send_template_with_parameter(KUTLO_PHONE_NUMBER, CONFIRM_SEND_REQUEST, "Yellow House")
 
-
     return HttpResponse(f"Server working as expected!")
 
