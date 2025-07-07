@@ -45,14 +45,9 @@ def send_message(message, phone_number):
 
 def handle_reply(reply, message_id, phone_number, username, display_phone_number):
 
-    print("got here 1")
-
     if display_phone_number == TEST_PHONE_NUMBER:
 
-        print("got here 2")
-
         if phone_number == KUTLO_PHONE_NUMBER:
-            print("got here 3")
             reply = reply.lower()
             
             user_id = get_user_id_tx(phone_number)
@@ -67,6 +62,7 @@ def handle_reply(reply, message_id, phone_number, username, display_phone_number
 
             if action is None:
                 send_routes(phone_number)
+                cache.set(f"{phone_number}_action", ROUTE, timeout=24 * 3600)
 
             else:
                 if action == ROUTE:
