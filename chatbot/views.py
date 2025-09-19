@@ -109,8 +109,15 @@ def verification(request):
 
                         response_str = message['interactive']['nfm_reply']['response_json']
                         message_from = json_data['entry'][0]['changes'][0]['value']['messages'][0]['from']
+                        
+                        # Convert to dictionary
+                        response_data = json.loads(response_str)
 
-                        send_message("Your application has been successfully submitted", message_from)
+                        flow_token = response_data.get('flow_token', '')
+
+                        logger.info(f"flow token: {flow_token}")
+
+                        logger.info(f"response data: {response_data}")
                         
 
             
@@ -325,9 +332,7 @@ def verification(request):
 
 def hello(request):
 
-    # send_template_without_header(KUTLO_PHONE_NUMBER, "confirm_send_request")
-
-    send_template_with_parameter(KUTLO_PHONE_NUMBER, CONFIRM_SEND_REQUEST, "Yellow House")
+    send_flow_message(KUTLO_PHONE_NUMBER, REGISTER_TITLE, REGISTER_BODY, REGISTER_FLOW_ID, REGISTER_FLOW_TOKEN, REGISTER_CTA)
 
     return HttpResponse(f"Server working as expected!")
 

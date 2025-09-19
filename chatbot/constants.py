@@ -1,4 +1,5 @@
 KUTLO_PHONE_NUMBER = "26774342078"
+INVALID_PHONE_NUMBER = "26774342078888888"
 TEST_PHONE_NUMBER = "26776448866"
 
 HUB_KEY_VERIFICATION = "e0bb32106f16cbf16332bf6d9d73f3ab"
@@ -75,3 +76,13 @@ CONFIRM_REQUEST = "confirm_request"
 
 
 
+
+
+
+########### PAY ##########
+
+REGISTER_TITLE = "Let’s Get You Started"
+REGISTER_BODY = "Hi there 👋 It seems you’re new here. Please register to enjoy quick, secure, and easy transactions with Wallet."
+REGISTER_FLOW_TOKEN = "registration_flow_token"
+REGISTER_FLOW_ID = "750873627774071"
+REGISTER_CTA = "Create Account"
