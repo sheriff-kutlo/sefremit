@@ -129,8 +129,13 @@ def verification(request):
                             confirm_pin = response_data.get('screen_0_Confrim_PIN_code_5', '')
 
                             # Hash the PIN
-                            pin_bytes = pin.encode('utf-8')  # convert string to bytes
+                            pin_bytes = pin.encode('utf-8')
                             hashed_pin = bcrypt.hashpw(pin_bytes, bcrypt.gensalt())
+
+                            # Convert bytes to string before saving to MySQL
+                            hashed_pin_str = hashed_pin.decode('utf-8')
+
+                            
 
                             # Check if PINs are at least 4 digits
                             if len(pin) < 4 or len(confirm_pin) < 4:
@@ -139,14 +144,8 @@ def verification(request):
                             elif pin != confirm_pin:
                                 send_flow_message(message_from, REGISTER_TITLE_ERROR, REGISTER_BODY_ERROR_PIN_NOT_MATCH, REGISTER_FLOW_ID, REGISTER_FLOW_TOKEN, TRY_AGAIN_CTA)
                             else:
-                                save_wallet_user({USERNAME: remove_emojis(name), FIRSTNAME: firstname, LASTNAME: lastname, PHONE_NUMBER: message_from, EMAIL: email, DATE_OF_BIRTH: date_of_birth, PIN: hashed_pin})
-                                send_message("Account Successfully Created!", message_from)
+                                save_wallet_user({USERNAME: remove_emojis(name), FIRSTNAME: firstname, LASTNAME: lastname, PHONE_NUMBER: message_from, EMAIL: email, DATE_OF_BIRTH: date_of_birth, PIN: hashed_pin_str})
   
-
-                            
-
-                                                    
-
             
                 if 'location' in json_data['entry'][0]['changes'][0]['value']['messages'][0]:
                     message = json_data['entry'][0]['changes'][0]['value']['messages'][0]
