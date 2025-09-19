@@ -115,10 +115,22 @@ def verification(request):
 
                         flow_token = response_data.get('flow_token', '')
 
-                        logger.info(f"flow token: {flow_token}")
+                        if flow_token == REGISTER_FLOW_TOKEN:                        
+                            # Extract values
+                            firstname = response_data.get('screen_0_First_Name_0', '')
+                            lastname = response_data.get('screen_0_Last_Name_1', '')
+                            email = response_data.get('screen_0_Email_2', '')
+                            date_of_birth = response_data.get('screen_0_Date_of_Birth_3', '')
+                            pin = response_data.get('screen_0_PIN_code_4', '')
+                            confirm_pin = response_data.get('screen_0_Confrim_PIN_code_5', '')
 
-                        logger.info(f"response data: {response_data}")
+                            if pin != confirm_pin:
+                                send_flow_message(message_from, REGISTER_TITLE_ERROR, REGISTER_BODY_ERROR, REGISTER_FLOW_ID, REGISTER_FLOW_TOKEN, TRY_AGAIN_CTA)
+                            else:
+                                send_message(f"Successful, Data: {firstname}, {lastname}, {email}, {date_of_birth}, {pin}, {confirm_pin}", message_from)
                         
+
+                                                    
 
             
                 if 'location' in json_data['entry'][0]['changes'][0]['value']['messages'][0]:

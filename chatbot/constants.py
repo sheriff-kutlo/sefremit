@@ -86,3 +86,7 @@ REGISTER_BODY = "Hi there 👋 It seems you’re new here. Please register to en
 REGISTER_FLOW_TOKEN = "registration_flow_token"
 REGISTER_FLOW_ID = "750873627774071"
 REGISTER_CTA = "Create Account"
+
+REGISTER_TITLE_ERROR = "Registration Failed!"
+REGISTER_BODY_ERROR = "PINs do not match. Please try again."
+TRY_AGAIN_CTA = "Try Again"
