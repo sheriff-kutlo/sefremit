@@ -1741,7 +1741,24 @@ def send_flow_message(phone_number, header, body, flow_id, flow_token, cta):
     except requests.exceptions.RequestException as e:
         logger.error(f"Error sending flow message: {e}", exc_info=True)
         return None
- 
+
+def save_wallet_user(save_user_dict):
+    try:
+        query = """
+            INSERT INTO users (username, first_name, last_name, phone_number, email, date_of_birth, pin, created_at) 
+            VALUES (%s, %s, %s, %s, %s, %s, CURRENT_TIMESTAMP());
+        """
+        
+        with connection.cursor() as cursor:
+            cursor.execute(query, (save_user_dict[USERNAME], save_user_dict[FIRSTNAME], save_user_dict[LASTNAME], save_user_dict[PHONE_NUMBER], save_user_dict[EMAIL], save_user_dict[DATE_OF_BIRTH], save_user_dict[PIN]))
+            connection.commit()
+            logger.info(f"User saved successfully. username: {save_user_dict[USERNAME]}, phone: {save_user_dict[PHONE_NUMBER]}")
+            send_message("Account Successfully Created!", save_user_dict[PHONE_NUMBER])
+
+    except Exception as e:
+        connection.rollback()
+        logger.error(f'An error occurred saving user: {e}', exc_info=True) 
+
 def handle_reply(reply, message_id, phone_number, username, display_phone_number):
 
     if display_phone_number == TEST_PHONE_NUMBER:

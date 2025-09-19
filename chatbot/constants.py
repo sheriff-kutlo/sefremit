@@ -88,5 +88,18 @@ REGISTER_FLOW_ID = "750873627774071"
 REGISTER_CTA = "Create Account"
 
 REGISTER_TITLE_ERROR = "Registration Failed!"
-REGISTER_BODY_ERROR = "PINs do not match. Please try again."
+REGISTER_BODY_ERROR_PIN_NOT_MATCH = "PINs do not match. Please try again."
+PIN_TOO_SHORT = "Your PIN must be at least 4 digits."
 TRY_AGAIN_CTA = "Try Again"
+
+
+FIRSTNAME = "firstname"
+LASTNAME = "lastname"
+EMAIL = "email"
+DATE_OF_BIRTH = "date of birth"
+PIN = "pin"
+
+
+
+
+

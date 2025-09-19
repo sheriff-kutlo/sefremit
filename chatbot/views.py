@@ -7,6 +7,8 @@ import json
 from .constants import *
 from .utils import *
 import logging
+import bcrypt
+
 
 # Get an instance of a logger
 logger = logging.getLogger(CHATBOT_CATALOG)
@@ -105,6 +107,8 @@ def verification(request):
 
                     elif interactive_data['type'] == 'nfm_reply':
 
+                        name = json_data['entry'][0]['changes'][0]['value']['contacts'][0]['profile']['name']
+
                         message = json_data['entry'][0]['changes'][0]['value']['messages'][0]
 
                         response_str = message['interactive']['nfm_reply']['response_json']
@@ -124,11 +128,22 @@ def verification(request):
                             pin = response_data.get('screen_0_PIN_code_4', '')
                             confirm_pin = response_data.get('screen_0_Confrim_PIN_code_5', '')
 
-                            if pin != confirm_pin:
-                                send_flow_message(message_from, REGISTER_TITLE_ERROR, REGISTER_BODY_ERROR, REGISTER_FLOW_ID, REGISTER_FLOW_TOKEN, TRY_AGAIN_CTA)
+                            # Hash the PIN
+                            pin_bytes = pin.encode('utf-8')  # convert string to bytes
+                            hashed_pin = bcrypt.hashpw(pin_bytes, bcrypt.gensalt())
+
+                            # Check if PINs are at least 4 digits
+                            if len(pin) < 4 or len(confirm_pin) < 4:
+                                send_flow_message(message_from, REGISTER_TITLE_ERROR, PIN_TOO_SHORT, REGISTER_FLOW_ID, REGISTER_FLOW_TOKEN, TRY_AGAIN_CTA)
+                            # Check if PINs match
+                            elif pin != confirm_pin:
+                                send_flow_message(message_from, REGISTER_TITLE_ERROR, REGISTER_BODY_ERROR_PIN_NOT_MATCH, REGISTER_FLOW_ID, REGISTER_FLOW_TOKEN, TRY_AGAIN_CTA)
                             else:
-                                send_message(f"Successful, Data: {firstname}, {lastname}, {email}, {date_of_birth}, {pin}, {confirm_pin}", message_from)
-                        
+                                save_wallet_user({USERNAME: remove_emojis(name), FIRSTNAME: firstname, LASTNAME: lastname, PHONE_NUMBER: message_from, EMAIL: email, DATE_OF_BIRTH: date_of_birth, PIN: hashed_pin})
+                                send_message("Account Successfully Created!", message_from)
+  
+
+                            
 
                                                     
 
