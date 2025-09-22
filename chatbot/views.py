@@ -131,10 +131,6 @@ def verification(request):
                             # Hash the PIN
                             pin_bytes = pin.encode('utf-8')
                             hashed_pin = bcrypt.hashpw(pin_bytes, bcrypt.gensalt())
-
-                            # Convert bytes to string before saving to MySQL
-                            hashed_pin_str = hashed_pin.decode('utf-8')
-
                             
 
                             # Check if PINs are at least 4 digits
@@ -144,8 +140,18 @@ def verification(request):
                             elif pin != confirm_pin:
                                 send_flow_message(message_from, REGISTER_TITLE_ERROR, REGISTER_BODY_ERROR_PIN_NOT_MATCH, REGISTER_FLOW_ID, REGISTER_FLOW_TOKEN, TRY_AGAIN_CTA)
                             else:
-                                save_wallet_user({USERNAME: remove_emojis(name), FIRSTNAME: firstname, LASTNAME: lastname, PHONE_NUMBER: message_from, EMAIL: email, DATE_OF_BIRTH: date_of_birth, PIN: hashed_pin_str})
+                                save_wallet_user({USERNAME: remove_emojis(name), FIRSTNAME: firstname, LASTNAME: lastname, PHONE_NUMBER: message_from, EMAIL: email, DATE_OF_BIRTH: date_of_birth, PIN: hashed_pin})
   
+                        elif flow_token == CARD_DETAILS_FLOW_TOKEN:                        
+                            # Extract values
+                            cardholder_name = response_data.get('screen_0_Cardholder_Name_0', '')
+                            card_number = response_data.get('screen_0_Card_Number_1', '')
+                            expiry_date = response_data.get('screen_0_Expiry_Date_2', '')
+                            cvv = response_data.get('screen_0_CVV_3', '')
+                            amount = response_data.get('screen_0_Amount_4', '')
+
+                            save_transaction({USER_ID: get_user_id(message_from), AMOUNT: amount, TRANSACTION_TYPE: ADD_FUNDS, PHONE_NUMBER: message_from})
+
             
                 if 'location' in json_data['entry'][0]['changes'][0]['value']['messages'][0]:
                     message = json_data['entry'][0]['changes'][0]['value']['messages'][0]
@@ -358,7 +364,6 @@ def verification(request):
 
 def hello(request):
 
-    send_flow_message(KUTLO_PHONE_NUMBER, REGISTER_TITLE, REGISTER_BODY, REGISTER_FLOW_ID, REGISTER_FLOW_TOKEN, REGISTER_CTA)
-
+    menu_message(KUTLO_PHONE_NUMBER)
     return HttpResponse(f"Server working as expected!")
 

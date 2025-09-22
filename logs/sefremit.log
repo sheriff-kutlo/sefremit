@@ -1434,3 +1434,294 @@ requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://gr
 2025-08-08 14:42:00 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBJEQUI2NEM2NzBGRDlCMkMyMjIA'}]}
 2025-09-19 09:24:04 INFO flow sent successfully: flow_id: 750873627774071, phone_number: 26774342078
 2025-09-19 09:24:04 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBI3MTM5NUQ3QjBDMTkwMUMyQkMA'}]}
+2025-09-19 11:15:07 ERROR An error occurred saving user: 'set' object is not subscriptable
+Traceback (most recent call last):
+  File "/Users/kutlomangwa/Documents/sefremit/chatbot/utils.py", line 1753, in save_wallet_user
+    cursor.execute(query, (save_user_dict[USERNAME], save_user_dict[FIRSTNAME], save_user_dict[LASTNAME], save_user_dict[PHONE_NUMBER], save_user_dict[EMAIL], save_user_dict[DATE_OF_BIRTH], save_user_dict[PIN]))
+                           ~~~~~~~~~~~~~~^^^^^^^^^^
+TypeError: 'set' object is not subscriptable
+2025-09-19 11:16:28 ERROR An error occurred saving user: not all arguments converted during bytes formatting
+Traceback (most recent call last):
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/MySQLdb/cursors.py", line 200, in _mogrify
+    query = query % args
+            ~~~~~~^~~~~~
+TypeError: not all arguments converted during bytes formatting
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/django/db/backends/mysql/base.py", line 76, in execute
+    return self.cursor.execute(query, args)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/MySQLdb/cursors.py", line 176, in execute
+    mogrified_query = self._mogrify(query, args)
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/MySQLdb/cursors.py", line 202, in _mogrify
+    raise ProgrammingError(str(m))
+MySQLdb.ProgrammingError: not all arguments converted during bytes formatting
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/kutlomangwa/Documents/sefremit/chatbot/utils.py", line 1753, in save_wallet_user
+    cursor.execute(query, (save_user_dict[USERNAME], save_user_dict[FIRSTNAME], save_user_dict[LASTNAME], save_user_dict[PHONE_NUMBER], save_user_dict[EMAIL], save_user_dict[DATE_OF_BIRTH], save_user_dict[PIN]))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sql, params, many=False, executor=self._execute
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/django/db/backends/mysql/base.py", line 76, in execute
+    return self.cursor.execute(query, args)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/MySQLdb/cursors.py", line 176, in execute
+    mogrified_query = self._mogrify(query, args)
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/MySQLdb/cursors.py", line 202, in _mogrify
+    raise ProgrammingError(str(m))
+django.db.utils.ProgrammingError: not all arguments converted during bytes formatting
+2025-09-19 11:16:31 ERROR An error occurred saving user: not all arguments converted during bytes formatting
+Traceback (most recent call last):
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/MySQLdb/cursors.py", line 200, in _mogrify
+    query = query % args
+            ~~~~~~^~~~~~
+TypeError: not all arguments converted during bytes formatting
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/django/db/backends/mysql/base.py", line 76, in execute
+    return self.cursor.execute(query, args)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/MySQLdb/cursors.py", line 176, in execute
+    mogrified_query = self._mogrify(query, args)
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/MySQLdb/cursors.py", line 202, in _mogrify
+    raise ProgrammingError(str(m))
+MySQLdb.ProgrammingError: not all arguments converted during bytes formatting
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/kutlomangwa/Documents/sefremit/chatbot/utils.py", line 1753, in save_wallet_user
+    cursor.execute(query, (save_user_dict[USERNAME], save_user_dict[FIRSTNAME], save_user_dict[LASTNAME], save_user_dict[PHONE_NUMBER], save_user_dict[EMAIL], save_user_dict[DATE_OF_BIRTH], save_user_dict[PIN]))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sql, params, many=False, executor=self._execute
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/django/db/backends/mysql/base.py", line 76, in execute
+    return self.cursor.execute(query, args)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/MySQLdb/cursors.py", line 176, in execute
+    mogrified_query = self._mogrify(query, args)
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/MySQLdb/cursors.py", line 202, in _mogrify
+    raise ProgrammingError(str(m))
+django.db.utils.ProgrammingError: not all arguments converted during bytes formatting
+2025-09-19 11:17:04 ERROR An error occurred saving user: not all arguments converted during bytes formatting
+Traceback (most recent call last):
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/MySQLdb/cursors.py", line 200, in _mogrify
+    query = query % args
+            ~~~~~~^~~~~~
+TypeError: not all arguments converted during bytes formatting
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/django/db/backends/mysql/base.py", line 76, in execute
+    return self.cursor.execute(query, args)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/MySQLdb/cursors.py", line 176, in execute
+    mogrified_query = self._mogrify(query, args)
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/MySQLdb/cursors.py", line 202, in _mogrify
+    raise ProgrammingError(str(m))
+MySQLdb.ProgrammingError: not all arguments converted during bytes formatting
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/kutlomangwa/Documents/sefremit/chatbot/utils.py", line 1753, in save_wallet_user
+    cursor.execute(query, (save_user_dict[USERNAME], save_user_dict[FIRSTNAME], save_user_dict[LASTNAME], save_user_dict[PHONE_NUMBER], save_user_dict[EMAIL], save_user_dict[DATE_OF_BIRTH], save_user_dict[PIN]))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sql, params, many=False, executor=self._execute
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/django/db/backends/mysql/base.py", line 76, in execute
+    return self.cursor.execute(query, args)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/MySQLdb/cursors.py", line 176, in execute
+    mogrified_query = self._mogrify(query, args)
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/MySQLdb/cursors.py", line 202, in _mogrify
+    raise ProgrammingError(str(m))
+django.db.utils.ProgrammingError: not all arguments converted during bytes formatting
+2025-09-19 11:25:34 ERROR An error occurred saving user: not all arguments converted during bytes formatting
+Traceback (most recent call last):
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/MySQLdb/cursors.py", line 200, in _mogrify
+    query = query % args
+            ~~~~~~^~~~~~
+TypeError: not all arguments converted during bytes formatting
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/django/db/backends/mysql/base.py", line 76, in execute
+    return self.cursor.execute(query, args)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/MySQLdb/cursors.py", line 176, in execute
+    mogrified_query = self._mogrify(query, args)
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/MySQLdb/cursors.py", line 202, in _mogrify
+    raise ProgrammingError(str(m))
+MySQLdb.ProgrammingError: not all arguments converted during bytes formatting
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/kutlomangwa/Documents/sefremit/chatbot/utils.py", line 1753, in save_wallet_user
+    cursor.execute(query, (save_user_dict[USERNAME], save_user_dict[FIRSTNAME], save_user_dict[LASTNAME], save_user_dict[PHONE_NUMBER], save_user_dict[EMAIL], save_user_dict[DATE_OF_BIRTH], save_user_dict[PIN]))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sql, params, many=False, executor=self._execute
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/django/db/backends/mysql/base.py", line 76, in execute
+    return self.cursor.execute(query, args)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/MySQLdb/cursors.py", line 176, in execute
+    mogrified_query = self._mogrify(query, args)
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/MySQLdb/cursors.py", line 202, in _mogrify
+    raise ProgrammingError(str(m))
+django.db.utils.ProgrammingError: not all arguments converted during bytes formatting
+2025-09-19 11:25:34 ERROR An error occurred saving user: not all arguments converted during bytes formatting
+Traceback (most recent call last):
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/MySQLdb/cursors.py", line 200, in _mogrify
+    query = query % args
+            ~~~~~~^~~~~~
+TypeError: not all arguments converted during bytes formatting
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/django/db/backends/mysql/base.py", line 76, in execute
+    return self.cursor.execute(query, args)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/MySQLdb/cursors.py", line 176, in execute
+    mogrified_query = self._mogrify(query, args)
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/MySQLdb/cursors.py", line 202, in _mogrify
+    raise ProgrammingError(str(m))
+MySQLdb.ProgrammingError: not all arguments converted during bytes formatting
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/kutlomangwa/Documents/sefremit/chatbot/utils.py", line 1753, in save_wallet_user
+    cursor.execute(query, (save_user_dict[USERNAME], save_user_dict[FIRSTNAME], save_user_dict[LASTNAME], save_user_dict[PHONE_NUMBER], save_user_dict[EMAIL], save_user_dict[DATE_OF_BIRTH], save_user_dict[PIN]))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sql, params, many=False, executor=self._execute
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/django/db/backends/mysql/base.py", line 76, in execute
+    return self.cursor.execute(query, args)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/MySQLdb/cursors.py", line 176, in execute
+    mogrified_query = self._mogrify(query, args)
+  File "/Users/kutlomangwa/Documents/sefremit/side_env/lib/python3.13/site-packages/MySQLdb/cursors.py", line 202, in _mogrify
+    raise ProgrammingError(str(m))
+django.db.utils.ProgrammingError: not all arguments converted during bytes formatting
+2025-09-19 11:27:56 INFO User saved successfully. username: Joe, phone: 26774342078
+2025-09-19 11:27:57 INFO Message sent successfully. message: Account Successfully Created!, phone_number: 26774342078
+2025-09-19 11:27:57 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBIyQUJENEM4Njk1OTg4NjQzODcA'}]}
+2025-09-19 12:06:00 INFO send_welcome_message interactive message successfully sent. phone_number: 26774342078
+2025-09-19 12:06:00 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBI4OTc3NzMwMUM4RjUxRDkwQTUA'}]}

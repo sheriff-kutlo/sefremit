@@ -79,7 +79,7 @@ CONFIRM_REQUEST = "confirm_request"
 
 
 
-########### PAY ##########
+########### PAY ###########
 
 REGISTER_TITLE = "Let’s Get You Started"
 REGISTER_BODY = "Hi there 👋 It seems you’re new here. Please register to enjoy quick, secure, and easy transactions with Wallet."
@@ -100,6 +100,21 @@ DATE_OF_BIRTH = "date of birth"
 PIN = "pin"
 
 
+MENU = "menu"
+ADD_FUNDS = "add funds"
+RECEIVE = "receive"
+PAY = "pay"
+SPLIT_BILL = "split bill"
+REQUEST = "request"
+
+
+CARD_DETAILS_FLOW_ID = "1123592552551610"
+CARD_DETAILS_FLOW_TOKEN = "card_details_flow_token"
+CARD_DETAILS_FLOW_TITLE = "Add Funds to Wallet"
+CARD_DETAILS_FLOW_BODY = "To top up, please enter the amount and provide your card details."
+CARD_DETAILS_FLOW_CTA = "Enter Card Details"
 
 
 
+TRANSACTION_TYPE = "transaction_type"
+AMOUNT = "amount"

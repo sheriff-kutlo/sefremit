@@ -1658,6 +1658,8 @@ def send_property_type_message(phone_number):
 
 ############### PAY ###############
 
+
+######### DB #########
 def get_user_id(phone_number):
     query = "SELECT user_id FROM users WHERE phone_number = %s;"
 
@@ -1683,6 +1685,96 @@ def get_user_id(phone_number):
         # Handle or raise the exception as needed
         return None
 
+def save_wallet_user(save_user_dict):
+    try:
+        query = """
+            INSERT INTO users (username, first_name, last_name, phone_number, email, date_of_birth, pin, created_at) 
+            VALUES (%s, %s, %s, %s, %s, %s, %s, CURRENT_TIMESTAMP());
+        """
+
+        with connection.cursor() as cursor:
+            # 1️⃣ Save user
+            cursor.execute(query, (
+                save_user_dict[USERNAME],
+                save_user_dict[FIRSTNAME],
+                save_user_dict[LASTNAME],
+                save_user_dict[PHONE_NUMBER],
+                save_user_dict[EMAIL],
+                save_user_dict[DATE_OF_BIRTH],
+                save_user_dict[PIN]
+            ))
+            # Get the inserted user_id
+            user_id = cursor.lastrowid
+
+            # 2️⃣ Initialize balance for new user
+            cursor.execute(
+                "INSERT INTO balances (balance, user_id) VALUES (%s, %s);",
+                (0.0, user_id)
+            )
+
+            connection.commit()
+
+            # 3️⃣ Logging and sending messages
+            logger.info(f"User saved successfully. username: {save_user_dict[USERNAME]}, phone: {save_user_dict[PHONE_NUMBER]}")
+            send_message("Account Successfully Created!", save_user_dict[PHONE_NUMBER])
+            menu_message(save_user_dict[PHONE_NUMBER])
+
+    except Exception as e:
+        connection.rollback()
+        logger.error(f'An error occurred saving user or initializing balance: {e}', exc_info=True)
+
+def save_transaction(save_transaction_dict):
+    try:
+        user_id = save_transaction_dict[USER_ID]
+        amount = float(save_transaction_dict[AMOUNT])  # make sure it's numeric
+        transaction_type = save_transaction_dict[TRANSACTION_TYPE]
+        phone_number = save_transaction_dict[PHONE_NUMBER]
+
+
+        with connection.cursor() as cursor:
+            # 1️⃣ Insert transaction
+            insert_query = """
+                INSERT INTO transactions (transaction_type, amount, created_at, user_id)
+                VALUES (%s, %s, CURRENT_TIMESTAMP(), %s);
+            """
+            cursor.execute(insert_query, (transaction_type, amount, user_id))
+
+            # 2️⃣ Get current balance
+            select_balance_query = "SELECT balance FROM balances WHERE user_id = %s FOR UPDATE;"
+            cursor.execute(select_balance_query, (user_id,))
+            result = cursor.fetchone()
+
+            if result:
+                current_balance = float(result[0])
+            else:
+                # If user has no balance yet, assume 0 and create record
+                current_balance = 0.0
+                cursor.execute(
+                    "INSERT INTO balances (balance, user_id) VALUES (%s, %s);",
+                    (current_balance, user_id)
+                )
+
+            # 3️⃣ Update balance based on transaction type
+            if transaction_type.lower() in [ADD_FUNDS, RECEIVE]:
+                new_balance = current_balance + amount
+            elif transaction_type.lower() in [PAY, SPLIT_BILL, REQUEST]:
+                new_balance = current_balance - amount
+            else:
+                new_balance = current_balance  # default: no change
+
+            # 4️⃣ Save updated balance
+            update_balance_query = "UPDATE balances SET balance = %s WHERE user_id = %s;"
+            cursor.execute(update_balance_query, (new_balance, user_id))
+
+            connection.commit()
+            logger.info(f"Transaction saved and balance updated successfully for user {user_id}.")
+            send_message(f"Funds added successfully! 🎉\n\nYour new wallet balance is: P{new_balance}.", phone_number)
+
+    except Exception as e:
+        connection.rollback()
+        logger.error(f'An error occurred saving transaction or updating balance: {e}', exc_info=True)
+
+######## FLOW ########
 def send_flow_message(phone_number, header, body, flow_id, flow_token, cta):
 
     json_data = {
@@ -1742,23 +1834,8 @@ def send_flow_message(phone_number, header, body, flow_id, flow_token, cta):
         logger.error(f"Error sending flow message: {e}", exc_info=True)
         return None
 
-def save_wallet_user(save_user_dict):
-    try:
-        query = """
-            INSERT INTO users (username, first_name, last_name, phone_number, email, date_of_birth, pin, created_at) 
-            VALUES (%s, %s, %s, %s, %s, %s, CURRENT_TIMESTAMP());
-        """
-        
-        with connection.cursor() as cursor:
-            cursor.execute(query, (save_user_dict[USERNAME], save_user_dict[FIRSTNAME], save_user_dict[LASTNAME], save_user_dict[PHONE_NUMBER], save_user_dict[EMAIL], save_user_dict[DATE_OF_BIRTH], save_user_dict[PIN]))
-            connection.commit()
-            logger.info(f"User saved successfully. username: {save_user_dict[USERNAME]}, phone: {save_user_dict[PHONE_NUMBER]}")
-            send_message("Account Successfully Created!", save_user_dict[PHONE_NUMBER])
 
-    except Exception as e:
-        connection.rollback()
-        logger.error(f'An error occurred saving user: {e}', exc_info=True) 
-
+######## METHODS #########
 def handle_reply(reply, message_id, phone_number, username, display_phone_number):
 
     if display_phone_number == TEST_PHONE_NUMBER:
@@ -1768,6 +1845,79 @@ def handle_reply(reply, message_id, phone_number, username, display_phone_number
 
         if not user_id:
             send_flow_message(phone_number, REGISTER_TITLE, REGISTER_BODY, REGISTER_FLOW_ID, REGISTER_FLOW_TOKEN, REGISTER_CTA)
+
+        if reply == MENU:
+            menu_message(phone_number)
+
+        elif reply == ADD_FUNDS:
+            send_flow_message(phone_number, CARD_DETAILS_FLOW_TITLE, CARD_DETAILS_FLOW_BODY, CARD_DETAILS_FLOW_ID, CARD_DETAILS_FLOW_TOKEN, CARD_DETAILS_FLOW_CTA)
+
+        else:
+            menu_message(phone_number)
         
-      
+def menu_message(phone_number):
+    headers = {
+        "Content-Type": APPLICATION_JSON,
+        "Authorization": AUTHORIZATION
+    }
+
+    json_data = {
+        "messaging_product": "whatsapp",
+        "recipient_type": "individual",
+        "to": phone_number,
+        "type": "interactive",
+        "interactive": {
+            "type": "list",
+            "header": {
+                "type": "text",
+                "text": "👋 Welcome to Your Wallet"
+            },
+            "body": {
+                "text": "Manage your money and explore features. Tap below to see the menu."
+            },
+            "footer": {
+                "text": "You can type *menu* at any time to return to this screen."
+            },
+            "action": {
+                "button": "Open Menu",
+                "sections": [
+                    {
+                        "title": "Please choose an option",
+                        "rows": [
+                            {"id": "1", "title": "Pay"},
+                            {"id": "2", "title": "Receive"},
+                            {"id": "3", "title": "Request"},
+                            {"id": "4", "title": "Split Bill"},
+                            {"id": "5", "title": "Add Funds"},
+                            {"id": "6", "title": "Transactions"},
+
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+
+    try:
+        response = requests.post(MESSAGES_ENDPOINT, json=json_data, headers=headers)
+        
+        if response.status_code == 200:
+            logger.info(f"send_welcome_message interactive message successfully sent. phone_number: {phone_number}")
+            response_data = response.json()
+            logger.debug(f"Response JSON: {response_data}")
+            return response_data.get("messages", [{}])[0].get("id")
+        else:
+            logger.error(f"Failed to send send_welcome_message message. Status Code: {response.status_code}. Response Content: {response.content}")
+            return None
+            
+    except requests.exceptions.RequestException as e:
+        logger.error(f"Error sending message: {e}", exc_info=True)
+        return None
+
+
+
+
+
+
+
         
