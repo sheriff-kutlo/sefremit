@@ -106,6 +106,8 @@ RECEIVE = "receive"
 PAY = "pay"
 SPLIT_BILL = "split bill"
 REQUEST = "request"
+PAY_MERCHANT = "pay merchant"
+PAY_FRIEND = "pay friend"
 
 
 CARD_DETAILS_FLOW_ID = "1123592552551610"
@@ -116,5 +118,24 @@ CARD_DETAILS_FLOW_CTA = "Enter Card Details"
 
 
 
+PAYMENT_METHOD = "payment_method"
+TRANSACTION = "transaction"
 TRANSACTION_TYPE = "transaction_type"
 AMOUNT = "amount"
+
+
+PAY_MERCHANT_FLOW_ID = "653416777808159"
+PAY_MERCHANT_FLOW_TOKEN = "pay_merchant_flow_token"
+PAY_MERCHANT_FLOW_TITLE = "Pay Merchant"
+PAY_MERCHANT_FLOW_BODY = "Enter the merchant details to proceed with your payment."
+PAY_MERCHANT_FLOW_CTA = "Enter Merchant Details"
+
+PAY_FRIEND_FLOW_ID = "1298577348393026"
+PAY_FRIEND_FLOW_TOKEN = "pay_friend_flow_token"
+PAY_FRIEND_FLOW_TITLE = "Pay Friend"
+PAY_FRIEND_FLOW_BODY = "Enter your friends details to proceed with your payment."
+PAY_FRIEND_FLOW_CTA = "Enter Friends Details"
+
+
+
+

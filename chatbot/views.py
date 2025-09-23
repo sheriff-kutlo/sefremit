@@ -150,7 +150,34 @@ def verification(request):
                             cvv = response_data.get('screen_0_CVV_3', '')
                             amount = response_data.get('screen_0_Amount_4', '')
 
-                            save_transaction({USER_ID: get_user_id(message_from), AMOUNT: amount, TRANSACTION_TYPE: ADD_FUNDS, PHONE_NUMBER: message_from})
+                            save_transaction({USER_ID: get_user_id(message_from), AMOUNT: amount, TRANSACTION_TYPE: ADD_FUNDS, TRANSACTION: ADD_FUNDS, PHONE_NUMBER: message_from})
+
+                        elif flow_token == PAY_MERCHANT_FLOW_TOKEN:
+                            # Extract values
+                            merchant_id = response_data.get('screen_0_Merchant_ID_0', '')
+                            amount = response_data.get('screen_0_Amount_1', '')
+                            pin_code = response_data.get('screen_0_PIN_code_2', '')
+
+                            user_pin = get_user_pin(message_from)
+
+                            if bcrypt.checkpw(pin_code, user_pin):
+                                save_transaction({USER_ID: get_user_id(message_from), AMOUNT: amount, TRANSACTION_TYPE: PAY_MERCHANT, TRANSACTION: merchant_id, PHONE_NUMBER: message_from})
+                            else:
+                                send_flow_message(message_from, "Incorrect PIN", "The PIN you entered is invalid. Please check and try again.", PAY_MERCHANT_FLOW_ID, PAY_MERCHANT_FLOW_TOKEN, "Try Again")
+
+                        elif flow_token == PAY_FRIEND_FLOW_TOKEN:
+                            # Extract values
+                            friend_id = response_data.get('screen_0_Phone_Number_0', '')
+                            amount = response_data.get('screen_0_Amount_1', '')
+                            pin_code = response_data.get('screen_0_PIN_code_2', '')
+
+                            user_pin = get_user_pin(message_from)
+
+                            if bcrypt.checkpw(pin_code, user_pin):
+                                save_transaction({USER_ID: get_user_id(message_from), AMOUNT: amount, TRANSACTION_TYPE: PAY_FRIEND, TRANSACTION: friend_id, PHONE_NUMBER: message_from})
+                            else:
+                                send_flow_message(message_from, "Incorrect PIN", "The PIN you entered is invalid. Please check and try again.", PAY_FRIEND_FLOW_ID, PAY_FRIEND_FLOW_TOKEN, "Try Again")
+
 
             
                 if 'location' in json_data['entry'][0]['changes'][0]['value']['messages'][0]:
@@ -364,6 +391,5 @@ def verification(request):
 
 def hello(request):
 
-    menu_message(KUTLO_PHONE_NUMBER)
     return HttpResponse(f"Server working as expected!")
 

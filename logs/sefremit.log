@@ -1725,3 +1725,85 @@ django.db.utils.ProgrammingError: not all arguments converted during bytes forma
 2025-09-19 11:27:57 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBIyQUJENEM4Njk1OTg4NjQzODcA'}]}
 2025-09-19 12:06:00 INFO send_welcome_message interactive message successfully sent. phone_number: 26774342078
 2025-09-19 12:06:00 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBI4OTc3NzMwMUM4RjUxRDkwQTUA'}]}
+2025-09-22 11:37:42 INFO pay_options_message interactive message successfully sent. phone_number: 26774342078
+2025-09-22 11:37:42 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBIzRDJBODVFRUI0RjYwM0Y5NUQA'}]}
+2025-09-22 12:36:44 INFO send_welcome_message interactive message successfully sent. phone_number: 26774342078
+2025-09-22 12:36:44 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBI5REY0OTE3RkJGREFGQjhCNTkA'}]}
+2025-09-22 12:39:16 ERROR Failed to send send_welcome_message message. Status Code: 400. Response Content: b'{"error":{"message":"(#100) Unexpected key \\"\\" on param \\"interactive[\'action\'][\'sections\'][1][\'rows\'][0]\\".","type":"OAuthException","code":100,"fbtrace_id":"AQrv6zMNtXmRtRqT9pMliCQ"}}'
+2025-09-22 12:39:53 ERROR Failed to send send_welcome_message message. Status Code: 400. Response Content: b'{"error":{"message":"(#100) Unexpected key \\" \\" on param \\"interactive[\'action\'][\'sections\'][1][\'rows\'][0]\\".","type":"OAuthException","code":100,"fbtrace_id":"AWjlBeToZbS1Gf-Hsbfie0Y"}}'
+2025-09-22 12:40:52 INFO send_welcome_message interactive message successfully sent. phone_number: 26774342078
+2025-09-22 12:40:52 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBI3MEI1RkUyQUJFRDdCMDc2RUIA'}]}
+2025-09-22 12:42:24 ERROR Failed to send send_welcome_message message. Status Code: 400. Response Content: b'{"error":{"message":"(#131009) Parameter value is not valid","type":"OAuthException","code":131009,"error_data":{"messaging_product":"whatsapp","details":"Duplicated row id"},"fbtrace_id":"AefhSjDM-xwNB_Story4vcd"}}'
+2025-09-22 12:43:07 INFO send_welcome_message interactive message successfully sent. phone_number: 26774342078
+2025-09-22 12:43:07 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBIyMjFCRTYyQjExMzg5RUFDMjgA'}]}
+2025-09-22 12:55:37 INFO flow sent successfully: flow_id: 1298577348393026, phone_number: 26774342078
+2025-09-22 12:55:37 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBJBOTQ0RjYwNjdDQzBEMDQyQzEA'}]}
+2025-09-22 12:55:38 INFO flow sent successfully: flow_id: 653416777808159, phone_number: 26774342078
+2025-09-22 12:55:38 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBI3RjQ1MTZGRkJCMTZCRDk5OTQA'}]}
+2025-09-22 12:56:56 INFO flow sent successfully: flow_id: 1298577348393026, phone_number: 26774342078
+2025-09-22 12:56:56 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBIwMTgxQzQxQzM5N0RCRkEyQjQA'}]}
+2025-09-22 12:56:56 INFO flow sent successfully: flow_id: 653416777808159, phone_number: 26774342078
+2025-09-22 12:56:56 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBI1NjQ5MDY1QUI3RDA2MjUyMUEA'}]}
+2025-09-23 11:38:58 INFO Message sent successfully. message: ✅ Payment Successful!
+
+You have paid Merchant ID: 76448866
+
+Amount: P5.00
+
+New Balance: P155.00, phone_number: 26774342078
+2025-09-23 11:38:58 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBIzRkVDQzY5Q0VGNjU4OEIzMEMA'}]}
+2025-09-23 11:38:58 INFO Transaction saved and balance updated successfully for user 1.
+2025-09-23 11:39:00 INFO flow sent successfully: flow_id: 653416777808159, phone_number: 26774342078
+2025-09-23 11:39:00 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBIyMjY0QjlCMUI4MkUxNkYzNEUA'}]}
+2025-09-23 11:39:11 INFO Message sent successfully. message: ✅ Payment Successful!
+
+You have paid Merchant ID: 76448866
+
+Amount: P5.00
+
+New Balance: P150.00, phone_number: 26774342078
+2025-09-23 11:39:11 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBIxQTYyNTNBQzBBMjFBRDBCNTgA'}]}
+2025-09-23 11:39:11 INFO Transaction saved and balance updated successfully for user 1.
+2025-09-23 11:39:12 INFO flow sent successfully: flow_id: 653416777808159, phone_number: 26774342078
+2025-09-23 11:39:12 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBI3MUY5ODI4NkRBRDJDMkJBRjQA'}]}
+2025-09-23 11:40:07 INFO Message sent successfully. message: ✅ Payment Successful!
+
+You have paid Merchant ID: 76448866
+
+Amount: P5.00
+
+New Balance: P145.00, phone_number: 26774342078
+2025-09-23 11:40:07 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBI5MjE5N0ZFNTAyREYzNEE1RUUA'}]}
+2025-09-23 11:40:07 INFO Transaction saved and balance updated successfully for user 1.
+2025-09-23 11:40:08 INFO flow sent successfully: flow_id: 653416777808159, phone_number: 26774342078
+2025-09-23 11:40:08 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBIyMjY0MDZDQzIzMDQyODJDQjAA'}]}
+2025-09-23 11:42:44 INFO Message sent successfully. message: ✅ Payment Successful!
+
+You have paid Merchant ID: *76448866*
+
+Amount: P5.00
+
+New Balance: *P140.00*, phone_number: 26774342078
+2025-09-23 11:42:44 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBJFODJGOUI2ODAzMDE3RDk1ODQA'}]}
+2025-09-23 11:42:44 INFO Transaction saved and balance updated successfully for user 1.
+2025-09-23 11:42:45 INFO flow sent successfully: flow_id: 653416777808159, phone_number: 26774342078
+2025-09-23 11:42:45 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBI2NTBGRkJBOTNFMTY4MjNCNkMA'}]}
+2025-09-23 11:42:46 INFO Message sent successfully. message: ✅ Payment Successful!
+
+You have paid Friend: *84648477*
+
+Amount: P2.00
+
+New Balance: *P138.00*, phone_number: 26774342078
+2025-09-23 11:42:46 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBI5MjdDMzdFOEUzOUNFQTVDQUUA'}]}
+2025-09-23 11:42:46 INFO Transaction saved and balance updated successfully for user 1.
+2025-09-23 11:42:47 INFO flow sent successfully: flow_id: 1298577348393026, phone_number: 26774342078
+2025-09-23 11:42:47 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBJFNTc0RDc5M0M0NEM5NzM2MUMA'}]}
+2025-09-23 11:44:58 INFO Message sent successfully. message: ⚠️ Insufficient funds! Your current balance is P138.00., phone_number: 26774342078
+2025-09-23 11:44:58 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBJFMTMzMzA3QkU4QkEzM0I3ODYA'}]}
+2025-09-23 11:44:59 INFO flow sent successfully: flow_id: 653416777808159, phone_number: 26774342078
+2025-09-23 11:44:59 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBJCRjA3RUFCN0Q5QTlFMkRBODQA'}]}
+2025-09-23 11:45:40 INFO Message sent successfully. message: ⚠️ Insufficient funds! Your current balance is P138.00., phone_number: 26774342078
+2025-09-23 11:45:40 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBI5RjE2MDZCNjAyNEFFNTRBQTYA'}]}
+2025-09-23 11:45:41 INFO flow sent successfully: flow_id: 1298577348393026, phone_number: 26774342078
+2025-09-23 11:45:41 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBJEMkZBRENGRjgzNkQyMzdGQjkA'}]}

@@ -1723,23 +1723,74 @@ def save_wallet_user(save_user_dict):
         connection.rollback()
         logger.error(f'An error occurred saving user or initializing balance: {e}', exc_info=True)
 
+# def save_transaction(save_transaction_dict):
+#     try:
+#         user_id = save_transaction_dict[USER_ID]
+#         amount = float(save_transaction_dict[AMOUNT])  # make sure it's numeric
+#         transaction_type = save_transaction_dict[TRANSACTION_TYPE]
+#         phone_number = save_transaction_dict[PHONE_NUMBER]
+#         transaction = save_transaction_dict[TRANSACTION]
+
+
+#         with connection.cursor() as cursor:
+#             # 1️⃣ Insert transaction
+#             insert_query = """
+#                 INSERT INTO transactions (transaction_type, amount, transaction, created_at, user_id)
+#                 VALUES (%s, %s, %s, CURRENT_TIMESTAMP(), %s);
+#             """
+#             cursor.execute(insert_query, (transaction_type, amount, transaction, user_id))
+
+#             # 2️⃣ Get current balance
+#             select_balance_query = "SELECT balance FROM balances WHERE user_id = %s FOR UPDATE;"
+#             cursor.execute(select_balance_query, (user_id,))
+#             result = cursor.fetchone()
+
+#             if result:
+#                 current_balance = float(result[0])
+#             else:
+#                 # If user has no balance yet, assume 0 and create record
+#                 current_balance = 0.0
+#                 cursor.execute(
+#                     "INSERT INTO balances (balance, user_id) VALUES (%s, %s);",
+#                     (current_balance, user_id)
+#                 )
+
+#             # 3️⃣ Update balance based on transaction type
+#             if transaction_type.lower() in [ADD_FUNDS, RECEIVE]:
+#                 new_balance = current_balance + amount
+#             elif transaction_type.lower() in [PAY, SPLIT_BILL, REQUEST]:
+#                 new_balance = current_balance - amount
+#             else:
+#                 new_balance = current_balance  # default: no change
+
+#             # 4️⃣ Save updated balance
+#             update_balance_query = "UPDATE balances SET balance = %s WHERE user_id = %s;"
+#             cursor.execute(update_balance_query, (new_balance, user_id))
+
+#             connection.commit()
+
+#             if transaction_type.lower() == ADD_FUNDS:
+#                 send_message(f"Funds added successfully! 🎉\n\nYour new wallet balance is: P{new_balance:.2f}", phone_number)
+#             elif transaction_type.lower() == PAY_MERCHANT:
+#                 send_message(f"✅ Payment Successful!\n\nYou have paid Merchant ID: {transaction}\n\nAmount: P{amount:.2f}\n\nNew Balance: P{new_balance:.2f}", phone_number)
+                
+#             logger.info(f"Transaction saved and balance updated successfully for user {user_id}.")
+
+#     except Exception as e:
+#         connection.rollback()
+#         logger.error(f'An error occurred saving transaction or updating balance: {e}', exc_info=True)
+
+
 def save_transaction(save_transaction_dict):
     try:
         user_id = save_transaction_dict[USER_ID]
         amount = float(save_transaction_dict[AMOUNT])  # make sure it's numeric
         transaction_type = save_transaction_dict[TRANSACTION_TYPE]
         phone_number = save_transaction_dict[PHONE_NUMBER]
-
+        transaction = save_transaction_dict[TRANSACTION]
 
         with connection.cursor() as cursor:
-            # 1️⃣ Insert transaction
-            insert_query = """
-                INSERT INTO transactions (transaction_type, amount, created_at, user_id)
-                VALUES (%s, %s, CURRENT_TIMESTAMP(), %s);
-            """
-            cursor.execute(insert_query, (transaction_type, amount, user_id))
-
-            # 2️⃣ Get current balance
+            # 1️⃣ Get current balance
             select_balance_query = "SELECT balance FROM balances WHERE user_id = %s FOR UPDATE;"
             cursor.execute(select_balance_query, (user_id,))
             result = cursor.fetchone()
@@ -1754,25 +1805,85 @@ def save_transaction(save_transaction_dict):
                     (current_balance, user_id)
                 )
 
-            # 3️⃣ Update balance based on transaction type
+            # 2️⃣ Check if payment would make balance negative
+            if transaction_type.lower() in [PAY_FRIEND, PAY_MERCHANT]:
+                if amount > current_balance:
+                    send_message(
+                        f"⚠️ Insufficient funds! Your current balance is P{current_balance:.2f}.",
+                        phone_number
+                    )
+                    return  # Stop the transaction
+
+            # 3️⃣ Insert transaction
+            insert_query = """
+                INSERT INTO transactions (transaction_type, amount, transaction, created_at, user_id)
+                VALUES (%s, %s, %s, CURRENT_TIMESTAMP(), %s);
+            """
+            cursor.execute(insert_query, (transaction_type, amount, transaction, user_id))
+
+            # 4️⃣ Update balance
             if transaction_type.lower() in [ADD_FUNDS, RECEIVE]:
                 new_balance = current_balance + amount
-            elif transaction_type.lower() in [PAY, SPLIT_BILL, REQUEST]:
+            else:  # deduct for PAY, SPLIT_BILL, REQUEST, PAY_MERCHANT
                 new_balance = current_balance - amount
-            else:
-                new_balance = current_balance  # default: no change
 
-            # 4️⃣ Save updated balance
             update_balance_query = "UPDATE balances SET balance = %s WHERE user_id = %s;"
             cursor.execute(update_balance_query, (new_balance, user_id))
 
             connection.commit()
+
+            # 5️⃣ Send confirmation messages
+            if transaction_type.lower() == ADD_FUNDS:
+                send_message(
+                    f"Funds added successfully! 🎉\n\nYour new wallet balance is: P{new_balance:.2f}",
+                    phone_number
+                )
+            elif transaction_type.lower() == PAY_MERCHANT:
+                send_message(
+                    f"✅ Payment Successful!\n\nYou have paid Merchant ID: *{transaction}*\n\nAmount: P{amount:.2f}\n\nNew Balance: *P{new_balance:.2f}*",
+                    phone_number
+                )
+            elif transaction_type.lower() == PAY_FRIEND:
+                send_message(
+                    f"✅ Payment Successful!\n\nYou have paid Friend: *{transaction}*\n\nAmount: P{amount:.2f}\n\nNew Balance: *P{new_balance:.2f}*",
+                    phone_number
+                )
+
             logger.info(f"Transaction saved and balance updated successfully for user {user_id}.")
-            send_message(f"Funds added successfully! 🎉\n\nYour new wallet balance is: P{new_balance}.", phone_number)
 
     except Exception as e:
         connection.rollback()
         logger.error(f'An error occurred saving transaction or updating balance: {e}', exc_info=True)
+
+
+
+def get_user_pin(phone_number):
+    query = "SELECT pin FROM users WHERE phone = %s;"
+
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute(query, (phone_number,))
+            result = cursor.fetchone()
+
+            if result:
+                return result[0]
+            else:
+                # Handle case where no customer is found
+                # Example: You might want to register the user here
+                # register_user(phone_number)
+                return None
+
+    except OperationalError as e:
+        logger.error(f'Operational error occurred in get_user_pin: {e}', exc_info=True)
+        # Handle or raise the exception as needed
+        return None
+    except Exception as e:
+        logger.error(f'An error occurred in get_user_pin: {e}', exc_info=True)
+        # Handle or raise the exception as needed
+        return None
+
+
+
 
 ######## FLOW ########
 def send_flow_message(phone_number, header, body, flow_id, flow_token, cta):
@@ -1852,6 +1963,15 @@ def handle_reply(reply, message_id, phone_number, username, display_phone_number
         elif reply == ADD_FUNDS:
             send_flow_message(phone_number, CARD_DETAILS_FLOW_TITLE, CARD_DETAILS_FLOW_BODY, CARD_DETAILS_FLOW_ID, CARD_DETAILS_FLOW_TOKEN, CARD_DETAILS_FLOW_CTA)
 
+        elif reply == PAY:
+            pay_options_message(phone_number)
+
+        elif reply == PAY_MERCHANT:
+            send_flow_message(phone_number, PAY_MERCHANT_FLOW_TITLE, PAY_MERCHANT_FLOW_BODY, PAY_MERCHANT_FLOW_ID, PAY_MERCHANT_FLOW_TOKEN, PAY_MERCHANT_FLOW_CTA)
+
+        elif reply == PAY_FRIEND:
+            send_flow_message(phone_number, PAY_FRIEND_FLOW_TITLE, PAY_FRIEND_FLOW_BODY, PAY_FRIEND_FLOW_ID, PAY_FRIEND_FLOW_TOKEN, PAY_FRIEND_FLOW_CTA)
+
         else:
             menu_message(phone_number)
         
@@ -1884,15 +2004,16 @@ def menu_message(phone_number):
                     {
                         "title": "Please choose an option",
                         "rows": [
-                            {"id": "1", "title": "Pay"},
-                            {"id": "2", "title": "Receive"},
-                            {"id": "3", "title": "Request"},
-                            {"id": "4", "title": "Split Bill"},
-                            {"id": "5", "title": "Add Funds"},
-                            {"id": "6", "title": "Transactions"},
+                            {"id": "1", "title": "My Balanace"},
+                            {"id": "2", "title": "Pay"},
+                            {"id": "3", "title": "Receive"},
+                            {"id": "4", "title": "Request"},
+                            {"id": "5", "title": "Split Bill"},
+                            {"id": "6", "title": "Add Funds"},
+                            {"id": "7", "title": "Transactions"},
 
                         ]
-                    }
+                    },
                 ]
             }
         }
@@ -1908,6 +2029,58 @@ def menu_message(phone_number):
             return response_data.get("messages", [{}])[0].get("id")
         else:
             logger.error(f"Failed to send send_welcome_message message. Status Code: {response.status_code}. Response Content: {response.content}")
+            return None
+            
+    except requests.exceptions.RequestException as e:
+        logger.error(f"Error sending message: {e}", exc_info=True)
+        return None
+
+def pay_options_message(phone_number):
+    headers = {
+        "Content-Type": APPLICATION_JSON,
+        "Authorization": AUTHORIZATION
+    }
+
+    json_data = {
+        "messaging_product": "whatsapp",
+        "recipient_type": "individual",
+        "to": phone_number,
+        "type": "interactive",
+        "interactive": {
+            "type": "list",
+            "header": {
+                "type": "text",
+                "text": "Payment Options"
+            },
+            "body": {
+                "text": "Select who you’d like to pay"
+            },
+            "action": {
+                "button": "Options",
+                "sections": [
+                    {
+                        "title": "Please choose an option",
+                        "rows": [
+                            {"id": "1", "title": "Pay Merchant"},
+                            {"id": "2", "title": "Pay Friend"},
+
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+
+    try:
+        response = requests.post(MESSAGES_ENDPOINT, json=json_data, headers=headers)
+        
+        if response.status_code == 200:
+            logger.info(f"pay_options_message interactive message successfully sent. phone_number: {phone_number}")
+            response_data = response.json()
+            logger.debug(f"Response JSON: {response_data}")
+            return response_data.get("messages", [{}])[0].get("id")
+        else:
+            logger.error(f"Failed to send pay_options_message message. Status Code: {response.status_code}. Response Content: {response.content}")
             return None
             
     except requests.exceptions.RequestException as e:
