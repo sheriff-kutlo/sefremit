@@ -108,6 +108,8 @@ SPLIT_BILL = "split bill"
 REQUEST = "request"
 PAY_MERCHANT = "pay merchant"
 PAY_FRIEND = "pay friend"
+MY_BALANCE = "my balance"
+
 
 
 CARD_DETAILS_FLOW_ID = "1123592552551610"

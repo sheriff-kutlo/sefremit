@@ -160,7 +160,15 @@ def verification(request):
 
                             user_pin = get_user_pin(message_from)
 
-                            if bcrypt.checkpw(pin_code, user_pin):
+                            # Convert both to bytes
+                            pin_bytes = pin_code.encode('utf-8')
+
+                            # user_pin might already be bytes (from MySQL varbinary)
+                            # If it's a string, decode it first
+                            if isinstance(user_pin, str):
+                                user_pin = user_pin.encode('utf-8')
+
+                            if bcrypt.checkpw(pin_bytes, user_pin):
                                 save_transaction({USER_ID: get_user_id(message_from), AMOUNT: amount, TRANSACTION_TYPE: PAY_MERCHANT, TRANSACTION: merchant_id, PHONE_NUMBER: message_from})
                             else:
                                 send_flow_message(message_from, "Incorrect PIN", "The PIN you entered is invalid. Please check and try again.", PAY_MERCHANT_FLOW_ID, PAY_MERCHANT_FLOW_TOKEN, "Try Again")
@@ -173,8 +181,23 @@ def verification(request):
 
                             user_pin = get_user_pin(message_from)
 
-                            if bcrypt.checkpw(pin_code, user_pin):
-                                save_transaction({USER_ID: get_user_id(message_from), AMOUNT: amount, TRANSACTION_TYPE: PAY_FRIEND, TRANSACTION: friend_id, PHONE_NUMBER: message_from})
+                            # Convert both to bytes
+                            pin_bytes = pin_code.encode('utf-8')
+
+                            # user_pin might already be bytes (from MySQL varbinary)
+                            # If it's a string, decode it first
+                            if isinstance(user_pin, str):
+                                user_pin = user_pin.encode('utf-8')
+
+                            if bcrypt.checkpw(pin_bytes, user_pin):
+                                save_transaction({
+                                    USER_ID: get_user_id(message_from),
+                                    AMOUNT: amount,
+                                    TRANSACTION_TYPE: PAY_FRIEND,
+                                    TRANSACTION: friend_id,
+                                    PHONE_NUMBER: message_from
+                                })
+
                             else:
                                 send_flow_message(message_from, "Incorrect PIN", "The PIN you entered is invalid. Please check and try again.", PAY_FRIEND_FLOW_ID, PAY_FRIEND_FLOW_TOKEN, "Try Again")
 

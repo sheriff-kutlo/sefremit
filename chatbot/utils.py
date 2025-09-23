@@ -1855,8 +1855,6 @@ def save_transaction(save_transaction_dict):
         connection.rollback()
         logger.error(f'An error occurred saving transaction or updating balance: {e}', exc_info=True)
 
-
-
 def get_user_pin(phone_number):
     query = "SELECT pin FROM users WHERE phone_number = %s;"
 
@@ -1959,6 +1957,13 @@ def handle_reply(reply, message_id, phone_number, username, display_phone_number
 
         if reply == MENU:
             menu_message(phone_number)
+
+        elif reply == MY_BALANCE:
+            balance = get_user_balance(get_user_id(phone_number))
+            if balance is not None:
+                send_message(f"Your current balance is: *P{balance:.2f}*", phone_number)
+            else:
+                send_message("No balance record found for your account.", phone_number)
 
         elif reply == ADD_FUNDS:
             send_flow_message(phone_number, CARD_DETAILS_FLOW_TITLE, CARD_DETAILS_FLOW_BODY, CARD_DETAILS_FLOW_ID, CARD_DETAILS_FLOW_TOKEN, CARD_DETAILS_FLOW_CTA)
@@ -2087,6 +2092,24 @@ def pay_options_message(phone_number):
         logger.error(f"Error sending message: {e}", exc_info=True)
         return None
 
+def get_user_balance(user_id):
+    """
+    Fetch the current wallet balance for a given user.
+    Returns a float balance or None if not found.
+    """
+    query = "SELECT balance FROM balances WHERE user_id = %s;"
+    
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute(query, (user_id,))
+            result = cursor.fetchone()
+            if result:
+                return float(result[0])  # Convert balance from varchar to float
+            else:
+                return None  # User has no balance record yet
+    except Exception as e:
+        logger.error(f"An error occurred fetching balance for user {user_id}: {e}", exc_info=True)
+        return None
 
 
 
