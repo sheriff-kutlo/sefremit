@@ -1858,7 +1858,7 @@ def save_transaction(save_transaction_dict):
 
 
 def get_user_pin(phone_number):
-    query = "SELECT pin FROM users WHERE phone = %s;"
+    query = "SELECT pin FROM users WHERE phone_number = %s;"
 
     try:
         with connection.cursor() as cursor:
