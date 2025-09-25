@@ -124,6 +124,7 @@ PAYMENT_METHOD = "payment_method"
 TRANSACTION = "transaction"
 TRANSACTION_TYPE = "transaction_type"
 AMOUNT = "amount"
+TRANSACTIONS = "transactions"
 
 
 PAY_MERCHANT_FLOW_ID = "653416777808159"

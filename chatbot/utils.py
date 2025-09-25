@@ -6,6 +6,7 @@ import logging
 import re
 from django.core.cache import cache
 import math
+from datetime import datetime
 
 
 
@@ -1731,16 +1732,8 @@ def save_wallet_user(save_user_dict):
 #         phone_number = save_transaction_dict[PHONE_NUMBER]
 #         transaction = save_transaction_dict[TRANSACTION]
 
-
 #         with connection.cursor() as cursor:
-#             # 1️⃣ Insert transaction
-#             insert_query = """
-#                 INSERT INTO transactions (transaction_type, amount, transaction, created_at, user_id)
-#                 VALUES (%s, %s, %s, CURRENT_TIMESTAMP(), %s);
-#             """
-#             cursor.execute(insert_query, (transaction_type, amount, transaction, user_id))
-
-#             # 2️⃣ Get current balance
+#             # 1️⃣ Get current balance
 #             select_balance_query = "SELECT balance FROM balances WHERE user_id = %s FOR UPDATE;"
 #             cursor.execute(select_balance_query, (user_id,))
 #             result = cursor.fetchone()
@@ -1755,105 +1748,150 @@ def save_wallet_user(save_user_dict):
 #                     (current_balance, user_id)
 #                 )
 
-#             # 3️⃣ Update balance based on transaction type
+#             # 2️⃣ Check if payment would make balance negative
+#             if transaction_type.lower() in [PAY_FRIEND, PAY_MERCHANT]:
+#                 if amount > current_balance:
+#                     send_message(
+#                         f"⚠️ Insufficient funds! Your current balance is P{current_balance:.2f}.",
+#                         phone_number
+#                     )
+#                     return  # Stop the transaction
+
+#             # 3️⃣ Insert transaction
+#             insert_query = """
+#                 INSERT INTO transactions (transaction_type, amount, transaction, created_at, user_id)
+#                 VALUES (%s, %s, %s, CURRENT_TIMESTAMP(), %s);
+#             """
+#             cursor.execute(insert_query, (transaction_type, amount, transaction, user_id))
+
+#             # 4️⃣ Update balance
 #             if transaction_type.lower() in [ADD_FUNDS, RECEIVE]:
 #                 new_balance = current_balance + amount
-#             elif transaction_type.lower() in [PAY, SPLIT_BILL, REQUEST]:
+#             else:  # deduct for PAY, SPLIT_BILL, REQUEST, PAY_MERCHANT
 #                 new_balance = current_balance - amount
-#             else:
-#                 new_balance = current_balance  # default: no change
 
-#             # 4️⃣ Save updated balance
 #             update_balance_query = "UPDATE balances SET balance = %s WHERE user_id = %s;"
 #             cursor.execute(update_balance_query, (new_balance, user_id))
 
 #             connection.commit()
 
+#             # 5️⃣ Send confirmation messages
 #             if transaction_type.lower() == ADD_FUNDS:
-#                 send_message(f"Funds added successfully! 🎉\n\nYour new wallet balance is: P{new_balance:.2f}", phone_number)
+#                 send_message(
+#                     f"Funds added successfully! 🎉\n\nYour new wallet balance is: P{new_balance:.2f}",
+#                     phone_number
+#                 )
 #             elif transaction_type.lower() == PAY_MERCHANT:
-#                 send_message(f"✅ Payment Successful!\n\nYou have paid Merchant ID: {transaction}\n\nAmount: P{amount:.2f}\n\nNew Balance: P{new_balance:.2f}", phone_number)
-                
+#                 send_message(
+#                     f"✅ Payment Successful!\n\nYou have paid Merchant ID: *{transaction}*\n\nAmount: P{amount:.2f}\n\nNew Balance: *P{new_balance:.2f}*",
+#                     phone_number
+#                 )
+#             elif transaction_type.lower() == PAY_FRIEND:
+#                 send_message(
+#                     f"✅ Payment Successful!\n\nYou have paid Friend: *{transaction}*\n\nAmount: P{amount:.2f}\n\nNew Balance: *P{new_balance:.2f}*",
+#                     phone_number
+#                 )
+
 #             logger.info(f"Transaction saved and balance updated successfully for user {user_id}.")
 
 #     except Exception as e:
 #         connection.rollback()
 #         logger.error(f'An error occurred saving transaction or updating balance: {e}', exc_info=True)
 
-
 def save_transaction(save_transaction_dict):
     try:
         user_id = save_transaction_dict[USER_ID]
-        amount = float(save_transaction_dict[AMOUNT])  # make sure it's numeric
-        transaction_type = save_transaction_dict[TRANSACTION_TYPE]
+        amount = float(save_transaction_dict[AMOUNT]) 
+        transaction_type = save_transaction_dict[TRANSACTION_TYPE].lower()
         phone_number = save_transaction_dict[PHONE_NUMBER]
         transaction = save_transaction_dict[TRANSACTION]
 
         with connection.cursor() as cursor:
-            # 1️⃣ Get current balance
+            # 1️⃣ Get sender's current balance
             select_balance_query = "SELECT balance FROM balances WHERE user_id = %s FOR UPDATE;"
             cursor.execute(select_balance_query, (user_id,))
             result = cursor.fetchone()
 
             if result:
-                current_balance = float(result[0])
+                sender_balance = float(result[0])
             else:
-                # If user has no balance yet, assume 0 and create record
-                current_balance = 0.0
+                sender_balance = 0.0
                 cursor.execute(
                     "INSERT INTO balances (balance, user_id) VALUES (%s, %s);",
-                    (current_balance, user_id)
+                    (sender_balance, user_id)
                 )
 
             # 2️⃣ Check if payment would make balance negative
-            if transaction_type.lower() in [PAY_FRIEND, PAY_MERCHANT]:
-                if amount > current_balance:
+            if transaction_type in [PAY_FRIEND, PAY_MERCHANT]:
+                if amount > sender_balance:
                     send_message(
-                        f"⚠️ Insufficient funds! Your current balance is P{current_balance:.2f}.",
+                        f"⚠️ Insufficient funds! Your current balance is P{sender_balance:.2f}.",
                         phone_number
                     )
                     return  # Stop the transaction
 
-            # 3️⃣ Insert transaction
+            # 3️⃣ Insert sender's transaction
             insert_query = """
                 INSERT INTO transactions (transaction_type, amount, transaction, created_at, user_id)
                 VALUES (%s, %s, %s, CURRENT_TIMESTAMP(), %s);
             """
             cursor.execute(insert_query, (transaction_type, amount, transaction, user_id))
 
-            # 4️⃣ Update balance
-            if transaction_type.lower() in [ADD_FUNDS, RECEIVE]:
-                new_balance = current_balance + amount
-            else:  # deduct for PAY, SPLIT_BILL, REQUEST, PAY_MERCHANT
-                new_balance = current_balance - amount
+            # 4️⃣ Update sender's balance
+            if transaction_type in [ADD_FUNDS, RECEIVE]:
+                new_balance = sender_balance + amount
+            else:  # deduct for PAY, SPLIT_BILL, REQUEST, PAY_MERCHANT, PAY_FRIEND
+                new_balance = sender_balance - amount
 
             update_balance_query = "UPDATE balances SET balance = %s WHERE user_id = %s;"
             cursor.execute(update_balance_query, (new_balance, user_id))
 
-            connection.commit()
+            # 5️⃣ If PAY_FRIEND, update recipient's balance and send them a message
+            if transaction_type == PAY_FRIEND:
+                # Look up friend's user_id by phone number
+                cursor.execute("SELECT user_id, balance FROM balances WHERE user_id = (SELECT user_id FROM users WHERE phone_number = %s) FOR UPDATE;", (transaction,))
+                friend_result = cursor.fetchone()
 
-            # 5️⃣ Send confirmation messages
-            if transaction_type.lower() == ADD_FUNDS:
-                send_message(
-                    f"Funds added successfully! 🎉\n\nYour new wallet balance is: P{new_balance:.2f}",
-                    phone_number
-                )
-            elif transaction_type.lower() == PAY_MERCHANT:
-                send_message(
-                    f"✅ Payment Successful!\n\nYou have paid Merchant ID: *{transaction}*\n\nAmount: P{amount:.2f}\n\nNew Balance: *P{new_balance:.2f}*",
-                    phone_number
-                )
-            elif transaction_type.lower() == PAY_FRIEND:
-                send_message(
+                if friend_result:
+                    friend_id, friend_balance = friend_result
+                    friend_new_balance = friend_balance + amount
+                    cursor.execute("UPDATE balances SET balance = %s WHERE user_id = %s;", (friend_new_balance, friend_id))
+                    # Optionally log the transaction for the friend
+                    cursor.execute(
+                        insert_query,
+                        ("RECEIVE", amount, f"From Friend ID {user_id}", friend_id)
+                    )
+                    # Send message to friend
+                    send_message(
+                        f"💸 You have received P{amount:.2f} from a friend!\nYour new balance is: P{friend_new_balance:.2f}",
+                        transaction  # friend's phone number
+                    )
+                else:
+                    # Handle case where friend doesn't exist
+                    # send_message(
+                    #     f"⚠️ Could not find a wallet for {transaction}. Payment recorded but recipient not notified.",
+                    #     phone_number
+                    # )
+
+                    send_message(
                     f"✅ Payment Successful!\n\nYou have paid Friend: *{transaction}*\n\nAmount: P{amount:.2f}\n\nNew Balance: *P{new_balance:.2f}*",
                     phone_number
                 )
+
+            connection.commit()
+
+            # 6️⃣ Send confirmation message to sender
+            send_message(
+                f"✅ Payment Successful!\n\nYou have paid Friend: *{transaction}*\nAmount: P{amount:.2f}\nNew Balance: P{new_balance:.2f}",
+                phone_number
+            )
 
             logger.info(f"Transaction saved and balance updated successfully for user {user_id}.")
 
     except Exception as e:
         connection.rollback()
         logger.error(f'An error occurred saving transaction or updating balance: {e}', exc_info=True)
+
 
 def get_user_pin(phone_number):
     query = "SELECT pin FROM users WHERE phone_number = %s;"
@@ -1879,6 +1917,27 @@ def get_user_pin(phone_number):
         logger.error(f'An error occurred in get_user_pin: {e}', exc_info=True)
         # Handle or raise the exception as needed
         return None
+
+def get_user_transactions(user_id, limit=5):
+    """
+    Fetch recent transactions for a user, limited to 'limit' rows.
+    """
+    query = """
+        SELECT transaction_id, transaction_type, amount, transaction, created_at
+        FROM transactions
+        WHERE user_id = %s
+        ORDER BY created_at DESC
+        LIMIT %s;
+    """
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute(query, (user_id, limit))
+            results = cursor.fetchall()
+            return results
+    except Exception as e:
+        logger.error(f"Error fetching transactions for user {user_id}: {e}", exc_info=True)
+        return []
+    
 
 
 
@@ -1954,6 +2013,7 @@ def handle_reply(reply, message_id, phone_number, username, display_phone_number
 
         if not user_id:
             send_flow_message(phone_number, REGISTER_TITLE, REGISTER_BODY, REGISTER_FLOW_ID, REGISTER_FLOW_TOKEN, REGISTER_CTA)
+            return
 
         if reply == MENU:
             menu_message(phone_number)
@@ -1973,6 +2033,15 @@ def handle_reply(reply, message_id, phone_number, username, display_phone_number
 
         elif reply == PAY_MERCHANT:
             send_flow_message(phone_number, PAY_MERCHANT_FLOW_TITLE, PAY_MERCHANT_FLOW_BODY, PAY_MERCHANT_FLOW_ID, PAY_MERCHANT_FLOW_TOKEN, PAY_MERCHANT_FLOW_CTA)
+
+        elif reply == RECEIVE:
+            send_message(f'💡 To receive a payment, share this number with the payer: {phone_number}\n\nThey will use it to send money directly to your wallet.', phone_number)
+
+        elif reply == TRANSACTIONS:
+            user_id = get_user_id(phone_number)
+            transactions = get_user_transactions(user_id)
+            message = format_transactions(transactions)
+            send_message(message, phone_number)
 
         elif reply == PAY_FRIEND:
             send_flow_message(phone_number, PAY_FRIEND_FLOW_TITLE, PAY_FRIEND_FLOW_BODY, PAY_FRIEND_FLOW_ID, PAY_FRIEND_FLOW_TOKEN, PAY_FRIEND_FLOW_CTA)
@@ -2009,11 +2078,11 @@ def menu_message(phone_number):
                     {
                         "title": "Please choose an option",
                         "rows": [
-                            {"id": "1", "title": "My Balanace"},
+                            {"id": "1", "title": "My Balance"},
                             {"id": "2", "title": "Pay"},
                             {"id": "3", "title": "Receive"},
-                            {"id": "4", "title": "Request"},
-                            {"id": "5", "title": "Split Bill"},
+                            # {"id": "4", "title": "Request"},
+                            # {"id": "5", "title": "Split Bill"},
                             {"id": "6", "title": "Add Funds"},
                             {"id": "7", "title": "Transactions"},
 
@@ -2111,6 +2180,21 @@ def get_user_balance(user_id):
         logger.error(f"An error occurred fetching balance for user {user_id}: {e}", exc_info=True)
         return None
 
+def format_transactions(transactions):
+    if not transactions:
+        return "📜 No recent transactions found."
+
+    message = "📜 Transaction History\n\n"
+    for txn in transactions:
+        txn_id, txn_type, amount, txn_detail, created_at = txn
+        # Format date cleanly: 23 Sep 2025, 12:48
+        formatted_date = datetime.strftime(created_at, "%d %b %Y, %H:%M")
+        message += (
+            f"#{txn_id} | {txn_type.title()}"
+            + (f" ({txn_detail})" if txn_detail else "")
+            + f"\nAmount: P{float(amount):.2f}\nDate: {formatted_date}\n\n"
+        )
+    return message.strip()
 
 
 

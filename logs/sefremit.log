@@ -1807,3 +1807,23 @@ New Balance: *P138.00*, phone_number: 26774342078
 2025-09-23 11:45:40 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBI5RjE2MDZCNjAyNEFFNTRBQTYA'}]}
 2025-09-23 11:45:41 INFO flow sent successfully: flow_id: 1298577348393026, phone_number: 26774342078
 2025-09-23 11:45:41 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBJEMkZBRENGRjgzNkQyMzdGQjkA'}]}
+2025-09-25 09:21:58 INFO Message sent successfully. message: 📜 Transaction History
+
+#11 | Pay Friend (71606723)
+Amount: P25.00
+Date: 23 Sep 2025, 12:55
+
+#10 | Pay Merchant (Sefalana)
+Amount: P15.00
+Date: 23 Sep 2025, 12:49
+
+#9 | Add Funds (add funds)
+Amount: P120.00
+Date: 23 Sep 2025, 12:48, phone_number: 26774342078
+2025-09-25 09:21:58 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBJFOUJFNEE2MENEOEQ2QTFEREEA'}]}
+2025-09-25 09:22:33 INFO Message sent successfully. message: Your current balance is: *P80.00*, phone_number: 26774342078
+2025-09-25 09:22:33 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBIyMkRBQ0FFNTY5ODlBRTM5OTIA'}]}
+2025-09-25 09:30:11 INFO Message sent successfully. message: 💡 To receive a payment, share this number with the payer: 26774342078
+
+They will use it to send money directly to your wallet., phone_number: 26774342078
+2025-09-25 09:30:11 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBI2MUU1MTU5RjY2ODQzQTdCNjcA'}]}
