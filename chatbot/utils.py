@@ -1888,10 +1888,11 @@ def save_transaction(save_transaction_dict):
                     )
                 else:
                     # Handle case where friend not found
-                    send_message(
-                        f"⚠️ Could not find a wallet for {transaction}. Payment recorded but recipient not notified.",
-                        phone_number
-                    )
+                    # send_message(
+                    #     f"⚠️ Could not find a wallet for {transaction}. Payment recorded but recipient not notified.",
+                    #     phone_number
+                    # )
+                    pass
 
             # 6️⃣ Send confirmation messages to sender based on transaction type
             if transaction_type == ADD_FUNDS:
