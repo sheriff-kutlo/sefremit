@@ -1801,7 +1801,7 @@ def save_wallet_user(save_user_dict):
 def save_transaction(save_transaction_dict):
     try:
         user_id = save_transaction_dict[USER_ID]
-        amount = float(save_transaction_dict[AMOUNT]) 
+        amount = float(save_transaction_dict[AMOUNT])
         transaction_type = save_transaction_dict[TRANSACTION_TYPE].lower()
         phone_number = save_transaction_dict[PHONE_NUMBER]
         transaction = save_transaction_dict[TRANSACTION]
@@ -1893,13 +1893,32 @@ def save_transaction(save_transaction_dict):
                         phone_number
                     )
 
-            connection.commit()
+            # 6️⃣ Send confirmation messages to sender based on transaction type
+            if transaction_type == ADD_FUNDS:
+                send_message(
+                    f"Funds added successfully! 🎉\n\nYour new wallet balance is: P{new_balance:.2f}",
+                    phone_number
+                )
+            elif transaction_type == PAY_MERCHANT:
+                send_message(
+                    f"✅ Payment Successful!\n\nYou have paid Merchant ID: *{transaction}*\n\nAmount: P{amount:.2f}\n\nNew Balance: *P{new_balance:.2f}*",
+                    phone_number
+                )
+            elif transaction_type == PAY_FRIEND:
+                send_message(
+                    f"✅ Payment Successful!\n\nYou have paid Friend: *{transaction}*\n\nAmount: P{amount:.2f}\n\nNew Balance: *P{new_balance:.2f}*",
+                    phone_number
+                )
 
+            connection.commit()
             logger.info(f"Transaction saved and balance updated successfully for user {user_id}.")
 
     except Exception as e:
         connection.rollback()
         logger.error(f'An error occurred saving transaction or updating balance: {e}', exc_info=True)
+
+
+
 
 
 def get_user_pin(phone_number):
