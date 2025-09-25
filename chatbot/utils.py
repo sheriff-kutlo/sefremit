@@ -1848,43 +1848,52 @@ def save_transaction(save_transaction_dict):
 
             # 5️⃣ If PAY_FRIEND, update recipient's balance and send them a message
             if transaction_type == PAY_FRIEND:
-                # Look up friend's user_id by phone number
-                cursor.execute("SELECT user_id, balance FROM balances WHERE user_id = (SELECT user_id FROM users WHERE phone_number = %s) FOR UPDATE;", (transaction,))
+                # Normalize phone number: make sure it matches either local or full format
+                friend_phone_number = transaction
+                if len(friend_phone_number) == 8:  # local format
+                    friend_phone_number_full = "267" + friend_phone_number
+                else:
+                    friend_phone_number_full = friend_phone_number
+
+                # Look up friend's user_id and balance
+                cursor.execute("""
+                    SELECT b.user_id, b.balance 
+                    FROM balances b
+                    JOIN users u ON b.user_id = u.user_id
+                    WHERE u.phone_number IN (%s, %s)
+                    FOR UPDATE;
+                """, (friend_phone_number, friend_phone_number_full))
+
                 friend_result = cursor.fetchone()
 
                 if friend_result:
                     friend_id, friend_balance = friend_result
+                    friend_balance = float(friend_balance)  # convert from string to float
                     friend_new_balance = friend_balance + amount
-                    cursor.execute("UPDATE balances SET balance = %s WHERE user_id = %s;", (friend_new_balance, friend_id))
-                    # Optionally log the transaction for the friend
+                    cursor.execute(
+                        "UPDATE balances SET balance = %s WHERE user_id = %s;",
+                        (friend_new_balance, friend_id)
+                    )
+
+                    # Log transaction for friend
                     cursor.execute(
                         insert_query,
                         ("RECEIVE", amount, f"From Friend ID {user_id}", friend_id)
                     )
+
                     # Send message to friend
                     send_message(
                         f"💸 You have received P{amount:.2f} from a friend!\nYour new balance is: P{friend_new_balance:.2f}",
-                        transaction  # friend's phone number
+                        friend_phone_number_full
                     )
                 else:
-                    # Handle case where friend doesn't exist
-                    # send_message(
-                    #     f"⚠️ Could not find a wallet for {transaction}. Payment recorded but recipient not notified.",
-                    #     phone_number
-                    # )
-
+                    # Handle case where friend not found
                     send_message(
-                    f"✅ Payment Successful!\n\nYou have paid Friend: *{transaction}*\n\nAmount: P{amount:.2f}\n\nNew Balance: *P{new_balance:.2f}*",
-                    phone_number
-                )
+                        f"⚠️ Could not find a wallet for {transaction}. Payment recorded but recipient not notified.",
+                        phone_number
+                    )
 
             connection.commit()
-
-            # 6️⃣ Send confirmation message to sender
-            send_message(
-                f"✅ Payment Successful!\n\nYou have paid Friend: *{transaction}*\nAmount: P{amount:.2f}\nNew Balance: P{new_balance:.2f}",
-                phone_number
-            )
 
             logger.info(f"Transaction saved and balance updated successfully for user {user_id}.")
 
