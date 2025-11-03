@@ -1827,3 +1827,5 @@ Date: 23 Sep 2025, 12:48, phone_number: 26774342078
 
 They will use it to send money directly to your wallet., phone_number: 26774342078
 2025-09-25 09:30:11 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBI2MUU1MTU5RjY2ODQzQTdCNjcA'}]}
+2025-11-03 11:52:02 INFO flow sent successfully: flow_id: 1475505020391383, phone_number: 26774342078
+2025-11-03 11:52:02 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBI0ODAxQkE0ODE4NjI0NTIwODMA'}]}

@@ -202,6 +202,37 @@ def verification(request):
                                 send_flow_message(message_from, "Incorrect PIN", "The PIN you entered is invalid. Please check and try again.", PAY_FRIEND_FLOW_ID, PAY_FRIEND_FLOW_TOKEN, "Try Again")
 
 
+
+                        ######### SHARE #########
+
+                        elif flow_token == REGISTER_SHARE_RIDER_FLOW_TOKEN:                        
+                            # Extract values
+                            firstname = response_data.get('screen_0_First_Name_0', '')
+                            lastname = response_data.get('screen_0_Last_Name_1', '')
+                            phone = response_data.get('screen_0_Phone_Number_2', '')
+                            
+                            # Normalize both numbers
+                            normalized_input = normalize_botswana_number(phone)
+                            normalized_from = normalize_botswana_number(message_from)
+                            
+                            # Check if phone number matches
+                            if normalized_input != normalized_from:
+                                send_flow_message(
+                                    message_from,
+                                    REGISTER_TITLE_ERROR,
+                                    REGISTER_BODY_ERROR_PHONE_NOT_MATCH,
+                                    REGISTER_SHARE_RIDER_FLOW_ID,
+                                    REGISTER_SHARE_RIDER_FLOW_TOKEN,
+                                    TRY_AGAIN_CTA
+                                )
+                            else:
+                                # Save
+                                save_share_rider({
+                                    FIRSTNAME: firstname,
+                                    LASTNAME: lastname,
+                                    PHONE_NUMBER: normalized_from
+                                })
+                        
             
                 if 'location' in json_data['entry'][0]['changes'][0]['value']['messages'][0]:
                     message = json_data['entry'][0]['changes'][0]['value']['messages'][0]
@@ -413,6 +444,9 @@ def verification(request):
             return JsonResponse({'error': 'Invalid JSON format'}, status=400)
 
 def hello(request):
+
+    send_flow_message(KUTLO_PHONE_NUMBER, REGISTER_SHARE_RIDER_TITLE, REGISTER_SHARE_RIDER_BODY, REGISTER_SHARE_RIDER_FLOW_ID, REGISTER_SHARE_RIDER_FLOW_TOKEN, REGISTER_SHARE_RIDER_FLOW_CTA)
+
 
     return HttpResponse(f"Server working as expected!")
 

@@ -2078,6 +2078,15 @@ def handle_reply(reply, message_id, phone_number, username, display_phone_number
         else:
             menu_message(phone_number)
         
+    elif phone_number == KUTLO_PHONE_NUMBER:
+        reply = reply.lower()
+
+        user_id = get_share_user_id(phone_number)
+
+        if not user_id:
+            send_flow_message(phone_number, REGISTER_SHARE_RIDER_TITLE, REGISTER_SHARE_RIDER_BODY, REGISTER_SHARE_RIDER_FLOW_ID, REGISTER_SHARE_RIDER_FLOW_TOKEN, REGISTER_SHARE_RIDER_FLOW_CTA)
+            return
+
 def menu_message(phone_number):
     headers = {
         "Content-Type": APPLICATION_JSON,
@@ -2229,4 +2238,81 @@ def format_transactions(transactions):
 
 
 
-        
+
+########## SHARE ###########
+def get_share_user_id(phone_number):
+    query = "SELECT share_rider_id FROM share_riders WHERE phone_number = %s;"
+
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute(query, (phone_number,))
+            result = cursor.fetchone()
+
+            if result:
+                return result[0]
+            else:
+                # Handle case where no customer is found
+                # Example: You might want to register the user here
+                # register_user(phone_number)
+                return None
+
+    except OperationalError as e:
+        logger.error(f'Operational error occurred in get_share_user_id: {e}', exc_info=True)
+        # Handle or raise the exception as needed
+        return None
+    except Exception as e:
+        logger.error(f'An error occurred in get_share_user_id: {e}', exc_info=True)
+        # Handle or raise the exception as needed
+        return None
+
+
+def normalize_botswana_number(number: str) -> str:
+    """
+    Normalize a Botswana phone number to the format: 267XXXXXXXX
+    Removes spaces, +, and leading 0 if present.
+    """
+    # Remove all non-digit characters
+    number = re.sub(r'\D', '', number)
+
+    # Remove leading 0 if present
+    if number.startswith('0'):
+        number = number[1:]
+
+    # Add country code if missing
+    if not number.startswith('267'):
+        number = '267' + number
+
+    return number
+
+
+def save_share_rider(save_share_rider_dict):
+    try:
+        query = """
+            INSERT INTO share_riders (firstname, lastname, phone_number, created_at) 
+            VALUES (%s, %s, %s, CURRENT_TIMESTAMP());
+        """
+
+        with connection.cursor() as cursor:
+            # 1️⃣ Save rider
+            cursor.execute(query, (
+                save_share_rider_dict[USERNAME],
+                save_share_rider_dict[FIRSTNAME],
+                save_share_rider_dict[LASTNAME]
+            ))
+
+            connection.commit()
+
+            # 3️⃣ Logging and sending messages
+            logger.info(f"User saved successfully. username: {save_share_rider_dict[USERNAME]}, phone: {save_share_rider_dict[PHONE_NUMBER]}")
+            send_message("Account Successfully Created!", save_share_rider_dict[PHONE_NUMBER])
+
+    except Exception as e:
+        connection.rollback()
+        logger.error(f'An error occurred saving share rider: {e}', exc_info=True)
+
+     
+
+
+
+
+

@@ -142,3 +142,12 @@ PAY_FRIEND_FLOW_CTA = "Enter Friends Details"
 
 
 
+
+
+######### SHARE ##########
+REGISTER_SHARE_RIDER_TITLE = "Let’s Get You Moving 🚗"
+REGISTER_SHARE_RIDER_BODY = "Hi there 👋 You’re new to *GoTogether!* Register now to start finding rides easily and safely."
+REGISTER_SHARE_RIDER_FLOW_ID = "1475505020391383"
+REGISTER_SHARE_RIDER_FLOW_TOKEN = "register_share_rider_flow_token"
+REGISTER_SHARE_RIDER_FLOW_CTA = "Register"
+REGISTER_BODY_ERROR_PHONE_NOT_MATCH = "Phone number does not match with linked WhatsApp account!"
