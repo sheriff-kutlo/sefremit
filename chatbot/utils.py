@@ -2305,7 +2305,7 @@ def save_share_rider(save_share_rider_dict):
             connection.commit()
 
             # 3️⃣ Logging and sending messages
-            logger.info(f"User saved successfully. username: {save_share_rider_dict[USERNAME]}, phone: {save_share_rider_dict[PHONE_NUMBER]}")
+            logger.info(f"User saved successfully. firstname: {save_share_rider_dict[FIRSTNAME]}, phone: {save_share_rider_dict[PHONE_NUMBER]}")
             send_message("Account Successfully Created!", save_share_rider_dict[PHONE_NUMBER])
 
     except Exception as e:
