@@ -2034,8 +2034,18 @@ def send_flow_message(phone_number, header, body, flow_id, flow_token, cta):
 
 ######## METHODS #########
 def handle_reply(reply, message_id, phone_number, username, display_phone_number):
+       
+    if phone_number == KUTLO_PHONE_NUMBER:
+        reply = reply.lower()
 
-    if display_phone_number == TEST_PHONE_NUMBER:
+        user_id = get_share_user_id(phone_number)
+
+        if not user_id:
+            send_flow_message(phone_number, REGISTER_SHARE_RIDER_TITLE, REGISTER_SHARE_RIDER_BODY, REGISTER_SHARE_RIDER_FLOW_ID, REGISTER_SHARE_RIDER_FLOW_TOKEN, REGISTER_SHARE_RIDER_FLOW_CTA)
+            return
+        
+    
+    elif display_phone_number == TEST_PHONE_NUMBER:
         reply = reply.lower()
 
         user_id = get_user_id(phone_number)
@@ -2077,15 +2087,7 @@ def handle_reply(reply, message_id, phone_number, username, display_phone_number
 
         else:
             menu_message(phone_number)
-        
-    elif phone_number == KUTLO_PHONE_NUMBER:
-        reply = reply.lower()
-
-        user_id = get_share_user_id(phone_number)
-
-        if not user_id:
-            send_flow_message(phone_number, REGISTER_SHARE_RIDER_TITLE, REGISTER_SHARE_RIDER_BODY, REGISTER_SHARE_RIDER_FLOW_ID, REGISTER_SHARE_RIDER_FLOW_TOKEN, REGISTER_SHARE_RIDER_FLOW_CTA)
-            return
+ 
 
 def menu_message(phone_number):
     headers = {
