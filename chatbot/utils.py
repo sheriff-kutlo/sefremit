@@ -2297,9 +2297,9 @@ def save_share_rider(save_share_rider_dict):
         with connection.cursor() as cursor:
             # 1️⃣ Save rider
             cursor.execute(query, (
-                save_share_rider_dict[USERNAME],
                 save_share_rider_dict[FIRSTNAME],
-                save_share_rider_dict[LASTNAME]
+                save_share_rider_dict[LASTNAME],
+                save_share_rider_dict[PHONE_NUMBER],
             ))
 
             connection.commit()
