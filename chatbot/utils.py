@@ -2038,13 +2038,11 @@ def handle_reply(reply, message_id, phone_number, username, display_phone_number
     if phone_number == KUTLO_PHONE_NUMBER:
         reply = reply.lower()
 
-        rider_id = get_share_rider_id(phone_number)
+        driver_id = get_share_driver_id(phone_number)
 
-        if not rider_id:
-            driver_id = get_share_driver_id(phone_number)
-            if not driver_id:
-                send_flow_message(phone_number, REGISTER_SHARE_DRIVER_TITLE, REGISTER_SHARE_DRIVER_BODY, REGISTER_SHARE_DRIVER_FLOW_ID, REGISTER_SHARE_DRIVER_FLOW_TOKEN, REGISTER_SHARE_RIDER_FLOW_CTA)
-                return
+        if not driver_id:
+            send_flow_message(phone_number, REGISTER_SHARE_DRIVER_TITLE, REGISTER_SHARE_DRIVER_BODY, REGISTER_SHARE_DRIVER_FLOW_ID, REGISTER_SHARE_DRIVER_FLOW_TOKEN, REGISTER_SHARE_RIDER_FLOW_CTA)
+            return
         
     
     elif display_phone_number == TEST_PHONE_NUMBER:
