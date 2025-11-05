@@ -233,6 +233,45 @@ def verification(request):
                                     PHONE_NUMBER: normalized_from
                                 })
                         
+                        elif flow_token == REGISTER_SHARE_DRIVER_FLOW_TOKEN:                        
+                            # Extract values
+                            firstname = response_data.get('screen_0_First_Name_0', '')
+                            lastname = response_data.get('screen_0_Last_Name_1', '')
+                            phone = response_data.get('screen_0_Phone_Number_2', '')
+
+                            make = response_data.get('screen_1_Make_0', '')
+                            model = response_data.get('screen_1_Model_1', '')
+                            year = response_data.get('screen_1_Year_2', '')
+                            number_plate = response_data.get('screen_1_Number_Plate_3', '')
+                            color = response_data.get('screen_1_Color_4', '')
+                            
+                            # Normalize both numbers
+                            normalized_input = normalize_botswana_number(phone)
+                            normalized_from = normalize_botswana_number(message_from)
+                            
+                            # Check if phone number matches
+                            if normalized_input != normalized_from:
+                                send_flow_message(
+                                    message_from,
+                                    REGISTER_TITLE_ERROR,
+                                    REGISTER_BODY_ERROR_PHONE_NOT_MATCH,
+                                    REGISTER_SHARE_DRIVER_FLOW_ID,
+                                    REGISTER_SHARE_DRIVER_FLOW_TOKEN,
+                                    TRY_AGAIN_CTA
+                                )
+                            else:
+                                # Save
+                                save_share_driver({
+                                    FIRSTNAME: firstname,
+                                    LASTNAME: lastname,
+                                    PHONE_NUMBER: normalized_from,
+                                    CAR_MAKE: make,
+                                    CAR_MODEL: model,
+                                    CAR_YEAR: year,
+                                    NUMBER_PLATE: number_plate,
+                                    CAR_COLOR: color
+                                })
+ 
             
                 if 'location' in json_data['entry'][0]['changes'][0]['value']['messages'][0]:
                     message = json_data['entry'][0]['changes'][0]['value']['messages'][0]
@@ -445,7 +484,20 @@ def verification(request):
 
 def hello(request):
 
-    send_flow_message(KUTLO_PHONE_NUMBER, REGISTER_SHARE_RIDER_TITLE, REGISTER_SHARE_RIDER_BODY, REGISTER_SHARE_RIDER_FLOW_ID, REGISTER_SHARE_RIDER_FLOW_TOKEN, REGISTER_SHARE_RIDER_FLOW_CTA)
+    # save_share_driver({
+    #     FIRSTNAME: "Kutlo Driver",
+    #     LASTNAME: "Mangwa Driver",
+    #     PHONE_NUMBER: "26776448866",
+    #     CAR_MAKE: "Mazda",
+    #     CAR_MODEL: "Etude 160ie",
+    #     CAR_YEAR: "2002",
+    #     NUMBER_PLATE: "B 123 ABC",
+    #     CAR_COLOR: "Grey"
+    # })
+
+    # send_flow_message(KUTLO_PHONE_NUMBER, REGISTER_SHARE_RIDER_TITLE, REGISTER_SHARE_RIDER_BODY, REGISTER_SHARE_RIDER_FLOW_ID, REGISTER_SHARE_RIDER_FLOW_TOKEN, REGISTER_SHARE_RIDER_FLOW_CTA)
+
+    send_flow_message(KUTLO_PHONE_NUMBER, REGISTER_SHARE_DRIVER_TITLE, REGISTER_SHARE_DRIVER_BODY, REGISTER_SHARE_DRIVER_FLOW_ID, REGISTER_SHARE_DRIVER_FLOW_TOKEN, REGISTER_SHARE_RIDER_FLOW_CTA)
 
 
     return HttpResponse(f"Server working as expected!")

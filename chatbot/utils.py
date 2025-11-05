@@ -2038,11 +2038,13 @@ def handle_reply(reply, message_id, phone_number, username, display_phone_number
     if phone_number == KUTLO_PHONE_NUMBER:
         reply = reply.lower()
 
-        user_id = get_share_user_id(phone_number)
+        rider_id = get_share_rider_id(phone_number)
 
-        if not user_id:
-            send_flow_message(phone_number, REGISTER_SHARE_RIDER_TITLE, REGISTER_SHARE_RIDER_BODY, REGISTER_SHARE_RIDER_FLOW_ID, REGISTER_SHARE_RIDER_FLOW_TOKEN, REGISTER_SHARE_RIDER_FLOW_CTA)
-            return
+        if not rider_id:
+            driver_id = get_share_driver_id(phone_number)
+            if not driver_id:
+                send_flow_message(phone_number, REGISTER_SHARE_DRIVER_TITLE, REGISTER_SHARE_DRIVER_BODY, REGISTER_SHARE_DRIVER_FLOW_ID, REGISTER_SHARE_DRIVER_FLOW_TOKEN, REGISTER_SHARE_RIDER_FLOW_CTA)
+                return
         
     
     elif display_phone_number == TEST_PHONE_NUMBER:
@@ -2242,7 +2244,7 @@ def format_transactions(transactions):
 
 
 ########## SHARE ###########
-def get_share_user_id(phone_number):
+def get_share_rider_id(phone_number):
     query = "SELECT share_rider_id FROM share_riders WHERE phone_number = %s;"
 
     try:
@@ -2259,14 +2261,38 @@ def get_share_user_id(phone_number):
                 return None
 
     except OperationalError as e:
-        logger.error(f'Operational error occurred in get_share_user_id: {e}', exc_info=True)
+        logger.error(f'Operational error occurred in get_share_rider_id: {e}', exc_info=True)
         # Handle or raise the exception as needed
         return None
     except Exception as e:
-        logger.error(f'An error occurred in get_share_user_id: {e}', exc_info=True)
+        logger.error(f'An error occurred in get_share_rider_id: {e}', exc_info=True)
         # Handle or raise the exception as needed
         return None
 
+def get_share_driver_id(phone_number):
+    query = "SELECT share_driver_id FROM share_drivers WHERE phone_number = %s;"
+
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute(query, (phone_number,))
+            result = cursor.fetchone()
+
+            if result:
+                return result[0]
+            else:
+                # Handle case where no customer is found
+                # Example: You might want to register the user here
+                # register_user(phone_number)
+                return None
+
+    except OperationalError as e:
+        logger.error(f'Operational error occurred in get_share_driver_id: {e}', exc_info=True)
+        # Handle or raise the exception as needed
+        return None
+    except Exception as e:
+        logger.error(f'An error occurred in get_share_driver_id: {e}', exc_info=True)
+        # Handle or raise the exception as needed
+        return None
 
 def normalize_botswana_number(number: str) -> str:
     """
@@ -2286,7 +2312,6 @@ def normalize_botswana_number(number: str) -> str:
 
     return number
 
-
 def save_share_rider(save_share_rider_dict):
     try:
         query = """
@@ -2305,14 +2330,45 @@ def save_share_rider(save_share_rider_dict):
             connection.commit()
 
             # 3️⃣ Logging and sending messages
-            logger.info(f"User saved successfully. firstname: {save_share_rider_dict[FIRSTNAME]}, phone: {save_share_rider_dict[PHONE_NUMBER]}")
+            logger.info(f"Rider saved successfully. firstname: {save_share_rider_dict[FIRSTNAME]}, phone: {save_share_rider_dict[PHONE_NUMBER]}")
             send_message("Account Successfully Created!", save_share_rider_dict[PHONE_NUMBER])
 
     except Exception as e:
         connection.rollback()
         logger.error(f'An error occurred saving share rider: {e}', exc_info=True)
+   
+def save_share_driver (save_share_driver_dict):
+    try:
+        query = """
+            INSERT INTO share_drivers (first_name, last_name, phone_number, car_make, car_model, car_year, number_plate, car_color) 
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s);
+        """
 
-     
+        with connection.cursor() as cursor:
+            # 1️⃣ Save rider
+            cursor.execute(query, (
+                save_share_driver_dict[FIRSTNAME],
+                save_share_driver_dict[LASTNAME],
+                save_share_driver_dict[PHONE_NUMBER],
+                save_share_driver_dict[CAR_MAKE],
+                save_share_driver_dict[CAR_MODEL],
+                save_share_driver_dict[CAR_YEAR],
+                save_share_driver_dict[NUMBER_PLATE],
+                save_share_driver_dict[CAR_COLOR],
+
+            ))
+
+            connection.commit()
+
+            # 3️⃣ Logging and sending messages
+            logger.info(f"Driver saved successfully. firstname: {save_share_driver_dict[FIRSTNAME]}, phone: {save_share_driver_dict[PHONE_NUMBER]}")
+            send_message("Account Successfully Created!", save_share_driver_dict[PHONE_NUMBER])
+
+    except Exception as e:
+        connection.rollback()
+        logger.error(f'An error occurred saving share driver: {e}', exc_info=True)
+
+
 
 
 

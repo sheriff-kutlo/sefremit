@@ -151,3 +151,16 @@ REGISTER_SHARE_RIDER_FLOW_ID = "1475505020391383"
 REGISTER_SHARE_RIDER_FLOW_TOKEN = "register_share_rider_flow_token"
 REGISTER_SHARE_RIDER_FLOW_CTA = "Register"
 REGISTER_BODY_ERROR_PHONE_NOT_MATCH = "Phone number does not match with linked WhatsApp account!"
+
+REGISTER_SHARE_DRIVER_TITLE = "Ready to Hit the Road? 🚗"
+REGISTER_SHARE_DRIVER_BODY = "Hi there 👋 Welcome to *GoTogether!* Register now to start offering rides and help passengers travel safely and conveniently."
+REGISTER_SHARE_DRIVER_FLOW_ID = "1189085153137959"
+REGISTER_SHARE_DRIVER_FLOW_TOKEN = "register_share_driver_flow_token"
+
+
+
+CAR_MAKE = "car_make"
+CAR_MODEL = "car_model"
+CAR_YEAR = "car_year"
+NUMBER_PLATE = "number_plate"
+CAR_COLOR = "car_color"
