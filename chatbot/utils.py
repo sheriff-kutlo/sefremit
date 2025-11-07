@@ -2034,15 +2034,38 @@ def send_flow_message(phone_number, header, body, flow_id, flow_token, cta):
 
 ######## METHODS #########
 def handle_reply(reply, message_id, phone_number, username, display_phone_number):
-       
+
     if phone_number == KUTLO_PHONE_NUMBER:
+
         reply = reply.lower()
 
         driver_id = get_share_driver_id(phone_number)
+        rider_id = get_share_rider_id(phone_number)
 
-        if not driver_id:
-            send_flow_message(phone_number, REGISTER_SHARE_DRIVER_TITLE, REGISTER_SHARE_DRIVER_BODY, REGISTER_SHARE_DRIVER_FLOW_ID, REGISTER_SHARE_DRIVER_FLOW_TOKEN, REGISTER_SHARE_RIDER_FLOW_CTA)
+        # 1. If user is a registered driver
+        if driver_id:
+            # continue with driver menu or flow
+            if driver_has_profile_image(phone_number):
+                send_message("✅ Profile picture already uploaded.", phone_number)
+            else:
+                send_message("📸 Send a clear selfie - no hats, no sunglasses, no filters.", phone_number)
             return
+
+        # 2. If user is a registered rider
+        if rider_id:
+            # continue with rider menu or flow
+            send_message("Are you looking for a ride?", phone_number)
+            return
+
+        if reply == RIDER:
+            send_flow_message(phone_number, REGISTER_SHARE_RIDER_TITLE, REGISTER_SHARE_RIDER_BODY, REGISTER_SHARE_RIDER_FLOW_ID, REGISTER_SHARE_RIDER_FLOW_TOKEN, REGISTER_SHARE_RIDER_FLOW_CTA)
+
+        elif reply == DRIVER:
+            send_flow_message(phone_number, REGISTER_SHARE_DRIVER_TITLE, REGISTER_SHARE_DRIVER_BODY, REGISTER_SHARE_DRIVER_FLOW_ID, REGISTER_SHARE_DRIVER_FLOW_TOKEN, REGISTER_SHARE_RIDER_FLOW_CTA)
+
+        else:
+            # If user is new → ask them to choose role
+            select_rider_driver_message(phone_number)
         
     
     elif display_phone_number == TEST_PHONE_NUMBER:
@@ -2241,7 +2264,7 @@ def format_transactions(transactions):
 
 
 
-########## SHARE ###########
+########## SHARE ###########=25
 def get_share_rider_id(phone_number):
     query = "SELECT share_rider_id FROM share_riders WHERE phone_number = %s;"
 
@@ -2366,7 +2389,79 @@ def save_share_driver (save_share_driver_dict):
         connection.rollback()
         logger.error(f'An error occurred saving share driver: {e}', exc_info=True)
 
+def select_rider_driver_message(phone_number):
+    headers = {
+        "Content-Type": APPLICATION_JSON,
+        "Authorization": AUTHORIZATION
+    }
 
+    json_data = {
+        "messaging_product": "whatsapp",
+        "recipient_type": "individual",
+        "to": phone_number,
+        "type": "interactive",
+        "interactive": {
+            "type": "list",
+            "header": {
+                "type": "text",
+                "text": "Welcome to GoTogether 🚗"
+            },
+            "body": {
+                "text": "Are you joining as a Driver or a Rider?"
+            },
+            "action": {
+                "button": "Choose",
+                "sections": [
+                    {
+                        "title": "Please choose an option",
+                        "rows": [
+                            {"id": "1", "title": "Rider"},
+                            {"id": "2", "title": "Driver"},
+
+                        ]
+                    },
+                ]
+            }
+        }
+    }
+
+    try:
+        response = requests.post(MESSAGES_ENDPOINT, json=json_data, headers=headers)
+        
+        if response.status_code == 200:
+            logger.info(f"select_rider_driver_message interactive message successfully sent. phone_number: {phone_number}")
+            response_data = response.json()
+            logger.debug(f"Response JSON: {response_data}")
+            return response_data.get("messages", [{}])[0].get("id")
+        else:
+            logger.error(f"Failed to send select_rider_driver_message message. Status Code: {response.status_code}. Response Content: {response.content}")
+            return None
+            
+    except requests.exceptions.RequestException as e:
+        logger.error(f"Error sending message: {e}", exc_info=True)
+        return None
+
+def driver_has_profile_image(phone_number):
+    try:
+        query = """
+            SELECT profile_image_url
+            FROM share_drivers
+            WHERE phone_number = %s
+            LIMIT 1;
+        """
+
+        with connection.cursor() as cursor:
+            cursor.execute(query, (phone_number,))
+            result = cursor.fetchone()
+
+            # result is a tuple like: ('/path/to/file.jpg',) or (None,)
+            if result and result[0] is not None and result[0] != "":
+                return True
+            return False
+
+    except Exception as e:
+        logger.error(f"Error checking profile image: {e}", exc_info=True)
+        return False
 
 
 

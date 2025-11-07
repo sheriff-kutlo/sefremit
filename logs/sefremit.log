@@ -1896,3 +1896,7 @@ django.db.utils.OperationalError: (1054, "Unknown column 'first_name' in 'field 
 2025-11-05 18:52:25 ERROR Failed to send message. Status Code: 400. Response Content: b'{"error":{"message":"(#100) Invalid parameter","type":"OAuthException","code":100,"error_data":{"messaging_product":"whatsapp","details":"Invalid parameter"},"fbtrace_id":"AO5-RxWROFPyFSJqZIQu5xJ"}}'
 2025-11-05 19:11:42 INFO flow sent successfully: flow_id: 1189085153137959, phone_number: 26774342078
 2025-11-05 19:11:42 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBJDMTlGM0IxOThENjQzMjlDRjYA'}]}
+2025-11-07 10:50:21 INFO select_rider_driver_message interactive message successfully sent. phone_number: 26774342078
+2025-11-07 10:50:21 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBIwNDRENjk2QTY0M0MyNEI3QjQA'}]}
+2025-11-07 11:24:47 INFO Message sent successfully. message: 📸 Send a clear selfie — no hats, no sunglasses, no filters., phone_number: 26774342078
+2025-11-07 11:24:47 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBIyQkVDRUNDQURFRDlDNzMyMjIA'}]}

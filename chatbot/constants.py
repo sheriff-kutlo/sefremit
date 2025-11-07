@@ -164,3 +164,8 @@ CAR_MODEL = "car_model"
 CAR_YEAR = "car_year"
 NUMBER_PLATE = "number_plate"
 CAR_COLOR = "car_color"
+
+
+
+RIDER = "rider"
+DRIVER = "driver"
