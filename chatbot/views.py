@@ -61,7 +61,6 @@ def verification(request):
                         logger.info(f"Conversation ID: {conversation_id}")
                         logger.info(f"Display Phone Number from status: {display_phone_number}")
 
-
                     else:
                         logger.info(f"Status is not 'delivered' or 'read': {status['status']}")
 
