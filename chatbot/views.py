@@ -295,6 +295,11 @@ def verification(request):
 
                     # cache.delete_pattern(f"{message_from}_*")
 
+                if 'image' in json_data['entry'][0]['changes'][0]['value']['messages'][0]:
+                    image_id = json_data['entry'][0]['changes'][0]['value']['messages'][0]['image']['id']
+
+                    logger.info(f"image id: {image_id}")
+
                 if 'audio' in json_data['entry'][0]['changes'][0]['value']['messages'][0]:
                     audio_id = json_data['entry'][0]['changes'][0]['value']['messages'][0]['audio']['id']
 
