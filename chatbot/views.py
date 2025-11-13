@@ -270,7 +270,6 @@ def verification(request):
                                     NUMBER_PLATE: number_plate,
                                     CAR_COLOR: color
                                 })
- 
             
                 if 'location' in json_data['entry'][0]['changes'][0]['value']['messages'][0]:
                     message = json_data['entry'][0]['changes'][0]['value']['messages'][0]
@@ -505,16 +504,18 @@ def hello(request):
 
     # select_rider_driver_message(KUTLO_PHONE_NUMBER)
 
-    driver_id = 123
+    # driver_id = 123
 
-    # 1. If user is a registered driver
-    if driver_id:
-        # continue with driver menu or flow
-        if driver_has_profile_image(KUTLO_PHONE_NUMBER):
-            send_message("✅ Profile picture already uploaded.", KUTLO_PHONE_NUMBER)
-        else:
-            send_message("📸 Send a clear selfie - no hats, no sunglasses, no filters.", KUTLO_PHONE_NUMBER)
-        return
+    # # 1. If user is a registered driver
+    # if driver_id:
+    #     # continue with driver menu or flow
+    #     if driver_has_profile_image(KUTLO_PHONE_NUMBER):
+    #         send_message("✅ Profile picture already uploaded.", KUTLO_PHONE_NUMBER)
+    #     else:
+    #         send_message("📸 Send a clear selfie - no hats, no sunglasses, no filters.", KUTLO_PHONE_NUMBER)
+    #     return
+
+    print(f"{download_whatsapp_media("4349288345304633")}")
 
     return HttpResponse(f"Server working as expected!")
 

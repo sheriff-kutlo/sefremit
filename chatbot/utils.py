@@ -2111,7 +2111,6 @@ def handle_reply(reply, message_id, phone_number, username, display_phone_number
         else:
             menu_message(phone_number)
  
-
 def menu_message(phone_number):
     headers = {
         "Content-Type": APPLICATION_JSON,
@@ -2462,6 +2461,14 @@ def driver_has_profile_image(phone_number):
     except Exception as e:
         logger.error(f"Error checking profile image: {e}", exc_info=True)
         return False
+
+def download_whatsapp_media(media_id):
+    url = f"{IMAGE_ENDPOINT}{media_id}"
+    headers = {"Authorization": AUTHORIZATION}
+    response = requests.get(url, headers=headers).json()
+    return response["url"]  # This returns the actual download link
+
+
 
 
 
