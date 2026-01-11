@@ -519,6 +519,7 @@ def hello(request):
 
     return HttpResponse(f"Server working as expected!")
 
+@csrf_exempt
 def get_shelve_talker_by_barcode(request, barcode):
     key = f"shelve_talker:{barcode}"
 
