@@ -2035,80 +2035,80 @@ def send_flow_message(phone_number, header, body, flow_id, flow_token, cta):
 ######## METHODS #########
 def handle_reply(reply, message_id, phone_number, username, display_phone_number):
 
-    reply = reply.lower()
+    # reply = reply.lower()
 
-    user_id = get_user_id(phone_number)
+    # user_id = get_user_id(phone_number)
 
-    if not user_id:
-        send_flow_message(phone_number, REGISTER_TITLE, REGISTER_BODY, REGISTER_FLOW_ID, REGISTER_FLOW_TOKEN, REGISTER_CTA)
-        return
+    # if not user_id:
+    #     send_flow_message(phone_number, REGISTER_TITLE, REGISTER_BODY, REGISTER_FLOW_ID, REGISTER_FLOW_TOKEN, REGISTER_CTA)
+    #     return
 
-    if reply == MENU:
-        menu_message(phone_number)
+    # if reply == MENU:
+    #     menu_message(phone_number)
 
-    elif reply == MY_BALANCE:
-        balance = get_user_balance(get_user_id(phone_number))
-        if balance is not None:
-            send_message(f"Your current balance is: *P{balance:.2f}*", phone_number)
-        else:
-            send_message("No balance record found for your account.", phone_number)
-
-    elif reply == ADD_FUNDS:
-        send_flow_message(phone_number, CARD_DETAILS_FLOW_TITLE, CARD_DETAILS_FLOW_BODY, CARD_DETAILS_FLOW_ID, CARD_DETAILS_FLOW_TOKEN, CARD_DETAILS_FLOW_CTA)
-
-    elif reply == PAY:
-        pay_options_message(phone_number)
-
-    elif reply == PAY_MERCHANT:
-        send_flow_message(phone_number, PAY_MERCHANT_FLOW_TITLE, PAY_MERCHANT_FLOW_BODY, PAY_MERCHANT_FLOW_ID, PAY_MERCHANT_FLOW_TOKEN, PAY_MERCHANT_FLOW_CTA)
-
-    elif reply == RECEIVE:
-        send_message(f'💡 To receive a payment, share this number with the payer: {phone_number}\n\nThey will use it to send money directly to your wallet.', phone_number)
-
-    elif reply == TRANSACTIONS:
-        user_id = get_user_id(phone_number)
-        transactions = get_user_transactions(user_id)
-        message = format_transactions(transactions)
-        send_message(message, phone_number)
-
-    elif reply == PAY_FRIEND:
-        send_flow_message(phone_number, PAY_FRIEND_FLOW_TITLE, PAY_FRIEND_FLOW_BODY, PAY_FRIEND_FLOW_ID, PAY_FRIEND_FLOW_TOKEN, PAY_FRIEND_FLOW_CTA)
-
-    else:
-        menu_message(phone_number)
-
-
-    # if phone_number == KUTLO_PHONE_NUMBER:
-
-    #     reply = reply.lower()
-
-    #     driver_id = get_share_driver_id(phone_number)
-    #     rider_id = get_share_rider_id(phone_number)
-
-    #     # 1. If user is a registered driver
-    #     if driver_id:
-    #         # continue with driver menu or flow
-    #         if driver_has_profile_image(phone_number):
-    #             send_message("✅ Profile picture already uploaded.", phone_number)
-    #         else:
-    #             send_message("📸 Send a clear selfie - no hats, no sunglasses, no filters.", phone_number)
-    #         return
-
-    #     # 2. If user is a registered rider
-    #     if rider_id:
-    #         # continue with rider menu or flow
-    #         send_message("Are you looking for a ride?", phone_number)
-    #         return
-
-    #     if reply == RIDER:
-    #         send_flow_message(phone_number, REGISTER_SHARE_RIDER_TITLE, REGISTER_SHARE_RIDER_BODY, REGISTER_SHARE_RIDER_FLOW_ID, REGISTER_SHARE_RIDER_FLOW_TOKEN, REGISTER_SHARE_RIDER_FLOW_CTA)
-
-    #     elif reply == DRIVER:
-    #         send_flow_message(phone_number, REGISTER_SHARE_DRIVER_TITLE, REGISTER_SHARE_DRIVER_BODY, REGISTER_SHARE_DRIVER_FLOW_ID, REGISTER_SHARE_DRIVER_FLOW_TOKEN, REGISTER_SHARE_RIDER_FLOW_CTA)
-
+    # elif reply == MY_BALANCE:
+    #     balance = get_user_balance(get_user_id(phone_number))
+    #     if balance is not None:
+    #         send_message(f"Your current balance is: *P{balance:.2f}*", phone_number)
     #     else:
-    #         # If user is new → ask them to choose role
-    #         select_rider_driver_message(phone_number)
+    #         send_message("No balance record found for your account.", phone_number)
+
+    # elif reply == ADD_FUNDS:
+    #     send_flow_message(phone_number, CARD_DETAILS_FLOW_TITLE, CARD_DETAILS_FLOW_BODY, CARD_DETAILS_FLOW_ID, CARD_DETAILS_FLOW_TOKEN, CARD_DETAILS_FLOW_CTA)
+
+    # elif reply == PAY:
+    #     pay_options_message(phone_number)
+
+    # elif reply == PAY_MERCHANT:
+    #     send_flow_message(phone_number, PAY_MERCHANT_FLOW_TITLE, PAY_MERCHANT_FLOW_BODY, PAY_MERCHANT_FLOW_ID, PAY_MERCHANT_FLOW_TOKEN, PAY_MERCHANT_FLOW_CTA)
+
+    # elif reply == RECEIVE:
+    #     send_message(f'💡 To receive a payment, share this number with the payer: {phone_number}\n\nThey will use it to send money directly to your wallet.', phone_number)
+
+    # elif reply == TRANSACTIONS:
+    #     user_id = get_user_id(phone_number)
+    #     transactions = get_user_transactions(user_id)
+    #     message = format_transactions(transactions)
+    #     send_message(message, phone_number)
+
+    # elif reply == PAY_FRIEND:
+    #     send_flow_message(phone_number, PAY_FRIEND_FLOW_TITLE, PAY_FRIEND_FLOW_BODY, PAY_FRIEND_FLOW_ID, PAY_FRIEND_FLOW_TOKEN, PAY_FRIEND_FLOW_CTA)
+
+    # else:
+    #     menu_message(phone_number)
+
+
+    if phone_number == KUTLO_PHONE_NUMBER:
+
+        reply = reply.lower()
+
+        driver_id = get_share_driver_id(phone_number)
+        rider_id = get_share_rider_id(phone_number)
+
+        # 1. If user is a registered driver
+        if driver_id:
+            # continue with driver menu or flow
+            if driver_has_profile_image(phone_number):
+                send_message("✅ Profile picture already uploaded.", phone_number)
+            else:
+                send_message("📸 Send a clear selfie - no hats, no sunglasses, no filters.", phone_number)
+            return
+
+        # 2. If user is a registered rider
+        if rider_id:
+            # continue with rider menu or flow
+            send_message("Are you looking for a ride?", phone_number)
+            return
+
+        if reply == RIDER:
+            send_flow_message(phone_number, REGISTER_SHARE_RIDER_TITLE, REGISTER_SHARE_RIDER_BODY, REGISTER_SHARE_RIDER_FLOW_ID, REGISTER_SHARE_RIDER_FLOW_TOKEN, REGISTER_SHARE_RIDER_FLOW_CTA)
+
+        elif reply == DRIVER:
+            send_flow_message(phone_number, REGISTER_SHARE_DRIVER_TITLE, REGISTER_SHARE_DRIVER_BODY, REGISTER_SHARE_DRIVER_FLOW_ID, REGISTER_SHARE_DRIVER_FLOW_TOKEN, REGISTER_SHARE_RIDER_FLOW_CTA)
+
+        else:
+            # If user is new → ask them to choose role
+            select_rider_driver_message(phone_number)
         
     
     # elif display_phone_number == TEST_PHONE_NUMBER:

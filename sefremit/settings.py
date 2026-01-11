@@ -189,8 +189,8 @@ LOGGING = {
         'file': {
             'level': 'DEBUG',  # Set the desired logging level
             'class': 'logging.FileHandler',
-            # 'filename': os.path.join(BASE_DIR, 'logs', 'sefremit.log'),
-            'filename': '/var/log/gunicorn/sefremit.log',
+            'filename': os.path.join(BASE_DIR, 'logs', 'sefremit.log'),
+            # 'filename': '/var/log/gunicorn/sefremit.log',
             'formatter': 'simple',
         },
         'console': {

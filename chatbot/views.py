@@ -519,3 +519,26 @@ def hello(request):
 
     return HttpResponse(f"Server working as expected!")
 
+def get_shelve_talker_by_barcode(request, barcode):
+    key = f"shelve_talker:{barcode}"
+
+    data = cache.get(key)
+
+    if not data:
+        return JsonResponse(
+            {"error": "Shelf talker not found or expired"},
+            status=404
+        )
+
+    return JsonResponse(
+        {
+            "barcode": barcode,
+            "description": data["description"],
+            "pack_size": data["pack_size"],
+            "price": data["price"],
+            "vat_percent": data["vat_percent"],
+            "talker_date": data["talker_date"],
+        }
+    )
+
+
