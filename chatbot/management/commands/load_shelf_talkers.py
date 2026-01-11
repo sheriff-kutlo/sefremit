@@ -4,7 +4,7 @@ from django.core.cache import cache
 from datetime import datetime, timedelta, date
 
 class Command(BaseCommand):
-    help = "Load today's shelf talker data into Redis cache"
+    help = "Load shelf talker data into Redis cache"
 
     def handle(self, *args, **options):
         self.stdout.write("Starting shelf talker cache load...")
@@ -18,9 +18,7 @@ class Command(BaseCommand):
             cursor.execute("""
                 SELECT barcode, description, pack_size, price, vat_percent
                 FROM shelve_talkers
-                WHERE talker_date = %s
-            """, [today])
-
+            """)
             rows = cursor.fetchall()
 
         # Calculate TTL → seconds until next midnight
@@ -47,6 +45,7 @@ class Command(BaseCommand):
 
         self.stdout.write(
             self.style.SUCCESS(
-                f"Loaded {len(rows)} shelf talker records for {today} into Redis"
+                f"Loaded {len(rows)} shelf talker records into Redis"
             )
         )
+
