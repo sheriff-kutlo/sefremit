@@ -34,11 +34,43 @@ def handle_reply(reply, message_id, phone_number, username, display_phone_number
         # if not user_id:
         #     save_user({USERNAME: remove_emojis(username), PHONE_NUMBER: phone_number})               
         
-        if reply == "menu":
-            pass
+        if reply == "file a complaint":
+            send_flow_message(
+                phone_number,
+                "File a Complaint",
+                "Submit your complaint in a few steps.",
+                1688139795516594,
+                "file_complaint_token",
+                "File a Complaint"
+            )
+
+        elif reply == "track a complaint":
+            send_message("Enter your reference ID", phone_number)
+
+
+        elif reply == ".bw registration":
+            send_flow_message(
+                phone_number,
+                ".bw Domain Registration",
+                "Check basic information about a domain, including registration details and status, to better understand its ownership and activity.",
+                2029972457934217,
+                "bw_registration_token",
+                "WHOIS lookup"
+            )
+
+        elif reply == "verify a licence":
+            send_flow_message(
+                KUTLO_PHONE_NUMBER,
+                "Verify a BOCRA Licence",
+                "Check if an operator holds a valid BOCRA licence",
+                2382063375629764,
+                "verify_bocra_licence_token",
+                "Verify"
+            )
+            
 
         else:
-            pass
+            send_interactive_services(phone_number)
                 
             
     
@@ -295,18 +327,6 @@ def send_flow_message(phone_number, header, body, flow_id, flow_token, cta="Ente
         logger.error(f"Error sending flow message: {e}", exc_info=True)
         return None
  
-def get_domain_info(domain):
-    try:
-        info = whois(domain)
-        return {
-            "success": True,
-            "data": str(info)
-        }
-    except Exception as e:
-        return {
-            "success": False,
-            "error": str(e)
-        }
 
 def save_complaint(complaint_dict):
     try:
@@ -372,3 +392,45 @@ def get_complaint_by_ref(complaint_ref):
         return None
     
     
+def send_message(message, phone_number):
+    headers = {
+        "Content-Type": APPLICATION_JSON,
+        "Authorization": AUTHORIZATION
+    }
+    
+    json_data = {
+        "messaging_product": "whatsapp",
+        "recipient_type": "individual",
+        "to": phone_number,
+        "type": "text",
+        "text": {
+            "preview_url": False,
+            "body": message
+        }
+    }
+    
+    try:
+        response = requests.post(MESSAGES_ENDPOINT, json=json_data, headers=headers)
+        
+        if response.status_code == 200:
+            logger.info(f"Message sent successfully. message: {message}, phone_number: {phone_number}")
+            response_data = response.json()
+            logger.debug(f"Response JSON: {response_data}")
+            return response_data.get("messages", [{}])[0].get("id")
+        else:
+            logger.error(f"Failed to send message. Status Code: {response.status_code}. Response Content: {response.content}")
+            return None
+            
+    except requests.exceptions.RequestException as e:
+        logger.error(f"Error sending message: {e}", exc_info=True)
+        return None
+
+def get_domain_info(domain: str) -> str:
+    """
+    Fetch WHOIS information for a domain and return as a string message.
+    """
+    try:
+        info = whois.whois(domain)
+        return f"WHOIS info for {domain}:\n{info}"
+    except Exception as e:
+        return f"Failed to get WHOIS info for {domain}: {e}"
