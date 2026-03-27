@@ -605,7 +605,9 @@ def verification(request):
                         elif flow_token == "bw_registration_token":
                             send_message("Domain google.com registered with MarkMonitor Inc., created on 1997-09-15, expires on 2028-09-14. Status: clientDeleteProhibited, clientTransferProhibited, clientUpdateProhibited.", message_from)
                             
-
+                        elif flow_token == "verify_bocra_licence_token":
+                            send_message("BOCRA Licence BOCRA-2026-00123 granted to TechConnect Botswana (ISP), valid 01 Mar 2026 – 28 Feb 2031. One-time fee BWP 50,000, annual fee BWP 10,000", message_from)
+                                            
 
                      
                 if 'text' in json_data['entry'][0]['changes'][0]['value']['messages'][0]:
