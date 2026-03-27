@@ -1900,3 +1900,385 @@ django.db.utils.OperationalError: (1054, "Unknown column 'first_name' in 'field 
 2025-11-07 10:50:21 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBIwNDRENjk2QTY0M0MyNEI3QjQA'}]}
 2025-11-07 11:24:47 INFO Message sent successfully. message: 📸 Send a clear selfie — no hats, no sunglasses, no filters., phone_number: 26774342078
 2025-11-07 11:24:47 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBIyQkVDRUNDQURFRDlDNzMyMjIA'}]}
+2026-02-09 19:42:19 INFO Received message from 267743420788: 'hello'
+2026-02-09 19:42:21 INFO Sending reply to 267743420788: 'I'm sorry, I'm not sure how to help with that. You can ask me to search for products, check an order status, or ask about our policies.'
+2026-02-10 07:52:00 INFO Received message from 267743420788: 'hello'
+2026-02-10 07:52:01 INFO Sending reply to 267743420788: 'I'm sorry, I'm not sure how to help with that. You can ask me to search for products, check an order status, or ask about our policies.'
+2026-02-10 08:00:38 INFO Successfully loaded products.csv, orders.csv, and faq.txt
+2026-02-10 08:00:38 INFO Loaded 38 products and 22 orders.
+2026-02-10 08:00:51 INFO Services and OpenAI client initialized successfully.
+2026-02-10 08:00:51 INFO Received message from 267743420788: 'hello'
+2026-02-10 08:00:52 INFO LLM classified intent: {'intent': 'general_knowledge', 'entities': {}} with history context.
+2026-02-10 08:00:54 INFO Sending reply to 267743420788: 'Hello! How can I assist you today?'
+2026-02-10 08:00:55 ERROR Failed to send WhatsApp message: 400 Client Error: Bad Request for url: https://graph.facebook.com/v20.0/286939801179582/messages
+2026-02-10 08:01:49 INFO Successfully loaded products.csv, orders.csv, and faq.txt
+2026-02-10 08:01:49 INFO Loaded 38 products and 22 orders.
+2026-02-10 08:01:57 INFO Services and OpenAI client initialized successfully.
+2026-02-10 08:01:57 INFO Received message from 267743420788: 'do you have headphones'
+2026-02-10 08:01:59 INFO LLM classified intent: {'intent': 'product_search', 'entities': {'keywords': ['headphones']}} with history context.
+2026-02-10 08:01:59 INFO Sending reply to 267743420788: 'Here's what I found:
+
+- SilentMark Noise-Cancelling Headphones (ID: PROD-003)
+  Price: $249.50 (In Stock)
+- Aura Gaming Headset (ID: PROD-007)
+  Price: $99.99 (In Stock)
+
+You can place an order using the Product ID.'
+2026-02-10 08:01:59 ERROR Failed to send WhatsApp message: 400 Client Error: Bad Request for url: https://graph.facebook.com/v20.0/286939801179582/messages
+2026-02-10 08:06:20 INFO Successfully loaded products.csv, orders.csv, and faq.txt
+2026-02-10 08:06:20 INFO Loaded 38 products and 22 orders.
+2026-02-10 08:06:40 INFO Services and OpenAI client initialized successfully.
+2026-02-10 08:06:40 INFO Received message from 267743420788: 'do you have headphones'
+2026-02-10 08:06:43 INFO LLM classified intent: {'intent': 'product_search', 'entities': {'keywords': ['headphones']}} with history context.
+2026-02-10 08:06:43 INFO Sending reply to 267743420788: 'Here's what I found:
+
+- SilentMark Noise-Cancelling Headphones (ID: PROD-003)
+  Price: $249.50 (In Stock)
+- Aura Gaming Headset (ID: PROD-007)
+  Price: $99.99 (In Stock)
+
+You can place an order using the Product ID.'
+2026-02-10 08:06:44 INFO WhatsApp message sent to 267743420788. Status: 200
+2026-02-10 08:07:09 INFO Successfully loaded products.csv, orders.csv, and faq.txt
+2026-02-10 08:07:09 INFO Loaded 38 products and 22 orders.
+2026-02-10 08:07:39 INFO Services and OpenAI client initialized successfully.
+2026-02-10 08:07:39 INFO Received message from 26774342078: 'do you have headphones'
+2026-02-10 08:07:41 INFO LLM classified intent: {'intent': 'product_search', 'entities': {'keywords': ['headphones']}} with history context.
+2026-02-10 08:07:41 INFO Sending reply to 26774342078: 'Here's what I found:
+
+- SilentMark Noise-Cancelling Headphones (ID: PROD-003)
+  Price: $249.50 (In Stock)
+- Aura Gaming Headset (ID: PROD-007)
+  Price: $99.99 (In Stock)
+
+You can place an order using the Product ID.'
+2026-02-10 08:07:43 INFO WhatsApp message sent to 26774342078. Status: 200
+2026-02-10 08:20:44 INFO Successfully loaded products.csv, orders.csv, and faq.txt
+2026-02-10 08:20:44 INFO Loaded 38 products and 22 orders.
+2026-02-10 08:20:49 INFO Services and OpenAI client initialized successfully.
+2026-02-10 08:20:49 INFO Received message from 26774342078: 'how many SilentMark do you have in stock?'
+2026-02-10 08:20:51 INFO LLM classified intent: {'intent': 'product_search', 'entities': {'keywords': ['SilentMark']}} with history context.
+2026-02-10 08:20:51 INFO Sending reply to 26774342078: 'Here's what I found:
+
+- SilentMark Noise-Cancelling Headphones (ID: PROD-003)
+  Price: $249.50 (In Stock)
+
+You can place an order using the Product ID.'
+2026-02-10 08:20:52 INFO WhatsApp message sent to 26774342078. Status: 200
+2026-02-10 08:32:23 INFO Successfully loaded products.csv, orders.csv, and faq.txt
+2026-02-10 08:32:23 INFO Loaded 38 products and 22 orders.
+2026-02-10 08:33:02 INFO Services and OpenAI client initialized successfully.
+2026-02-10 08:33:02 INFO Received message from 26774342078: 'PROD-003'
+2026-02-10 08:33:03 INFO LLM classified intent: {'intent': 'order_status', 'entities': {'order_id': 'PROD-003'}} with history context.
+2026-02-10 08:33:03 INFO Sending reply to 26774342078: 'Sorry, I couldn't find an order with the ID: PROD-003.'
+2026-02-10 08:33:04 INFO WhatsApp message sent to 26774342078. Status: 200
+2026-02-10 08:38:11 INFO Successfully loaded products.csv, orders.csv, and faq.txt
+2026-02-10 08:38:11 INFO Loaded 38 products and 22 orders.
+2026-02-10 08:38:16 INFO Services and OpenAI client initialized successfully.
+2026-02-10 08:38:16 INFO Received message from 26774342078: 'make an order for PROD-003'
+2026-02-10 08:38:19 INFO LLM classified intent: {'intent': 'order_placing', 'entities': {'product_id': 'PROD-003', 'quantity': ''}} with history context.
+2026-02-10 08:38:19 INFO Sending reply to 26774342078: 'You want to order 'SilentMark Noise-Cancelling Headphones' for $249.50. Is that correct? (Please reply with 'yes' or 'no')'
+2026-02-10 08:38:20 INFO WhatsApp message sent to 26774342078. Status: 200
+2026-02-10 08:38:47 INFO Successfully loaded products.csv, orders.csv, and faq.txt
+2026-02-10 08:38:47 INFO Loaded 38 products and 22 orders.
+2026-02-10 08:38:50 INFO Services and OpenAI client initialized successfully.
+2026-02-10 08:38:50 INFO Received message from 26774342078: 'yes'
+2026-02-10 08:38:51 INFO LLM classified intent: {'intent': 'unclassified', 'entities': {}} with history context.
+2026-02-10 08:38:51 INFO Sending reply to 26774342078: 'I'm sorry, I'm not sure how to help with that. You can ask me to search for products, check an order status, or ask about our policies.'
+2026-02-10 08:38:52 INFO WhatsApp message sent to 26774342078. Status: 200
+2026-02-10 08:52:14 INFO Successfully loaded products.csv, orders.csv, and faq.txt
+2026-02-10 08:52:14 INFO Loaded 38 products and 22 orders.
+2026-02-10 08:52:27 INFO Services and OpenAI client initialized successfully.
+2026-02-10 08:52:27 INFO Received message from 26774342078: 'make an order for PROD-003'
+2026-02-10 08:52:29 INFO LLM classified intent: {'intent': 'order_placing', 'entities': {'product_id': 'PROD-003', 'quantity': ''}} with history context.
+2026-02-10 08:52:29 INFO Sending reply to 26774342078: 'You want to order 'SilentMark Noise-Cancelling Headphones' for $249.50. Is that correct? (Please reply with 'yes' or 'no')'
+2026-02-10 08:52:30 INFO WhatsApp message sent to 26774342078. Status: 200
+2026-02-10 08:52:50 INFO Successfully loaded products.csv, orders.csv, and faq.txt
+2026-02-10 08:52:50 INFO Loaded 38 products and 22 orders.
+2026-02-10 08:52:57 INFO Services and OpenAI client initialized successfully.
+2026-02-10 08:52:57 INFO Received message from 26774342078: 'yes'
+2026-02-10 08:52:58 INFO LLM classified intent: {'intent': 'unclassified', 'entities': {}} with history context.
+2026-02-10 08:52:58 INFO Sending reply to 26774342078: 'I'm sorry, I'm not sure how to help with that. You can ask me to search for products, check an order status, or ask about our policies.'
+2026-02-10 08:52:59 INFO WhatsApp message sent to 26774342078. Status: 200
+2026-02-10 09:16:58 INFO Successfully loaded products.csv, orders.csv, and faq.txt
+2026-02-10 09:16:58 INFO Loaded 38 products and 22 orders.
+2026-02-10 09:31:03 INFO Successfully loaded products.csv, orders.csv, and faq.txt
+2026-02-10 09:31:03 INFO Loaded 38 products and 22 orders.
+2026-02-10 09:39:34 INFO Services and OpenAI client initialized successfully.
+2026-02-10 09:39:34 INFO Received message from 26774342078: 'yes'
+2026-02-10 09:39:37 INFO LLM classified intent: {'intent': 'unclassified', 'entities': {}} with history context.
+2026-02-10 09:39:37 INFO Sending reply to 26774342078: 'I'm sorry, I'm not sure how to help with that. You can ask me to search for products, check an order status, or ask about our policies.'
+2026-02-10 09:39:39 INFO WhatsApp message sent to 26774342078. Status: 200
+2026-02-10 09:47:42 INFO Successfully loaded products.csv, orders.csv, and faq.txt
+2026-02-10 09:47:42 INFO Loaded 38 products and 22 orders.
+2026-02-10 09:48:07 INFO Successfully loaded products.csv, orders.csv, and faq.txt
+2026-02-10 09:48:07 INFO Loaded 38 products and 22 orders.
+2026-02-10 09:50:44 INFO Services and OpenAI client initialized successfully.
+2026-02-10 09:50:44 INFO Received message from 26774342078: 'Hello Kutlo, this is from Postman'
+2026-02-10 09:50:45 INFO LLM classified intent: {'intent': 'general_knowledge', 'entities': {}} with history context.
+2026-02-10 09:50:47 INFO Sending reply to 26774342078: 'Hello! How can I assist you today with your e-commerce needs?'
+2026-02-10 09:50:48 INFO WhatsApp message sent to 26774342078. Status: 200
+2026-02-10 09:51:09 INFO Successfully loaded products.csv, orders.csv, and faq.txt
+2026-02-10 09:51:09 INFO Loaded 38 products and 22 orders.
+2026-02-10 09:51:54 INFO Services and OpenAI client initialized successfully.
+2026-02-10 09:51:54 INFO Received message from 26774342078: 'Do you have headphones'
+2026-02-10 09:51:57 INFO LLM classified intent: {'intent': 'product_search', 'entities': {'keywords': ['headphones']}} with history context.
+2026-02-10 09:51:57 INFO Sending reply to 26774342078: 'Here's what I found:
+
+- SilentMark Noise-Cancelling Headphones (ID: PROD-003)
+  Price: $249.50 (In Stock)
+- Aura Gaming Headset (ID: PROD-007)
+  Price: $99.99 (In Stock)
+
+You can place an order using the Product ID.'
+2026-02-10 09:51:58 INFO WhatsApp message sent to 26774342078. Status: 200
+2026-02-10 09:52:28 INFO Services and OpenAI client initialized successfully.
+2026-02-10 09:52:28 INFO Received message from 26774342078: 'i want to order silentmark'
+2026-02-10 09:52:29 INFO LLM classified intent: {'intent': 'order_placing', 'entities': {'product_name': 'SilentMark Noise-Cancelling Headphones', 'quantity': '1'}} with history context.
+2026-02-10 09:52:29 INFO Sending reply to 26774342078: 'You want to order 'SilentMark Noise-Cancelling Headphones' for $249.50. Is that correct? (Please reply with 'yes' or 'no')'
+2026-02-10 09:52:30 INFO WhatsApp message sent to 26774342078. Status: 200
+2026-02-10 09:52:47 INFO Services and OpenAI client initialized successfully.
+2026-02-10 09:52:47 INFO Received message from 26774342078: 'yes'
+2026-02-10 09:52:47 INFO User 26774342078 confirmed order. Now awaiting shipping address.
+2026-02-10 09:52:47 INFO Sending reply to 26774342078: 'Great! Please provide your full shipping address.'
+2026-02-10 09:52:48 INFO WhatsApp message sent to 26774342078. Status: 200
+2026-02-10 09:53:20 INFO Services and OpenAI client initialized successfully.
+2026-02-10 09:53:20 INFO Received message from 26774342078: 'Kutlo Mangwa PO Box 2452 ABG Gaborone'
+2026-02-10 09:53:20 INFO Received shipping address 'Kutlo Mangwa PO Box 2452 ABG Gaborone' from 26774342078. Finalizing order.
+2026-02-10 09:53:20 INFO Successfully updated and saved orders.csv. Total orders: 23
+2026-02-10 09:53:20 INFO Sending reply to 26774342078: 'Thank you! Your order for 'SilentMark Noise-Cancelling Headphones' has been placed. Your order ID is ORD-1023. It will be shipped to: Kutlo Mangwa PO Box 2452 ABG Gaborone'
+2026-02-10 09:53:21 INFO WhatsApp message sent to 26774342078. Status: 200
+2026-02-10 09:53:48 INFO Services and OpenAI client initialized successfully.
+2026-02-10 09:53:48 INFO Received message from 26774342078: 'what are my orders'
+2026-02-10 09:53:51 INFO LLM classified intent: {'intent': 'order_status', 'entities': {'order_id': 'ORD-1023'}} with history context.
+2026-02-10 09:53:51 INFO Sending reply to 26774342078: 'Order #ORD-1023 is currently 'Pending'. The estimated delivery date is 2026-02-15.'
+2026-02-10 09:53:52 INFO WhatsApp message sent to 26774342078. Status: 200
+2026-02-10 09:55:07 INFO Services and OpenAI client initialized successfully.
+2026-02-10 09:55:07 INFO Received message from 26774342078: 'you yo have laptops?'
+2026-02-10 09:55:09 INFO LLM classified intent: {'intent': 'product_search', 'entities': {'keywords': ['laptops']}} with history context.
+2026-02-10 09:55:09 INFO Sending reply to 26774342078: 'Sorry, I couldn't find any products matching 'laptops'.'
+2026-02-10 09:55:10 INFO WhatsApp message sent to 26774342078. Status: 200
+2026-02-10 09:55:28 INFO Services and OpenAI client initialized successfully.
+2026-02-10 09:55:28 INFO Received message from 26774342078: 'what electoronic do you have?'
+2026-02-10 09:55:30 INFO LLM classified intent: {'intent': 'general_knowledge', 'entities': {}} with history context.
+2026-02-10 09:55:32 INFO Sending reply to 26774342078: 'We have a variety of electronics, including:
+
+1. **Headphones** - Like the SilentMark Noise-Cancelling Headphones.
+2. **Gaming Headsets** - Such as the Aura Gaming Headset.
+3. **Smartphones** - Various models available.
+4. **Smartwatches** - Different brands and styles.
+
+If you're interested in a specific category, let me know!'
+2026-02-10 09:55:32 INFO WhatsApp message sent to 26774342078. Status: 200
+2026-02-10 09:56:09 INFO Services and OpenAI client initialized successfully.
+2026-02-10 09:56:09 INFO Received message from 26774342078: 'I want a laptop?'
+2026-02-10 09:56:11 INFO LLM classified intent: {'intent': 'product_search', 'entities': {'keywords': ['laptop']}} with history context.
+2026-02-10 09:56:11 INFO Sending reply to 26774342078: 'Here's what I found:
+
+- QuantumCore Pro Laptop 15" (ID: PROD-001)
+  Price: $1299.99 (In Stock)
+
+You can place an order using the Product ID.'
+2026-02-10 09:56:12 INFO WhatsApp message sent to 26774342078. Status: 200
+2026-02-10 09:56:47 INFO Services and OpenAI client initialized successfully.
+2026-02-10 09:56:47 INFO Received message from 26774342078: 'Aliright how many do you have in stock because i want 5'
+2026-02-10 09:56:49 INFO LLM classified intent: {'intent': 'order_placing', 'entities': {'product_id': 'PROD-001', 'quantity': '5'}} with history context.
+2026-02-10 09:56:49 INFO Sending reply to 26774342078: 'You want to order 'QuantumCore Pro Laptop 15"' for $1299.99. Is that correct? (Please reply with 'yes' or 'no')'
+2026-02-10 09:56:50 INFO WhatsApp message sent to 26774342078. Status: 200
+2026-02-10 09:57:20 INFO Services and OpenAI client initialized successfully.
+2026-02-10 09:57:20 INFO Received message from 26774342078: 'yes but i want 5 of them'
+2026-02-10 09:57:20 INFO User 26774342078 confirmed order. Now awaiting shipping address.
+2026-02-10 09:57:20 INFO Sending reply to 26774342078: 'Great! Please provide your full shipping address.'
+2026-02-10 09:57:23 INFO WhatsApp message sent to 26774342078. Status: 200
+2026-02-10 09:57:53 INFO Services and OpenAI client initialized successfully.
+2026-02-10 09:57:53 INFO Received message from 26774342078: 'Kutlo Sefalana H/Q Gaborone'
+2026-02-10 09:57:53 INFO Received shipping address 'Kutlo Sefalana H/Q Gaborone' from 26774342078. Finalizing order.
+2026-02-10 09:57:53 INFO Successfully updated and saved orders.csv. Total orders: 24
+2026-02-10 09:57:53 INFO Sending reply to 26774342078: 'Thank you! Your order for 'QuantumCore Pro Laptop 15"' has been placed. Your order ID is ORD-1024. It will be shipped to: Kutlo Sefalana H/Q Gaborone'
+2026-02-10 09:57:54 INFO WhatsApp message sent to 26774342078. Status: 200
+2026-02-10 09:58:16 INFO Services and OpenAI client initialized successfully.
+2026-02-10 09:58:16 INFO Received message from 26774342078: 'show me my orders'
+2026-02-10 09:58:17 INFO LLM classified intent: {'intent': 'order_status', 'entities': {'order_id': 'ORD-1024'}} with history context.
+2026-02-10 09:58:17 INFO Sending reply to 26774342078: 'Order #ORD-1024 is currently 'Pending'. The estimated delivery date is 2026-02-15.'
+2026-02-10 09:58:18 INFO WhatsApp message sent to 26774342078. Status: 200
+2026-02-10 09:58:39 INFO Services and OpenAI client initialized successfully.
+2026-02-10 09:58:39 INFO Received message from 26774342078: 'i want to see all my orders'
+2026-02-10 09:58:41 INFO LLM classified intent: {'intent': 'order_status', 'entities': {'order_id': 'all'}} with history context.
+2026-02-10 09:58:41 INFO Sending reply to 26774342078: 'Sorry, I couldn't find an order with the ID: all.'
+2026-02-10 09:58:42 INFO WhatsApp message sent to 26774342078. Status: 200
+2026-02-10 09:59:19 INFO Services and OpenAI client initialized successfully.
+2026-02-10 09:59:19 INFO Received message from 26774342078: 'order id 123'
+2026-02-10 09:59:20 INFO LLM classified intent: {'intent': 'order_status', 'entities': {'order_id': '123'}} with history context.
+2026-02-10 09:59:20 INFO Sending reply to 26774342078: 'Sorry, I couldn't find an order with the ID: 123.'
+2026-02-10 09:59:21 INFO WhatsApp message sent to 26774342078. Status: 200
+2026-02-10 09:59:40 INFO Services and OpenAI client initialized successfully.
+2026-02-10 09:59:40 INFO Received message from 26774342078: 'order id 1023'
+2026-02-10 09:59:41 INFO LLM classified intent: {'intent': 'order_status', 'entities': {'order_id': '1023'}} with history context.
+2026-02-10 09:59:41 INFO Sending reply to 26774342078: 'Sorry, I couldn't find an order with the ID: 1023.'
+2026-02-10 09:59:42 INFO WhatsApp message sent to 26774342078. Status: 200
+2026-02-10 10:00:06 INFO Services and OpenAI client initialized successfully.
+2026-02-10 10:00:06 INFO Received message from 26774342078: 'order id ord-1023'
+2026-02-10 10:00:09 INFO LLM classified intent: {'intent': 'order_status', 'entities': {'order_id': 'ord-1023'}} with history context.
+2026-02-10 10:00:09 INFO Sending reply to 26774342078: 'Sorry, I couldn't find an order with the ID: ord-1023.'
+2026-02-10 10:00:10 INFO WhatsApp message sent to 26774342078. Status: 200
+2026-02-10 12:16:07 INFO Services and OpenAI client initialized successfully.
+2026-02-10 12:16:07 INFO Received message from 26774342078: 'hello'
+2026-02-10 12:16:09 INFO LLM classified intent: {'intent': 'general_knowledge', 'entities': {}} with history context.
+2026-02-10 12:16:11 INFO Sending reply to 26774342078: 'Hello! How can I assist you today?'
+2026-02-10 12:16:12 INFO WhatsApp message sent to 26774342078. Status: 200
+2026-02-10 12:16:30 INFO Services and OpenAI client initialized successfully.
+2026-02-10 12:16:30 INFO Received message from 26774342078: 'i need a computer'
+2026-02-10 12:16:32 INFO LLM classified intent: {'intent': 'product_search', 'entities': {'keywords': ['computer']}} with history context.
+2026-02-10 12:16:32 ERROR Product embeddings not initialized
+2026-02-10 12:16:32 INFO Sending reply to 26774342078: 'Sorry, I couldn't find any products matching 'computer'.'
+2026-02-10 12:16:33 INFO WhatsApp message sent to 26774342078. Status: 200
+2026-02-10 12:16:50 INFO Services and OpenAI client initialized successfully.
+2026-02-10 12:16:50 INFO Received message from 26774342078: 'i need a laptop'
+2026-02-10 12:16:52 INFO LLM classified intent: {'intent': 'product_search', 'entities': {'keywords': ['laptop']}} with history context.
+2026-02-10 12:16:52 ERROR Product embeddings not initialized
+2026-02-10 12:16:52 INFO Sending reply to 26774342078: 'Sorry, I couldn't find any products matching 'laptop'.'
+2026-02-10 12:16:52 INFO WhatsApp message sent to 26774342078. Status: 200
+2026-02-10 12:21:55 INFO Services and OpenAI client initialized successfully.
+2026-02-10 12:21:55 INFO Received message from 26774342078: 'laptop'
+2026-02-10 12:21:57 INFO LLM classified intent: {'intent': 'product_search', 'entities': {'keywords': ['laptop']}} with history context.
+2026-02-10 12:21:57 ERROR Product embeddings not initialized
+2026-02-10 12:21:57 INFO Sending reply to 26774342078: 'Sorry, I couldn't find any products matching 'laptop'.'
+2026-02-10 12:21:58 INFO WhatsApp message sent to 26774342078. Status: 200
+2026-02-10 12:22:30 INFO Services and OpenAI client initialized successfully.
+2026-02-10 12:22:30 INFO Successfully loaded products.csv, orders.csv, and faq.txt
+2026-02-10 12:22:30 INFO Loaded 38 products and 24 orders.
+2026-02-10 12:22:30 INFO Creating new product embeddings...
+2026-02-10 12:22:30 INFO Creating product embeddings...
+2026-02-10 12:22:34 INFO Saved product embeddings to embeddings_cache/product_embeddings.pkl
+2026-02-10 12:22:34 INFO Created embeddings for 38 products
+2026-02-10 12:22:34 INFO Creating new FAQ embeddings...
+2026-02-10 12:22:34 INFO Creating FAQ embeddings...
+2026-02-10 12:22:36 INFO Saved FAQ embeddings to embeddings_cache/faq_embeddings.pkl
+2026-02-10 12:22:36 INFO Created embeddings for 6 FAQ chunks
+2026-02-10 12:22:36 INFO Embeddings initialized successfully
+2026-02-10 12:22:36 INFO Received message from 26774342078: 'yes'
+2026-02-10 12:22:37 INFO LLM classified intent: {'intent': 'unclassified', 'entities': {}} with history context.
+2026-02-10 12:22:37 ERROR Error processing webhook message: handle_unclassified() missing 1 required positional argument: 'user_query'
+Traceback (most recent call last):
+  File "/Users/kutlomangwa/Documents/sefremit/chatbot/views.py", line 623, in process_whatsapp_message
+    reply_message = handler()
+TypeError: handle_unclassified() missing 1 required positional argument: 'user_query'
+2026-02-10 12:22:38 INFO WhatsApp message sent to 26774342078. Status: 200
+2026-02-10 12:23:38 INFO Services and OpenAI client initialized successfully.
+2026-02-10 12:23:38 INFO Successfully loaded products.csv, orders.csv, and faq.txt
+2026-02-10 12:23:38 INFO Loaded 38 products and 24 orders.
+2026-02-10 12:23:38 INFO Loaded cached product embeddings (38 products)
+2026-02-10 12:23:38 INFO Loaded cached FAQ embeddings (6 chunks)
+2026-02-10 12:23:38 INFO Embeddings initialized successfully
+2026-02-10 12:23:38 INFO Received message from 26774342078: 'yes'
+2026-02-10 12:23:42 INFO LLM classified intent: {'intent': 'unclassified', 'entities': {}} with history context.
+2026-02-10 12:23:42 ERROR Error processing webhook message: handle_unclassified() missing 1 required positional argument: 'user_query'
+Traceback (most recent call last):
+  File "/Users/kutlomangwa/Documents/sefremit/chatbot/views.py", line 623, in process_whatsapp_message
+    reply_message = handler()
+TypeError: handle_unclassified() missing 1 required positional argument: 'user_query'
+2026-02-10 12:23:43 INFO WhatsApp message sent to 26774342078. Status: 200
+2026-02-10 12:23:55 INFO Services and OpenAI client initialized successfully.
+2026-02-10 12:23:55 INFO Received message from 26774342078: 'laptop'
+2026-02-10 12:23:58 INFO LLM classified intent: {'intent': 'product_search', 'entities': {'keywords': ['laptop']}} with history context.
+2026-02-10 12:23:58 INFO Sending reply to 26774342078: 'Here's what I found:
+
+1. QuantumCore Pro Laptop 15" (ID: PROD-001)
+   Price: $1299.99 | Category: Electronics
+   Status: In Stock
+2. ChronoWatch Series 5 (ID: PROD-004)
+   Price: $399.00 | Category: Electronics
+   Status: In Stock
+3. SoundWave Portable Bluetooth Speaker (ID: PROD-077)
+   Price: $35.00 | Category: Electronics
+   Status: In Stock
+4. High-Lumen LED Headlamp (ID: PROD-056)
+   Price: $19.99 | Category: Sports & Outdoors
+   Status: In Stock
+5. AeroPress Coffee Maker (ID: PROD-026)
+   Price: $32.00 | Category: Home & Kitchen
+   Status: In Stock
+
+You can place an order using the Product ID.'
+2026-02-10 12:23:59 INFO WhatsApp message sent to 26774342078. Status: 200
+2026-02-10 12:24:40 INFO Services and OpenAI client initialized successfully.
+2026-02-10 12:24:40 INFO Received message from 26774342078: 'i want a compputer for work'
+2026-02-10 12:24:43 INFO LLM classified intent: {'intent': 'order_placing', 'entities': {'product_name': 'computer', 'quantity': '1'}} with history context.
+2026-02-10 12:24:43 INFO Sending reply to 26774342078: 'You want to order 'QuantumCore Pro Laptop 15"' for $1299.99. Is that correct? (Please reply with 'yes' or 'no')'
+2026-02-10 12:24:44 INFO WhatsApp message sent to 26774342078. Status: 200
+2026-02-10 12:25:21 INFO Services and OpenAI client initialized successfully.
+2026-02-10 12:25:21 INFO Received message from 26774342078: 'do you have something i can game on?'
+2026-02-10 12:25:21 INFO Sending reply to 26774342078: 'Okay, I've cancelled the order process. Is there anything else I can help with?'
+2026-02-10 12:25:22 INFO WhatsApp message sent to 26774342078. Status: 200
+2026-02-10 12:25:41 INFO Services and OpenAI client initialized successfully.
+2026-02-10 12:25:41 INFO Received message from 26774342078: 'do you have something i can game on?'
+2026-02-10 12:25:43 INFO LLM classified intent: {'intent': 'product_search', 'entities': {'keywords': ['gaming', 'computer', 'laptop']}} with history context.
+2026-02-10 12:25:43 INFO Sending reply to 26774342078: 'Here's what I found:
+
+1. Aura Gaming Headset (ID: PROD-007)
+   Price: $99.99 | Category: Electronics
+   Status: In Stock
+2. QuantumCore Pro Laptop 15" (ID: PROD-001)
+   Price: $1299.99 | Category: Electronics
+   Status: In Stock
+3. ChronoWatch Series 5 (ID: PROD-004)
+   Price: $399.00 | Category: Electronics
+   Status: In Stock
+4. High-Lumen LED Headlamp (ID: PROD-056)
+   Price: $19.99 | Category: Sports & Outdoors
+   Status: In Stock
+5. AeroPress Coffee Maker (ID: PROD-026)
+   Price: $32.00 | Category: Home & Kitchen
+   Status: In Stock
+
+You can place an order using the Product ID.'
+2026-02-10 12:25:45 INFO WhatsApp message sent to 26774342078. Status: 200
+2026-02-10 12:57:18 INFO Services and OpenAI client initialized successfully.
+2026-02-10 12:57:18 INFO Received message from 26774342078: 'What kitchen stuff do you have?'
+2026-02-10 12:57:22 INFO LLM classified intent: {'intent': 'product_search', 'entities': {'keywords': ['kitchen']}} with history context.
+2026-02-10 12:57:22 INFO Sending reply to 26774342078: 'Here's what I found:
+
+1. All-Purpose Natural Cleaner (ID: PROD-030)
+   Price: $9.99 | Category: Home & Kitchen
+   Status: In Stock
+2. Eco-Friendly Bamboo Cutting Board (ID: PROD-027)
+   Price: $19.99 | Category: Home & Kitchen
+   Status: In Stock
+3. Stainless Steel Chef's Knife (8-inch) (ID: PROD-023)
+   Price: $45.00 | Category: Home & Kitchen
+   Status: In Stock
+4. Modernist Ceramic Vase (ID: PROD-021)
+   Price: $34.99 | Category: Home & Kitchen
+   Status: In Stock
+5. AeroPress Coffee Maker (ID: PROD-026)
+   Price: $32.00 | Category: Home & Kitchen
+   Status: In Stock
+
+You can place an order using the Product ID.'
+2026-02-10 12:57:24 INFO WhatsApp message sent to 26774342078. Status: 200
+2026-02-10 13:05:31 INFO Services and OpenAI client initialized successfully.
+2026-02-10 13:05:31 INFO Received message from 26774342078: 'im going to the beach what do you have`?'
+2026-02-10 13:05:34 INFO LLM classified intent: {'intent': 'general_knowledge', 'entities': {}} with history context.
+2026-02-10 13:05:40 INFO Sending reply to 26774342078: 'Here are some beach-related items you might find useful:
+
+1. Eco-Friendly Beach Towel (ID: PROD-080)
+   Price: $29.99 | Category: Beach Gear
+   Status: In Stock
+2. Waterproof Phone Case (ID: PROD-081)
+   Price: $14.99 | Category: Beach Gear
+   Status: In Stock
+3. Portable Beach Umbrella (ID: PROD-082)
+   Price: $49.99 | Category: Beach Gear
+   Status: In Stock
+4. Insulated Cooler Bag (ID: PROD-083)
+   Price: $39.99 | Category: Beach Gear
+   Status: In Stock
+5. Sunscreen SPF 50 (ID: PROD-084)
+   Price: $12.99 | Category: Beach Gear
+   Status: In Stock
+
+Let me know if you'd like to order any of these items!'
+2026-02-10 13:05:41 INFO WhatsApp message sent to 26774342078. Status: 200
+2026-03-27 14:01:12 INFO Received GET request at /hello
+2026-03-27 14:01:21 INFO flow sent successfully: flow_id: 2382063375629764, phone_number: 26774342078
+2026-03-27 14:01:21 DEBUG Response JSON: {'messaging_product': 'whatsapp', 'contacts': [{'input': '26774342078', 'wa_id': '26774342078'}], 'messages': [{'id': 'wamid.HBgLMjY3NzQzNDIwNzgVAgARGBIzMDM3NUMwQjg5MEJEOTM3N0MA'}]}

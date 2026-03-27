@@ -99,16 +99,16 @@ WSGI_APPLICATION = 'sefremit.wsgi.application'
 #     }
 # }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'wallet_db',
-        'USER': 'sheriff_kutlo',
-        'PASSWORD': 'FavShow#1K',
-        'HOST': '127.0.0.1', # must be localhost
-        'PORT': '3306'
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'wallet_db',
+#         'USER': 'sheriff_kutlo',
+#         'PASSWORD': 'FavShow#1K',
+#         'HOST': '41.216.208.252', # must be localhost
+#         'PORT': '3306'
+#     }
+# }
 
 # DATABASES = {
 #     'default': {

@@ -2,11 +2,22 @@ from django.core.management.base import BaseCommand
 from django.db import connection
 from django.core.cache import cache
 from datetime import datetime, timedelta, date
+from django_redis import get_redis_connection
 
 class Command(BaseCommand):
     help = "Load shelf talker data into Redis cache"
 
     def handle(self, *args, **options):
+
+         # --- REDIS LOCK START ---
+        redis = get_redis_connection("default")
+
+        # Try to acquire lock
+        if not redis.set("shelve_talker_lock", "1", nx=True, ex=3600):
+            self.stdout.write("Job already running, exiting")
+            return
+        # --- REDIS LOCK END ---
+
         self.stdout.write("Starting shelf talker cache load...")
 
         # Clear Redis (safe if Redis is dedicated)

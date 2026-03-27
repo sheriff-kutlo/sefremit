@@ -9,9 +9,27 @@ from .utils import *
 import logging
 import bcrypt
 
+from dotenv import load_dotenv
+from collections import deque
+
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+
+# --- In-Memory Storage (No changes here) ---
+user_sessions = {}
+conversation_history = {}
+MAX_HISTORY_LENGTH = 10
+
 
 # Get an instance of a logger
 logger = logging.getLogger(CHATBOT_CATALOG)
+
+# --- App Initialization ---
+load_dotenv()
 
 @csrf_exempt
 def verification(request):
@@ -485,61 +503,41 @@ def verification(request):
         except json.JSONDecodeError as e:
             return JsonResponse({'error': 'Invalid JSON format'}, status=400)
 
-def hello(request):
-
-    # save_share_driver({
-    #     FIRSTNAME: "Kutlo Driver",
-    #     LASTNAME: "Mangwa Driver",
-    #     PHONE_NUMBER: "26776448866",
-    #     CAR_MAKE: "Mazda",
-    #     CAR_MODEL: "Etude 160ie",
-    #     CAR_YEAR: "2002",
-    #     NUMBER_PLATE: "B 123 ABC",
-    #     CAR_COLOR: "Grey"
-    # })
-
-    # send_flow_message(KUTLO_PHONE_NUMBER, REGISTER_SHARE_RIDER_TITLE, REGISTER_SHARE_RIDER_BODY, REGISTER_SHARE_RIDER_FLOW_ID, REGISTER_SHARE_RIDER_FLOW_TOKEN, REGISTER_SHARE_RIDER_FLOW_CTA)
-
-    # send_flow_message(KUTLO_PHONE_NUMBER, REGISTER_SHARE_DRIVER_TITLE, REGISTER_SHARE_DRIVER_BODY, REGISTER_SHARE_DRIVER_FLOW_ID, REGISTER_SHARE_DRIVER_FLOW_TOKEN, REGISTER_SHARE_RIDER_FLOW_CTA)
-
-    # select_rider_driver_message(KUTLO_PHONE_NUMBER)
-
-    # driver_id = 123
-
-    # # 1. If user is a registered driver
-    # if driver_id:
-    #     # continue with driver menu or flow
-    #     if driver_has_profile_image(KUTLO_PHONE_NUMBER):
-    #         send_message("✅ Profile picture already uploaded.", KUTLO_PHONE_NUMBER)
-    #     else:
-    #         send_message("📸 Send a clear selfie - no hats, no sunglasses, no filters.", KUTLO_PHONE_NUMBER)
-    #     return
-
-    print(f"{download_whatsapp_media("4349288345304633")}")
-
-    return HttpResponse(f"Server working as expected!")
-
 @csrf_exempt
-def get_shelve_talker_by_barcode(request, barcode):
-    key = f"shelve_talker:{barcode}"
+def hello(request): 
 
-    data = cache.get(key)
+    logger.info("Received GET request at /hello")
+    
 
-    if not data:
-        return JsonResponse(
-            {"error": "Shelf talker not found or expired"},
-            status=404
-        )
-
-    return JsonResponse(
-        {
-            "barcode": barcode,
-            "description": data["description"],
-            "pack_size": data["pack_size"],
-            "price": data["price"],
-            "vat_percent": data["vat_percent"],
-            "talker_date": data["talker_date"],
-        }
+    send_flow_message(
+        KUTLO_PHONE_NUMBER,
+        "Verify a BOCRA Licence",
+        "Check if an operator holds a valid BOCRA licence",
+        2382063375629764,
+        "verify_bocra_licence_token",
+        "Verify"
     )
 
+    # send_flow_message(
+    #     KUTLO_PHONE_NUMBER,
+    #     ".bw Domain Registration",
+    #     "Check basic information about a domain, including registration details and status, to better understand its ownership and activity.",
+    #     2029972457934217,
+    #     "bw_registration_token",
+    #     "WHOIS lookup"
+    # )
+
+    # send_flow_message(
+    #     KUTLO_PHONE_NUMBER,
+    #     "File a Complaint",
+    #     "Submit your complaint in a few steps.",
+    #     1688139795516594,
+    #     "file_complaint_token",
+    #     "File a Complaint"
+    # )
+
+    # send_interactive_services(KUTLO_PHONE_NUMBER)
+
+
+    return HttpResponse(f"Server working as expected!")
 
